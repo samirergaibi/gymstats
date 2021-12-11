@@ -1,11 +1,10 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import { useRouter } from "next/router";
 import { AuthenticationData } from "../types";
-import { useSupaBaseContext } from "../contexts/SupabaseContext";
+import { supabase } from "../utils/supabaseClient";
 
 const LoginForm = () => {
   const router = useRouter();
-  const { supabase } = useSupaBaseContext();
 
   const [loginFormData, setLoginFormData] = useState<AuthenticationData>();
 
