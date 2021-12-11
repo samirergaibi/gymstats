@@ -1,10 +1,8 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import { AuthenticationData } from "../types";
-import { useSupaBaseContext } from "../contexts/SupabaseContext";
+import { supabase } from "../utils/supabaseClient";
 
 const SignupForm = () => {
-  const { supabase } = useSupaBaseContext();
-
   const [signUpFormData, setSignUpFormData] = useState<AuthenticationData>();
 
   const signUp = async (event: FormEvent) => {

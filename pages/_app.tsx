@@ -1,7 +1,6 @@
 import type { AppProps } from "next/app";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import Layout from "../components/Layout";
-import SupabaseContext from "../contexts/SupabaseContext";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -22,11 +21,9 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <SupabaseContext>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </SupabaseContext>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </ThemeProvider>
     </>
   );
