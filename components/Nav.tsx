@@ -1,6 +1,15 @@
 import styled from "styled-components";
 import Link from "next/link";
 
+const StyledNav = styled.nav`
+  padding: 10px;
+`;
+
+const StyledLink = styled.a`
+  display: inline-block;
+  padding: 10px;
+`;
+
 const StyledList = styled.ul`
   list-style: none;
   display: flex;
@@ -11,19 +20,25 @@ const StyledList = styled.ul`
 
 const Nav: React.FC = () => {
   return (
-    <nav>
+    <StyledNav>
       <StyledList>
         <li>
-          <Link href="/">Login</Link>
+          <Link href="/" passHref>
+            <StyledLink>Login</StyledLink>
+          </Link>
         </li>
         <li>
-          <Link href="/exercises">Exercises</Link>
+          <Link href="/exercises" passHref>
+            <StyledLink>Exercises</StyledLink>
+          </Link>
         </li>
         <li>
-          <Link href="/about">About</Link>
+          <Link href="/about" passHref>
+            <StyledLink>About</StyledLink>
+          </Link>
         </li>
       </StyledList>
-    </nav>
+    </StyledNav>
   );
 };
 
