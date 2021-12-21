@@ -1,6 +1,7 @@
+import { NextPage } from "next";
 import Nav from "./Nav";
 
-const Layout: React.FC = ({ children }) => {
+const Layout: NextPage = ({ children }) => {
   return (
     <>
       <header>

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { NextPage } from "next";
 import Link from "next/link";
 
 const StyledNav = styled.nav`
@@ -18,23 +19,23 @@ const StyledList = styled.ul`
   padding: 0;
 `;
 
-const Nav: React.FC = () => {
+const Nav: NextPage = () => {
   return (
     <StyledNav>
       <StyledList>
         <li>
           <Link href="/" passHref>
-            <StyledLink>Login</StyledLink>
-          </Link>
-        </li>
-        <li>
-          <Link href="/exercises" passHref>
-            <StyledLink>Exercises</StyledLink>
+            <StyledLink>Hem</StyledLink>
           </Link>
         </li>
         <li>
           <Link href="/about" passHref>
-            <StyledLink>About</StyledLink>
+            <StyledLink>Om GymStats</StyledLink>
+          </Link>
+        </li>
+        <li>
+          <Link href="/login" passHref>
+            <StyledLink>Logga in</StyledLink>
           </Link>
         </li>
       </StyledList>

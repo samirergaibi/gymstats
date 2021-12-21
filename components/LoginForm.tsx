@@ -5,23 +5,51 @@ import { AuthenticationData } from "../types";
 import { supabase } from "../utils/supabaseClient";
 import TextField from "../components/TextField";
 
-const StyledForm = styled.form`
-  display: block;
+const StyledWrapper = styled.div`
   box-shadow: var(--box-shadow-main);
   border-radius: 5px;
+  margin-top: 15px;
+  position: relative;
+  background: var(--purple-gradient);
+  color: white;
+  width: 90%;
+  @media screen and (min-width: 600px) {
+    width: 500px;
+  }
+`;
+
+const StyledForm = styled.form`
   padding: 50px 30px;
 `;
 
-const StyledButtonWrapper = styled.div`
+const StyledHeadingWrapper = styled.div`
   display: flex;
   justify-content: center;
+  position: absolute;
+  width: 100%;
+  top: -15px;
+`;
+
+const StyledH2 = styled.span`
+  background: var(--orange-gradient);
+  padding: 10px;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  transform: rotate(-2deg);
 `;
 
 const StyledInputWrapper = styled.div<{ firstItem?: boolean }>`
   display: grid;
   gap: 5px;
-  margin: 15px;
+  margin-bottom: 15px;
   margin-top: ${({ firstItem }) => firstItem && "0px"};
+`;
+
+const StyledButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
 `;
 
 const LoginForm = () => {
@@ -55,39 +83,46 @@ const LoginForm = () => {
   };
 
   return (
-    <StyledForm onSubmit={login}>
-      <StyledInputWrapper firstItem>
-        <TextField
-          id="email"
-          label="Email"
-          type="text"
-          value={loginFormData?.email}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => {
-            setLoginFormData({
-              ...loginFormData,
-              email: event.target.value,
-            });
-          }}
-        />
-      </StyledInputWrapper>
-      <StyledInputWrapper>
-        <TextField
-          id="password"
-          label="Password"
-          type="password"
-          value={loginFormData?.password}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => {
-            setLoginFormData({
-              ...loginFormData,
-              password: event.target.value,
-            });
-          }}
-        />
-      </StyledInputWrapper>
-      <StyledButtonWrapper>
-        <button type="submit">Login</button>
-      </StyledButtonWrapper>
-    </StyledForm>
+    <StyledWrapper>
+      <StyledHeadingWrapper>
+        <StyledH2>Logga in på ditt konto</StyledH2>
+      </StyledHeadingWrapper>
+      <StyledForm onSubmit={login}>
+        <StyledInputWrapper firstItem>
+          <TextField
+            id="email"
+            label="E-postadress"
+            type="text"
+            placeholder="Ange din e-postadress"
+            value={loginFormData?.email}
+            onChange={(event: ChangeEvent<HTMLInputElement>) => {
+              setLoginFormData({
+                ...loginFormData,
+                email: event.target.value,
+              });
+            }}
+          />
+        </StyledInputWrapper>
+        <StyledInputWrapper>
+          <TextField
+            id="password"
+            label="Lösenord"
+            type="password"
+            placeholder="Ange ditt lösenord"
+            value={loginFormData?.password}
+            onChange={(event: ChangeEvent<HTMLInputElement>) => {
+              setLoginFormData({
+                ...loginFormData,
+                password: event.target.value,
+              });
+            }}
+          />
+        </StyledInputWrapper>
+        <StyledButtonWrapper>
+          <button type="submit">Logga in</button>
+        </StyledButtonWrapper>
+      </StyledForm>
+    </StyledWrapper>
   );
 };
 

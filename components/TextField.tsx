@@ -1,4 +1,5 @@
 import { InputHTMLAttributes } from "react";
+import { NextPage } from "next";
 import styled from "styled-components";
 
 const StyledLabel = styled.label`
@@ -8,17 +9,20 @@ const StyledLabel = styled.label`
 
 const StyledTextField = styled.input`
   border-radius: 6px;
-  border: 1px solid rgba(0, 0, 0, 0.4);
+  border: none;
   padding: 8px 10px;
   font-size: 1rem;
   width: 100%;
+  &::placeholder {
+    font-size: 0.8rem;
+  }
 `;
 
 type Props = InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
 };
 
-const TextField: React.FC<Props> = props => {
+const TextField: NextPage<Props> = props => {
   const { id, label } = props;
 
   return (
