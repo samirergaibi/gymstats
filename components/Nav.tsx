@@ -1,14 +1,16 @@
 import styled from "styled-components";
-import { NextPage } from "next";
 import Link from "next/link";
 
 const StyledNav = styled.nav`
   padding: 10px;
+  background: var(--primary);
 `;
 
 const StyledLink = styled.a`
   display: inline-block;
   padding: 10px;
+  color: #fff;
+  text-decoration: none;
 `;
 
 const StyledList = styled.ul`
@@ -19,7 +21,7 @@ const StyledList = styled.ul`
   padding: 0;
 `;
 
-const Nav: NextPage = () => {
+const Nav: React.FC = () => {
   return (
     <StyledNav>
       <StyledList>

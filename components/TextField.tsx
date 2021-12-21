@@ -1,5 +1,4 @@
 import { InputHTMLAttributes } from "react";
-import { NextPage } from "next";
 import styled from "styled-components";
 
 const StyledLabel = styled.label`
@@ -22,7 +21,7 @@ type Props = InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
 };
 
-const TextField: NextPage<Props> = props => {
+const TextField: React.FC<Props> = props => {
   const { id, label } = props;
 
   return (

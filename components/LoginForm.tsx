@@ -6,11 +6,11 @@ import { supabase } from "../utils/supabaseClient";
 import TextField from "../components/TextField";
 
 const StyledWrapper = styled.div`
-  box-shadow: var(--box-shadow-main);
+  box-shadow: var(--box-shadow-primary);
   border-radius: 5px;
   margin-top: 15px;
   position: relative;
-  background: var(--purple-gradient);
+  background: var(--gradient-primary);
   color: white;
   width: 90%;
   @media screen and (min-width: 600px) {
@@ -32,6 +32,7 @@ const StyledHeadingWrapper = styled.div`
 
 const StyledH2 = styled.span`
   background: var(--orange-gradient);
+  box-shadow: var(--box-shadow-primary);
   padding: 10px;
   color: #fff;
   border-radius: 8px;
