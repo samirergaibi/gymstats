@@ -7,15 +7,11 @@ const StyledWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  margin-top: 40px;
+  margin-top: 20px;
 `;
 
 const StyledH1 = styled.h1`
   text-align: center;
-`;
-
-const StyledH2 = styled.h2`
-  margin-bottom: 10px;
 `;
 
 const Separator = styled.div`
@@ -28,10 +24,12 @@ const Separator = styled.div`
 const Home: NextPage = () => {
   return (
     <StyledWrapper>
-      <StyledH1>Stats for your gym workouts 💪</StyledH1>
+      <StyledH1>Welcome back to GymStats.</StyledH1>
       <Separator />
-      <StyledH2>Sign in to your account</StyledH2>
       <LoginForm />
+      <div style={{ marginTop: 10 }}>
+        New here? <a href="#">Create an account</a>
+      </div>
     </StyledWrapper>
   );
 };

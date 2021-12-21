@@ -8,10 +8,13 @@ const StyledLabel = styled.label`
 
 const StyledTextField = styled.input`
   border-radius: 6px;
-  border: 1px solid rgba(0, 0, 0, 0.4);
+  border: none;
   padding: 8px 10px;
   font-size: 1rem;
   width: 100%;
+  &::placeholder {
+    font-size: 0.8rem;
+  }
 `;
 
 type Props = InputHTMLAttributes<HTMLInputElement> & {
