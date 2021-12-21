@@ -4,11 +4,14 @@ import Link from "next/link";
 
 const StyledNav = styled.nav`
   padding: 10px;
+  background: var(--primary);
 `;
 
 const StyledLink = styled.a`
   display: inline-block;
   padding: 10px;
+  color: #fff;
+  text-decoration: none;
 `;
 
 const StyledList = styled.ul`
