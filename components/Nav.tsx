@@ -24,17 +24,17 @@ const Nav: React.FC = () => {
       <StyledList>
         <li>
           <Link href="/" passHref>
-            <StyledLink>Login</StyledLink>
-          </Link>
-        </li>
-        <li>
-          <Link href="/exercises" passHref>
-            <StyledLink>Exercises</StyledLink>
+            <StyledLink>Hem</StyledLink>
           </Link>
         </li>
         <li>
           <Link href="/about" passHref>
-            <StyledLink>About</StyledLink>
+            <StyledLink>Om GymStats</StyledLink>
+          </Link>
+        </li>
+        <li>
+          <Link href="/login" passHref>
+            <StyledLink>Logga in</StyledLink>
           </Link>
         </li>
       </StyledList>

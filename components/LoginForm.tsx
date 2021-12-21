@@ -85,15 +85,15 @@ const LoginForm = () => {
   return (
     <StyledWrapper>
       <StyledHeadingWrapper>
-        <StyledH2>Sign in to your account</StyledH2>
+        <StyledH2>Logga in på ditt konto</StyledH2>
       </StyledHeadingWrapper>
       <StyledForm onSubmit={login}>
         <StyledInputWrapper firstItem>
           <TextField
             id="email"
-            label="Email"
+            label="E-postadress"
             type="text"
-            placeholder="Enter your email"
+            placeholder="Ange din e-postadress"
             value={loginFormData?.email}
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
               setLoginFormData({
@@ -106,9 +106,9 @@ const LoginForm = () => {
         <StyledInputWrapper>
           <TextField
             id="password"
-            label="Password"
+            label="Lösenord"
             type="password"
-            placeholder="Enter your password"
+            placeholder="Ange ditt lösenord"
             value={loginFormData?.password}
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
               setLoginFormData({
@@ -119,7 +119,7 @@ const LoginForm = () => {
           />
         </StyledInputWrapper>
         <StyledButtonWrapper>
-          <button type="submit">Sign in</button>
+          <button type="submit">Logga in</button>
         </StyledButtonWrapper>
       </StyledForm>
     </StyledWrapper>
