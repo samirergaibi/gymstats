@@ -20,10 +20,6 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     font-family: 'Spartan', sans-serif;
   }
-  
-  html, body, #__next {
-    height: 100%;
-  }
 
   body {
     line-height: 1.5;
