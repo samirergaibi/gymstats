@@ -20,7 +20,10 @@ const StyledWrapper = styled.div`
 `;
 
 const StyledForm = styled.form`
-  padding: 60px 30px 50px;
+  padding: 60px 30px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 `;
 
 const StyledHeadingWrapper = styled.div`
@@ -40,11 +43,9 @@ const StyledFormTitle = styled.span`
   transform: rotate(-2deg);
 `;
 
-const StyledInputWrapper = styled.div<{ firstItem?: boolean }>`
+const StyledInputWrapper = styled.div`
   display: grid;
   gap: 5px;
-  margin-bottom: 15px;
-  margin-top: ${({ firstItem }) => firstItem && "0px"};
 `;
 
 const StyledButtonWrapper = styled.div`
@@ -88,7 +89,7 @@ const LoginForm = () => {
         <StyledFormTitle>Logga in på ditt konto</StyledFormTitle>
       </StyledHeadingWrapper>
       <StyledForm onSubmit={login}>
-        <StyledInputWrapper firstItem>
+        <StyledInputWrapper>
           <TextField
             id="email"
             label="E-postadress"
