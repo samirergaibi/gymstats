@@ -54,7 +54,7 @@ const Home: NextPage = () => {
           />
           <SmallCard
             backgroundColor="var(--primary)"
-            href="/create-account"
+            href="/register"
             imageNode={<Image alt="Dumbells illustration" src={dumbellSvg} />}
             text="Skapa konto"
           />
