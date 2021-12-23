@@ -6,10 +6,18 @@ const cssVariables = `
   :root {
     --primary: #087E8B;
     --secondary: #4EA685;
+    --blue: #2B70C1;
+    --peach: #F76863;
+
+    --gradient-primary: linear-gradient(var(--secondary), var(--primary));
+    --orange-gradient: linear-gradient(to right, var(--peach), #f78c63);
+
+    --medium-bold: 600;
+
+    --border-medium: 8px;
+
     --box-shadow-primary: 0 15px 35px 0 rgba(60, 66, 87, 0.08),
     0 5px 15px 0 rgba(0, 0, 0, 0.12);
-    --gradient-primary: linear-gradient(var(--secondary), var(--primary));
-    --orange-gradient: linear-gradient(to right, #f76863, #f78c63);
   }
 `;
 

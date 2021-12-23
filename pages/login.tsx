@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import Link from "next/link";
 import styled from "styled-components";
 import LoginForm from "../components/LoginForm";
 
@@ -21,15 +22,27 @@ const Separator = styled.div`
   margin: 20px;
 `;
 
+const StyledP = styled.p`
+  margin-top: 10px;
+`;
+
+const StyledLink = styled.a`
+  color: var(--blue);
+  text-decoration: underline;
+`;
+
 const Home: NextPage = () => {
   return (
     <StyledWrapper>
       <StyledH1>Välkommen tillbaka till GymStats!</StyledH1>
       <Separator />
       <LoginForm />
-      <p style={{ marginTop: 10 }}>
-        Ny här? <a href="#">Skapa konto</a>
-      </p>
+      <StyledP>
+        Ny här?{" "}
+        <Link href="/register" passHref>
+          <StyledLink>Skapa konto</StyledLink>
+        </Link>
+      </StyledP>
     </StyledWrapper>
   );
 };

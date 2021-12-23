@@ -4,10 +4,11 @@ import styled from "styled-components";
 import { AuthenticationData } from "../types";
 import { supabase } from "../utils/supabaseClient";
 import TextField from "../components/TextField";
+import Button from "./Button";
 
 const StyledWrapper = styled.div`
   box-shadow: var(--box-shadow-primary);
-  border-radius: 5px;
+  border-radius: var(--border-medium);
   margin-top: 15px;
   position: relative;
   background: var(--gradient-primary);
@@ -19,7 +20,7 @@ const StyledWrapper = styled.div`
 `;
 
 const StyledForm = styled.form`
-  padding: 50px 30px;
+  padding: 60px 30px 50px;
 `;
 
 const StyledHeadingWrapper = styled.div`
@@ -30,14 +31,12 @@ const StyledHeadingWrapper = styled.div`
   top: -15px;
 `;
 
-const StyledH2 = styled.span`
+const StyledFormTitle = styled.span`
   background: var(--orange-gradient);
   box-shadow: var(--box-shadow-primary);
   padding: 10px;
-  color: #fff;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
+  border-radius: var(--border-medium);
+  font-weight: var(--medium-bold);
   transform: rotate(-2deg);
 `;
 
@@ -86,7 +85,7 @@ const LoginForm = () => {
   return (
     <StyledWrapper>
       <StyledHeadingWrapper>
-        <StyledH2>Logga in på ditt konto</StyledH2>
+        <StyledFormTitle>Logga in på ditt konto</StyledFormTitle>
       </StyledHeadingWrapper>
       <StyledForm onSubmit={login}>
         <StyledInputWrapper firstItem>
@@ -120,7 +119,7 @@ const LoginForm = () => {
           />
         </StyledInputWrapper>
         <StyledButtonWrapper>
-          <button type="submit">Logga in</button>
+          <Button type="submit">Logga in</Button>
         </StyledButtonWrapper>
       </StyledForm>
     </StyledWrapper>
