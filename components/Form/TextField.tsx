@@ -6,6 +6,11 @@ const StyledLabel = styled.label`
   font-size: 0.85rem;
 `;
 
+const StyledInputWrapper = styled.div`
+  display: grid;
+  gap: 5px;
+`;
+
 const StyledTextField = styled.input`
   border-radius: 6px;
   border: none;
@@ -25,10 +30,10 @@ const TextField: React.FC<Props> = props => {
   const { id, label } = props;
 
   return (
-    <>
+    <StyledInputWrapper>
       {label && <StyledLabel htmlFor={id}>{label}</StyledLabel>}
       <StyledTextField {...props} />
-    </>
+    </StyledInputWrapper>
   );
 };
 

@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 import { AuthenticationData } from "../types";
 import { supabase } from "../utils/supabaseClient";
-import TextField from "../components/TextField";
+import TextField from "./Form/TextField";
 import Button from "./Button";
 
 const StyledWrapper = styled.div`
@@ -41,11 +41,6 @@ const StyledFormTitle = styled.span`
   border-radius: var(--border-medium);
   font-weight: var(--medium-bold);
   transform: rotate(-2deg);
-`;
-
-const StyledInputWrapper = styled.div`
-  display: grid;
-  gap: 5px;
 `;
 
 const StyledButtonWrapper = styled.div`
@@ -89,36 +84,32 @@ const LoginForm = () => {
         <StyledFormTitle>Logga in på ditt konto</StyledFormTitle>
       </StyledHeadingWrapper>
       <StyledForm onSubmit={login}>
-        <StyledInputWrapper>
-          <TextField
-            id="email"
-            label="E-postadress"
-            type="text"
-            placeholder="Ange din e-postadress"
-            value={loginFormData?.email}
-            onChange={(event: ChangeEvent<HTMLInputElement>) => {
-              setLoginFormData({
-                ...loginFormData,
-                email: event.target.value,
-              });
-            }}
-          />
-        </StyledInputWrapper>
-        <StyledInputWrapper>
-          <TextField
-            id="password"
-            label="Lösenord"
-            type="password"
-            placeholder="Ange ditt lösenord"
-            value={loginFormData?.password}
-            onChange={(event: ChangeEvent<HTMLInputElement>) => {
-              setLoginFormData({
-                ...loginFormData,
-                password: event.target.value,
-              });
-            }}
-          />
-        </StyledInputWrapper>
+        <TextField
+          id="email"
+          label="E-postadress"
+          type="text"
+          placeholder="Ange din e-postadress"
+          value={loginFormData?.email}
+          onChange={(event: ChangeEvent<HTMLInputElement>) => {
+            setLoginFormData({
+              ...loginFormData,
+              email: event.target.value,
+            });
+          }}
+        />
+        <TextField
+          id="password"
+          label="Lösenord"
+          type="password"
+          placeholder="Ange ditt lösenord"
+          value={loginFormData?.password}
+          onChange={(event: ChangeEvent<HTMLInputElement>) => {
+            setLoginFormData({
+              ...loginFormData,
+              password: event.target.value,
+            });
+          }}
+        />
         <StyledButtonWrapper>
           <Button type="submit">Logga in</Button>
         </StyledButtonWrapper>

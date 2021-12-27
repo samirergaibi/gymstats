@@ -31,7 +31,7 @@ const StyledLink = styled.a`
   text-decoration: underline;
 `;
 
-const Home: NextPage = () => {
+const Login: NextPage = () => {
   return (
     <StyledWrapper>
       <StyledH1>Välkommen tillbaka till GymStats!</StyledH1>
@@ -47,4 +47,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Login;
