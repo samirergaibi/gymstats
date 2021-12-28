@@ -47,7 +47,7 @@ const StyledButtonWrapper = styled.div`
 type Props = {
   buttonText: string;
   title?: string;
-  onSubmit: (event: FormEvent) => void;
+  onSubmit: (event?: FormEvent<HTMLFormElement>) => void;
 };
 
 const Form: React.FC<Props> = ({ title, onSubmit, children, buttonText }) => {
