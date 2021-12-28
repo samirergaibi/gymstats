@@ -1,23 +1,41 @@
-import { useState, ChangeEvent, FormEvent } from "react";
-import { AuthenticationData } from "../types";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import { supabase } from "../utils/supabaseClient";
 import { Form, TextField } from "./Form";
 
-const RegisterForm = () => {
-  const [registerFormData, setRegisterFormData] =
-    useState<AuthenticationData>();
+type FormValues = {
+  email: string;
+  password: string;
+  passwordConfirmation: string;
+};
 
-  const register = async (event: FormEvent) => {
-    event.preventDefault();
+const initialValues = {
+  email: "",
+  password: "",
+  passwordConfirmation: "",
+};
+
+const validationSchema = Yup.object({
+  email: Yup.string()
+    .email("Ogiltig e-postadress")
+    .required("Du behöver ange din e-postadress"),
+  password: Yup.string()
+    .min(6, "Lösenordet måste vara minst 6 tecken långt")
+    .required("Du behöver ange ditt lösenord"),
+  passwordConfirmation: Yup.string()
+    .oneOf([Yup.ref("password")], "Lösenorden stämmer inte överens")
+    .required("Du behöver bekräfta lösenordet"),
+});
+
+const RegisterForm = () => {
+  const register = async ({ email, password }: FormValues) => {
     if (!supabase) {
       throw new Error("Trying to sign up without being connect to Supabase.");
     }
 
     const { user, session, error } = await supabase.auth.signUp(
-      {
-        email: registerFormData?.email,
-        password: registerFormData?.password,
-      },
+      { email, password },
+      // TODO: Redirect to correct page
       { redirectTo: "https://samirergaibi.se" }
     );
     console.log({
@@ -27,43 +45,51 @@ const RegisterForm = () => {
     });
   };
 
+  const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
+    useFormik({
+      initialValues,
+      validationSchema,
+      onSubmit: register,
+    });
+
   return (
-    <Form buttonText="Skapa konto" title="Skapa ett konto" onSubmit={register}>
+    <Form
+      buttonText="Skapa konto"
+      title="Skapa ett konto"
+      onSubmit={handleSubmit}
+    >
       <TextField
         id="email"
         label="E-postadress"
         type="text"
         placeholder="Ange din e-postadress"
-        value={registerFormData?.email}
-        onChange={(event: ChangeEvent<HTMLInputElement>) => {
-          setRegisterFormData({
-            ...registerFormData,
-            email: event.target.value,
-          });
-        }}
+        value={values.email}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        error={errors.email}
+        touched={touched.email}
       />
       <TextField
         id="password"
         label="Lösenord"
         type="password"
         placeholder="Ange ditt lösenord"
-        value={registerFormData?.password}
-        onChange={(event: ChangeEvent<HTMLInputElement>) => {
-          setRegisterFormData({
-            ...registerFormData,
-            password: event.target.value,
-          });
-        }}
+        value={values.password}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        error={errors.password}
+        touched={touched.password}
       />
       <TextField
-        id="password"
-        label="Upprepa lösenord"
+        id="passwordConfirmation"
+        label="Bekräfta lösenord"
         type="password"
         placeholder="Ange ditt lösenord"
-        value={registerFormData?.password}
-        onChange={(event: ChangeEvent<HTMLInputElement>) => {
-          // TODO: Check that they enter the same password
-        }}
+        value={values.passwordConfirmation}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        error={errors.passwordConfirmation}
+        touched={touched.passwordConfirmation}
       />
     </Form>
   );
