@@ -1,6 +1,7 @@
 import { FormEvent } from "react";
 import styled from "styled-components";
 import Button from "../Button";
+import FormError from "./FormError";
 
 const StyledWrapper = styled.div`
   box-shadow: var(--box-shadow-primary);
@@ -46,11 +47,18 @@ const StyledButtonWrapper = styled.div`
 
 type Props = {
   buttonText: string;
+  error?: string;
   title?: string;
   onSubmit: (event?: FormEvent<HTMLFormElement>) => void;
 };
 
-const Form: React.FC<Props> = ({ title, onSubmit, children, buttonText }) => {
+const Form: React.FC<Props> = ({
+  buttonText,
+  children,
+  error,
+  title,
+  onSubmit,
+}) => {
   return (
     <StyledWrapper>
       {title && (
@@ -59,14 +67,11 @@ const Form: React.FC<Props> = ({ title, onSubmit, children, buttonText }) => {
         </StyledHeadingWrapper>
       )}
       <StyledForm onSubmit={onSubmit}>
-        {
-          <>
-            {children}{" "}
-            <StyledButtonWrapper>
-              <Button type="submit">{buttonText}</Button>
-            </StyledButtonWrapper>
-          </>
-        }
+        {children}{" "}
+        <StyledButtonWrapper>
+          <Button type="submit">{buttonText}</Button>
+        </StyledButtonWrapper>
+        {error && <FormError>{error}</FormError>}
       </StyledForm>
     </StyledWrapper>
   );

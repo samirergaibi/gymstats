@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -21,8 +22,9 @@ const validationSchema = Yup.object({
   password: Yup.string().required("Fyll i lösenord"),
 });
 
-const LoginForm = () => {
+const LoginForm: React.FC = () => {
   const router = useRouter();
+  const [apiError, setApiError] = useState<string>();
 
   const login = async ({ email, password }: FormValues) => {
     if (!supabase) {
@@ -34,8 +36,7 @@ const LoginForm = () => {
       password,
     });
     if (error) {
-      // TODO: Add unexpected error handling
-      console.log(error);
+      setApiError("Ogiltiga inloggningsuppgifter");
     }
     if (session && user) {
       // TODO: route to correct login page when it exists
@@ -50,13 +51,21 @@ const LoginForm = () => {
       onSubmit: login,
     });
 
+  useEffect(() => {
+    if (values.email.length === 0 || values.password.length === 0) {
+      setApiError(undefined);
+    }
+  }, [values.email, values.password]);
+
   return (
     <Form
       buttonText="Logga in"
+      error={apiError}
       title="Logga in på ditt konto"
       onSubmit={handleSubmit}
     >
       <TextField
+        autoComplete="username"
         id="email"
         label="E-postadress"
         type="text"
@@ -68,6 +77,7 @@ const LoginForm = () => {
         touched={touched.email}
       />
       <TextField
+        autoComplete="current-password"
         id="password"
         label="Lösenord"
         type="password"

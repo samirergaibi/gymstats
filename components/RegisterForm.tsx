@@ -59,6 +59,7 @@ const RegisterForm = () => {
       onSubmit={handleSubmit}
     >
       <TextField
+        autoComplete="email"
         id="email"
         label="E-postadress"
         type="text"
@@ -70,6 +71,7 @@ const RegisterForm = () => {
         touched={touched.email}
       />
       <TextField
+        autoComplete="new-password"
         id="password"
         label="Lösenord"
         type="password"
@@ -81,6 +83,7 @@ const RegisterForm = () => {
         touched={touched.password}
       />
       <TextField
+        autoComplete="new-password"
         id="passwordConfirmation"
         label="Bekräfta lösenord"
         type="password"
