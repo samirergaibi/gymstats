@@ -1,5 +1,6 @@
 import { InputHTMLAttributes } from "react";
 import styled from "styled-components";
+import FormError from "./FormError";
 
 const StyledLabel = styled.label`
   font-weight: 600;
@@ -21,12 +22,6 @@ const StyledTextField = styled.input<{ error?: string; touched?: boolean }>`
   &::placeholder {
     font-size: 0.8rem;
   }
-`;
-
-const FormError = styled.p`
-  color: #f00800;
-  font-size: 0.8rem;
-  text-align: center;
 `;
 
 type Props = InputHTMLAttributes<HTMLInputElement> & {
