@@ -1,10 +1,10 @@
-import type { NextPage } from "next";
-import Image from "next/image";
-import styled from "styled-components";
-import pilatesSvg from "../assets/pilates-2.svg";
-import userSvg from "../assets/user.svg";
-import dumbellSvg from "../assets/dumbells.svg";
-import SmallCard from "../components/SmallCard";
+import type { NextPage } from 'next';
+import Image from 'next/image';
+import styled from 'styled-components';
+import pilatesSvg from '../assets/pilates-2.svg';
+import userSvg from '../assets/user.svg';
+import dumbellSvg from '../assets/dumbells.svg';
+import SmallCard from '../components/SmallCard';
 
 const ImageWrapper = styled.div`
   display: flex;

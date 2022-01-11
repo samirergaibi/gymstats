@@ -5,7 +5,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prettier": "prettier --write src/**{ts,tsx}"
   },
   "dependencies": {
     "@supabase/supabase-js": "1.28.5",
@@ -23,6 +24,9 @@
     "babel-plugin-styled-components": "1.13.3",
     "eslint": "7",
     "eslint-config-next": "12.0.3",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-prettier": "4.0.0",
+    "prettier": "2.5.1",
     "typescript": "4.4.4"
   }
 }

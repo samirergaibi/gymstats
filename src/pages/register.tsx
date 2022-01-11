@@ -1,7 +1,7 @@
-import type { NextPage } from "next";
-import Link from "next/link";
-import styled from "styled-components";
-import RegisterForm from "../components/RegisterForm";
+import type { NextPage } from 'next';
+import Link from 'next/link';
+import styled from 'styled-components';
+import RegisterForm from '../components/RegisterForm';
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -38,7 +38,7 @@ const Register: NextPage = () => {
       <Separator />
       <RegisterForm />
       <StyledP>
-        Har du redan ett konto?{" "}
+        Har du redan ett konto?{' '}
         <Link href="/login" passHref>
           <StyledLink>Logga in</StyledLink>
         </Link>

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const StyledButton = styled.button`
   color: white;
@@ -12,7 +12,7 @@ const StyledButton = styled.button`
 
 type Props = {
   children: React.ReactNode;
-  type?: "button" | "submit" | "reset";
+  type?: 'button' | 'submit' | 'reset';
 };
 
 const Button: React.FC<Props> = ({ children, ...props }) => (
