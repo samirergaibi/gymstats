@@ -33,7 +33,7 @@ const SmallCard: React.FC<Props> = ({
   backgroundColor,
   href,
   imageNode: ImageNode,
-  text
+  text,
 }) => (
   <Link href={href} passHref>
     <StyledLink>

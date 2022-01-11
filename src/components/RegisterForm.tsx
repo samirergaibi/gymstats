@@ -12,7 +12,7 @@ type FormValues = {
 const initialValues = {
   email: '',
   password: '',
-  passwordConfirmation: ''
+  passwordConfirmation: '',
 };
 
 const validationSchema = Yup.object({
@@ -24,7 +24,7 @@ const validationSchema = Yup.object({
     .required('Du behöver ange ditt lösenord'),
   passwordConfirmation: Yup.string()
     .oneOf([Yup.ref('password')], 'Lösenorden stämmer inte överens')
-    .required('Du behöver bekräfta lösenordet')
+    .required('Du behöver bekräfta lösenordet'),
 });
 
 const RegisterForm = () => {
@@ -36,12 +36,12 @@ const RegisterForm = () => {
     const { user, session, error } = await supabase.auth.signUp(
       { email, password },
       // TODO: Redirect to correct page
-      { redirectTo: 'https://samirergaibi.se' }
+      { redirectTo: 'https://samirergaibi.se' },
     );
     console.log({
       user,
       session,
-      error
+      error,
     });
   };
 
@@ -49,7 +49,7 @@ const RegisterForm = () => {
     useFormik({
       initialValues,
       validationSchema,
-      onSubmit: register
+      onSubmit: register,
     });
 
   return (

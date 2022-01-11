@@ -57,7 +57,7 @@ const Form: React.FC<Props> = ({
   children,
   error,
   title,
-  onSubmit
+  onSubmit,
 }) => {
   return (
     <StyledWrapper>

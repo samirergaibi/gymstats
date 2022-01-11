@@ -12,14 +12,14 @@ type FormValues = {
 
 const initialValues = {
   email: '',
-  password: ''
+  password: '',
 };
 
 const validationSchema = Yup.object({
   email: Yup.string()
     .email('Ogiltig e-postadress')
     .required('Fyll i e-postadress'),
-  password: Yup.string().required('Fyll i lösenord')
+  password: Yup.string().required('Fyll i lösenord'),
 });
 
 const LoginForm: React.FC = () => {
@@ -33,7 +33,7 @@ const LoginForm: React.FC = () => {
 
     const { user, session, error } = await supabase.auth.signIn({
       email,
-      password
+      password,
     });
     if (error) {
       setApiError('Ogiltiga inloggningsuppgifter');
@@ -48,7 +48,7 @@ const LoginForm: React.FC = () => {
     useFormik<FormValues>({
       initialValues,
       validationSchema,
-      onSubmit: login
+      onSubmit: login,
     });
 
   useEffect(() => {

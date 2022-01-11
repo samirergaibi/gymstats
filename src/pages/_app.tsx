@@ -44,8 +44,8 @@ const GlobalStyle = createGlobalStyle`
 
 const theme = {
   colors: {
-    primary: '#0070f3'
-  }
+    primary: '#0070f3',
+  },
 };
 
 export default function App({ Component, pageProps }: AppProps) {
