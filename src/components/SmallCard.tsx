@@ -1,5 +1,5 @@
-import Link from "next/link";
-import styled from "styled-components";
+import Link from 'next/link';
+import styled from 'styled-components';
 
 const Card = styled.div<{ backgroundColor: string }>`
   width: 130px;
@@ -33,7 +33,7 @@ const SmallCard: React.FC<Props> = ({
   backgroundColor,
   href,
   imageNode: ImageNode,
-  text,
+  text
 }) => (
   <Link href={href} passHref>
     <StyledLink>

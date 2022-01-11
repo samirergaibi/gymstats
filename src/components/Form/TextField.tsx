@@ -1,6 +1,6 @@
-import { InputHTMLAttributes } from "react";
-import styled from "styled-components";
-import FormError from "./FormError";
+import { InputHTMLAttributes } from 'react';
+import styled from 'styled-components';
+import FormError from './FormError';
 
 const StyledLabel = styled.label`
   font-weight: 600;
@@ -15,7 +15,7 @@ const StyledInputWrapper = styled.div`
 const StyledTextField = styled.input<{ error?: string; touched?: boolean }>`
   border-radius: 6px;
   border: ${({ error, touched }) =>
-    error && touched ? "2px solid #f00800" : "none"};
+    error && touched ? '2px solid #f00800' : 'none'};
   padding: 8px 10px;
   font-size: 1rem;
   width: 100%;
@@ -30,7 +30,7 @@ type Props = InputHTMLAttributes<HTMLInputElement> & {
   touched?: boolean;
 };
 
-const TextField: React.FC<Props> = props => {
+const TextField: React.FC<Props> = (props) => {
   const { id, label, error, touched } = props;
 
   return (

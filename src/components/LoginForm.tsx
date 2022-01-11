@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { supabase } from "../utils/supabaseClient";
-import { Form, TextField } from "./Form";
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { supabase } from '../utils/supabaseClient';
+import { Form, TextField } from './Form';
 
 type FormValues = {
   email: string;
@@ -11,15 +11,15 @@ type FormValues = {
 };
 
 const initialValues = {
-  email: "",
-  password: "",
+  email: '',
+  password: ''
 };
 
 const validationSchema = Yup.object({
   email: Yup.string()
-    .email("Ogiltig e-postadress")
-    .required("Fyll i e-postadress"),
-  password: Yup.string().required("Fyll i lösenord"),
+    .email('Ogiltig e-postadress')
+    .required('Fyll i e-postadress'),
+  password: Yup.string().required('Fyll i lösenord')
 });
 
 const LoginForm: React.FC = () => {
@@ -28,19 +28,19 @@ const LoginForm: React.FC = () => {
 
   const login = async ({ email, password }: FormValues) => {
     if (!supabase) {
-      throw new Error("Trying to log in without being connected to Supabase.");
+      throw new Error('Trying to log in without being connected to Supabase.');
     }
 
     const { user, session, error } = await supabase.auth.signIn({
       email,
-      password,
+      password
     });
     if (error) {
-      setApiError("Ogiltiga inloggningsuppgifter");
+      setApiError('Ogiltiga inloggningsuppgifter');
     }
     if (session && user) {
       // TODO: route to correct login page when it exists
-      router.push("/about");
+      router.push('/about');
     }
   };
 
@@ -48,7 +48,7 @@ const LoginForm: React.FC = () => {
     useFormik<FormValues>({
       initialValues,
       validationSchema,
-      onSubmit: login,
+      onSubmit: login
     });
 
   useEffect(() => {

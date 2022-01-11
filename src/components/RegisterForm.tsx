@@ -1,7 +1,7 @@
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { supabase } from "../utils/supabaseClient";
-import { Form, TextField } from "./Form";
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { supabase } from '../utils/supabaseClient';
+import { Form, TextField } from './Form';
 
 type FormValues = {
   email: string;
@@ -10,38 +10,38 @@ type FormValues = {
 };
 
 const initialValues = {
-  email: "",
-  password: "",
-  passwordConfirmation: "",
+  email: '',
+  password: '',
+  passwordConfirmation: ''
 };
 
 const validationSchema = Yup.object({
   email: Yup.string()
-    .email("Ogiltig e-postadress")
-    .required("Du behöver ange din e-postadress"),
+    .email('Ogiltig e-postadress')
+    .required('Du behöver ange din e-postadress'),
   password: Yup.string()
-    .min(6, "Lösenordet måste vara minst 6 tecken långt")
-    .required("Du behöver ange ditt lösenord"),
+    .min(6, 'Lösenordet måste vara minst 6 tecken långt')
+    .required('Du behöver ange ditt lösenord'),
   passwordConfirmation: Yup.string()
-    .oneOf([Yup.ref("password")], "Lösenorden stämmer inte överens")
-    .required("Du behöver bekräfta lösenordet"),
+    .oneOf([Yup.ref('password')], 'Lösenorden stämmer inte överens')
+    .required('Du behöver bekräfta lösenordet')
 });
 
 const RegisterForm = () => {
   const register = async ({ email, password }: FormValues) => {
     if (!supabase) {
-      throw new Error("Trying to sign up without being connect to Supabase.");
+      throw new Error('Trying to sign up without being connect to Supabase.');
     }
 
     const { user, session, error } = await supabase.auth.signUp(
       { email, password },
       // TODO: Redirect to correct page
-      { redirectTo: "https://samirergaibi.se" }
+      { redirectTo: 'https://samirergaibi.se' }
     );
     console.log({
       user,
       session,
-      error,
+      error
     });
   };
 
@@ -49,7 +49,7 @@ const RegisterForm = () => {
     useFormik({
       initialValues,
       validationSchema,
-      onSubmit: register,
+      onSubmit: register
     });
 
   return (

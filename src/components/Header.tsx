@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
-import styled from "styled-components";
-import Nav from "./Nav";
+import { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import Nav from './Nav';
 
 const StickyHeader = styled.header<{ hideHeader: boolean }>`
   position: sticky;
   top: 0;
   z-index: 9999;
   transform: ${({ hideHeader }) =>
-    hideHeader ? "translateY(-110%)" : "translateY(0)"};
+    hideHeader ? 'translateY(-110%)' : 'translateY(0)'};
   transition: transform 0.3s;
 `;
 
@@ -25,9 +25,9 @@ const Header = () => {
       }
     };
 
-    document.addEventListener("scroll", scrollListener);
+    document.addEventListener('scroll', scrollListener);
     return () => {
-      window.removeEventListener("scroll", scrollListener);
+      window.removeEventListener('scroll', scrollListener);
     };
   }, [hideHeader]);
 

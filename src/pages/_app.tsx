@@ -1,6 +1,6 @@
-import type { AppProps } from "next/app";
-import { createGlobalStyle, ThemeProvider } from "styled-components";
-import Layout from "../components/Layout";
+import type { AppProps } from 'next/app';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import Layout from '../components/Layout';
 
 const cssVariables = `
   :root {
@@ -44,8 +44,8 @@ const GlobalStyle = createGlobalStyle`
 
 const theme = {
   colors: {
-    primary: "#0070f3",
-  },
+    primary: '#0070f3'
+  }
 };
 
 export default function App({ Component, pageProps }: AppProps) {

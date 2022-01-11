@@ -1,7 +1,7 @@
-import { FormEvent } from "react";
-import styled from "styled-components";
-import Button from "../Button";
-import FormError from "./FormError";
+import { FormEvent } from 'react';
+import styled from 'styled-components';
+import Button from '../Button';
+import FormError from './FormError';
 
 const StyledWrapper = styled.div`
   box-shadow: var(--box-shadow-primary);
@@ -57,7 +57,7 @@ const Form: React.FC<Props> = ({
   children,
   error,
   title,
-  onSubmit,
+  onSubmit
 }) => {
   return (
     <StyledWrapper>
@@ -67,7 +67,7 @@ const Form: React.FC<Props> = ({
         </StyledHeadingWrapper>
       )}
       <StyledForm onSubmit={onSubmit}>
-        {children}{" "}
+        {children}{' '}
         <StyledButtonWrapper>
           <Button type="submit">{buttonText}</Button>
         </StyledButtonWrapper>
