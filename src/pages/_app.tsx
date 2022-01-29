@@ -8,9 +8,12 @@ const cssVariables = `
     --secondary: #4EA685;
     --blue: #2B70C1;
     --peach: #F76863;
+    --dark: #323232;
+
+    --error: #F76863;
 
     --gradient-primary: linear-gradient(var(--secondary), var(--primary));
-    --orange-gradient: linear-gradient(to right, var(--peach), #f78c63);
+    --gradient-orange: linear-gradient(to right, var(--peach), #f78c63);
 
     --medium-bold: 600;
 
@@ -18,6 +21,7 @@ const cssVariables = `
 
     --box-shadow-primary: 0 15px 35px 0 rgba(60, 66, 87, 0.08),
     0 5px 15px 0 rgba(0, 0, 0, 0.12);
+    --box-shadow-strong: 0 4px 4px 0 rgba(0, 0, 0, 0.4);
   }
 `;
 

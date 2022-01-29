@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import FormError from './FormError';
 
 const StyledLabel = styled.label`
-  font-weight: 600;
+  font-weight: var(--medium-bold);
   font-size: 0.85rem;
 `;
 
@@ -15,7 +15,7 @@ const StyledInputWrapper = styled.div`
 const StyledTextField = styled.input<{ error?: string; touched?: boolean }>`
   border-radius: 6px;
   border: ${({ error, touched }) =>
-    error && touched ? '2px solid #f00800' : 'none'};
+    error && touched ? '2px solid var(--error)' : 'none'};
   padding: 8px 10px;
   font-size: 1rem;
   width: 100%;
