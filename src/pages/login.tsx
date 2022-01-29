@@ -13,13 +13,14 @@ const StyledWrapper = styled.div`
 
 const StyledH1 = styled.h1`
   text-align: center;
+  font-size: 1.8rem;
 `;
 
 const Separator = styled.div`
   height: 1px;
   background-color: rgba(0, 0, 0, 0.3);
   width: 60%;
-  margin: 20px;
+  margin: 40px;
 `;
 
 const StyledP = styled.p`

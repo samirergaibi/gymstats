@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const StyledNav = styled.nav`
   padding: 10px;
-  background: var(--primary);
+  background: var(--dark);
 `;
 
 const StyledLink = styled.a`

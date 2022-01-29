@@ -8,7 +8,7 @@ const StyledWrapper = styled.div`
   border-radius: var(--border-medium);
   margin-top: 15px;
   position: relative;
-  background: var(--gradient-primary);
+  background: var(--dark);
   color: white;
   width: 90%;
   @media screen and (min-width: 600px) {
@@ -32,8 +32,8 @@ const StyledHeadingWrapper = styled.div`
 `;
 
 const StyledFormTitle = styled.span`
-  background: var(--orange-gradient);
-  box-shadow: var(--box-shadow-primary);
+  background: var(--dark);
+  box-shadow: var(--box-shadow-strong);
   padding: 10px;
   border-radius: var(--border-medium);
   font-weight: var(--medium-bold);
