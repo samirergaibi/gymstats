@@ -40,7 +40,7 @@ const LoginForm: React.FC = () => {
     }
     if (session && user) {
       // TODO: route to correct login page when it exists
-      router.push('/about');
+      router.push('/account');
     }
   };
 

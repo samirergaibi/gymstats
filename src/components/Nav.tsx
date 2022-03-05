@@ -1,5 +1,13 @@
 import styled from 'styled-components';
 import Link from 'next/link';
+import { supabase } from '../utils/supabaseClient';
+import { useUserContext } from '../contexts/UserContext';
+
+type Routes = {
+  action?: Function;
+  href: string;
+  text: string;
+};
 
 const StyledNav = styled.nav`
   padding: 10px;
@@ -21,25 +29,43 @@ const StyledList = styled.ul`
   padding: 0;
 `;
 
+async function logout() {
+  const { error } = await supabase.auth.signOut();
+  if (error) {
+    throw new Error(JSON.stringify(error));
+  }
+}
+
+const loggedOutRoutes = [
+  { href: '/', text: 'Hem' },
+  { href: '/about', text: 'Om Gymstats' },
+  { href: '/login', text: 'Logga in' },
+];
+
+const loggedInRoutes = [
+  { href: '/account', text: 'Konto' },
+  { href: '/exercises', text: 'Övningar' },
+  { action: logout, href: '/login', text: 'Logga ut' },
+];
+
 const Nav: React.FC = () => {
+  const { isLoggedIn } = useUserContext();
+  const routes: Routes[] = isLoggedIn ? loggedInRoutes : loggedOutRoutes;
+
   return (
     <StyledNav>
       <StyledList>
-        <li>
-          <Link href="/" passHref>
-            <StyledLink>Hem</StyledLink>
-          </Link>
-        </li>
-        <li>
-          <Link href="/about" passHref>
-            <StyledLink>Om GymStats</StyledLink>
-          </Link>
-        </li>
-        <li>
-          <Link href="/login" passHref>
-            <StyledLink>Logga in</StyledLink>
-          </Link>
-        </li>
+        {routes.map(({ action, href, text }) => (
+          <li key={href}>
+            <Link href={href} passHref>
+              {action ? (
+                <StyledLink onClick={() => action()}>{text}</StyledLink>
+              ) : (
+                <StyledLink>{text}</StyledLink>
+              )}
+            </Link>
+          </li>
+        ))}
       </StyledList>
     </StyledNav>
   );

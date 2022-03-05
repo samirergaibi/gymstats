@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { supabase } from '../utils/supabaseClient';
@@ -28,6 +29,8 @@ const validationSchema = Yup.object({
 });
 
 const RegisterForm = () => {
+  const router = useRouter();
+
   const register = async ({ email, password }: FormValues) => {
     if (!supabase) {
       throw new Error('Trying to sign up without being connect to Supabase.');
@@ -43,6 +46,11 @@ const RegisterForm = () => {
       session,
       error,
     });
+    if (error) {
+      throw new Error(JSON.stringify(error));
+    }
+
+    router.push('/login');
   };
 
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
