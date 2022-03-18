@@ -1,7 +1,10 @@
+import { useEffect } from 'react';
 import type { NextPage } from 'next';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import styled from 'styled-components';
 import LoginForm from '../components/LoginForm';
+import { useUserContext } from '../contexts/UserContext';
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -33,6 +36,15 @@ const StyledLink = styled.a`
 `;
 
 const Login: NextPage = () => {
+  const router = useRouter();
+  const { authenticated } = useUserContext();
+
+  useEffect(() => {
+    if (authenticated) {
+      router.push('/account');
+    }
+  });
+
   return (
     <StyledWrapper>
       <StyledH1>Välkommen tillbaka till GymStats!</StyledH1>

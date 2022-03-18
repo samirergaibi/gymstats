@@ -49,8 +49,8 @@ const loggedInRoutes = [
 ];
 
 const Nav: React.FC = () => {
-  const { isLoggedIn } = useUserContext();
-  const routes: Routes[] = isLoggedIn ? loggedInRoutes : loggedOutRoutes;
+  const { authenticated } = useUserContext();
+  const routes: Routes[] = authenticated ? loggedInRoutes : loggedOutRoutes;
 
   return (
     <StyledNav>
