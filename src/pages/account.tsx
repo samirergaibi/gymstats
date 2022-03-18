@@ -3,7 +3,7 @@ import { protectedRoute } from '../utils/protectedRoute';
 
 export const getServerSideProps = protectedRoute;
 
-const Account: NextPage = () => {
+const AccountPage: NextPage = () => {
   return (
     <div>
       <h1>Ditt Konto! 😜</h1>
@@ -11,4 +11,4 @@ const Account: NextPage = () => {
   );
 };
 
-export default Account;
+export default AccountPage;
