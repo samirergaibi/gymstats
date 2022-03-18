@@ -1,7 +1,5 @@
-import { useEffect } from 'react';
 import type { AppProps } from 'next/app';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
-import { supabase } from '../utils/supabaseClient';
 import Layout from '../components/Layout';
 import { UserContextProvider } from '../contexts/UserContext';
 
@@ -56,16 +54,6 @@ const theme = {
 };
 
 export default function App({ Component, pageProps }: AppProps) {
-  useEffect(() => {
-    supabase.auth.onAuthStateChange((event, session) => {
-      fetch('/api/auth', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ event, session }),
-      });
-    });
-  }, []);
-
   return (
     <>
       <GlobalStyle />

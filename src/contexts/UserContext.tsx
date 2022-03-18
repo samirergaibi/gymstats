@@ -1,27 +1,45 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { User } from '@supabase/supabase-js';
+import { AuthChangeEvent, Session } from '@supabase/supabase-js';
 import { supabase } from '../utils/supabaseClient';
 
 interface IUserContext {
-  isLoggedIn: boolean;
-  user: User | null;
-  setUser: (user: User | null) => void;
+  authenticated: boolean;
 }
 
 export const UserContext = createContext<IUserContext | undefined>(undefined);
 
+const updateSupabaseCookie = async (
+  event: AuthChangeEvent,
+  session: Session | null,
+) => {
+  await fetch('/api/auth', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ event, session }),
+  });
+};
+
 export const UserContextProvider: React.FC = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
-    const supabaseUser = supabase.auth.user();
-    setUser(supabaseUser);
-  });
+    const authListener = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN') {
+        setAuthenticated(true);
+      }
+      if (event === 'SIGNED_OUT') {
+        setAuthenticated(false);
+      }
+      updateSupabaseCookie(event, session);
+    });
+
+    () => {
+      authListener.data?.unsubscribe();
+    };
+  }, []);
 
   const value: IUserContext = {
-    isLoggedIn: user ? true : false,
-    user,
-    setUser,
+    authenticated,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
