@@ -5,6 +5,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import LoginForm from '../components/LoginForm';
 import { useUserContext } from '../contexts/UserContext';
+import Spinner from '../components/Spinner';
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -44,6 +45,14 @@ const Login: NextPage = () => {
       router.push('/account');
     }
   });
+
+  if (authenticated) {
+    return (
+      <StyledWrapper>
+        <Spinner />
+      </StyledWrapper>
+    );
+  }
 
   return (
     <StyledWrapper>
