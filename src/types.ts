@@ -9,6 +9,5 @@ export type Exercise = {
   reps: number;
   sets: number;
   weight: number;
-  id: any;
-  sessions: any;
+  id: string;
 };
