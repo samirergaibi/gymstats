@@ -63,7 +63,7 @@ const ExercisesPage: NextPage = () => {
       throw new Error(error.message);
     }
 
-    setExercises(data);
+    setExercises(data ?? []);
   };
 
   useEffect(() => {
