@@ -1,51 +1,12 @@
 import { NextPage } from 'next';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Button from '../components/Button';
 import { protectedRoute } from '../utils/protectedRoute';
 import ExerciseCard from '../components/ExerciseCard';
-
-const EXERCISES_MOCK = [
-  {
-    categories: ['Bröst'],
-    name: 'Bänkpress',
-    reps: 8,
-    sets: 4,
-    weight: 55,
-    id: 1,
-    sessions: [],
-  },
-  {
-    categories: ['Biceps'],
-    name: 'Koncentrationscurl',
-    reps: 8,
-    sets: 4,
-    weight: 12,
-    id: 2,
-    sessions: [],
-  },
-  {
-    categories: ['Bröst'],
-    name: 'KAKA',
-    reps: 8,
-    sets: 4,
-    weight: 18,
-    id: 3,
-    sessions: [],
-  },
-  {
-    categories: ['Biceps'],
-    name: 'BABA',
-    reps: 8,
-    sets: 4,
-    weight: 16,
-    id: 4,
-    sessions: [],
-  },
-];
-
-const CATEGORIES_MOCK = [
-  ...new Set(EXERCISES_MOCK.map((exercise) => exercise.categories).flat()),
-];
+import ExerciseForm from '../components/ExerciseForm';
+import { supabase } from '../utils/supabaseClient';
+import { Exercise } from '../types';
+import { uppercase } from '../utils/uppercase';
 
 const StyledHeaderWrapper = styled.div`
   height: 200px;
@@ -65,25 +26,6 @@ const StyledH1 = styled.h1`
   top: 20%;
   left: 0;
   padding-left: 10px;
-`;
-
-const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px 0;
-`;
-const StyledInputWrapper = styled.div`
-  margin: 10px 0;
-`;
-const StyledLabel = styled.label`
-  font-weight: var(--medium-bold);
-  color: var(--dark);
-`;
-const StyledInput = styled.input`
-  display: block;
-  border: 2px solid var(--dark);
-  border-radius: 6px;
 `;
 
 const StyledH2 = styled.h2`
@@ -107,46 +49,70 @@ const StyledExerciseWrapper = styled.div`
   gap: 20px;
 `;
 
-export const getServerSideProps = protectedRoute;
-
 const ExercisesPage: NextPage = () => {
+  const [exercises, setExercises] = useState<Exercise[]>([]);
+
+  const getExercises = async () => {
+    const user = supabase.auth.user();
+    const { data, error } = await supabase
+      .from('exercises')
+      .select()
+      .eq('userId', user?.id);
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    setExercises(data ?? []);
+  };
+
+  useEffect(() => {
+    getExercises();
+  }, []);
+
+  const categories = [
+    ...new Set(
+      exercises
+        .map((exercise) => exercise.categories)
+        .flat()
+        .map((category) => category.toLowerCase()),
+    ),
+  ];
+
+  console.log({ exercises, categories });
+
   return (
-    <div>
+    <>
       <StyledHeaderWrapper>
         <StyledHeaderImage />
         <StyledH1>Övningar</StyledH1>
       </StyledHeaderWrapper>
 
-      <StyledForm>
-        <StyledH2>Lägg till en ny övning</StyledH2>
-        <StyledInputWrapper>
-          <StyledLabel>Kategori</StyledLabel>
-          <StyledInput type="text" />
-        </StyledInputWrapper>
-        <StyledInputWrapper>
-          <StyledLabel>Övning</StyledLabel>
-          <StyledInput type="text" />
-        </StyledInputWrapper>
-        <Button variant="blue">Lägg till övning</Button>
-      </StyledForm>
+      <ExerciseForm />
 
-      <div>
+      <>
         <StyledH2>Dina övningar</StyledH2>
-        {CATEGORIES_MOCK.map((category) => (
+        {categories.map((category) => (
           <StyledCategoryWrapper key={category}>
-            <StyledH3>{category}</StyledH3>
+            <StyledH3>{uppercase(category)}</StyledH3>
             <StyledExerciseWrapper>
-              {EXERCISES_MOCK.filter((exercise) =>
-                exercise.categories.includes(category),
-              ).map((exercise) => (
-                <ExerciseCard key={exercise.id} exercise={exercise} />
-              ))}
+              {exercises
+                .filter((exercise) =>
+                  exercise.categories
+                    .map((category) => category.toLowerCase())
+                    .includes(category),
+                )
+                .map((exercise) => (
+                  <ExerciseCard key={exercise.id} exercise={exercise} />
+                ))}
             </StyledExerciseWrapper>
           </StyledCategoryWrapper>
         ))}
-      </div>
-    </div>
+      </>
+    </>
   );
 };
 
 export default ExercisesPage;
+
+export const getServerSideProps = protectedRoute;

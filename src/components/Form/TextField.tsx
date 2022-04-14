@@ -12,10 +12,14 @@ const StyledInputWrapper = styled.div`
   gap: 5px;
 `;
 
-const StyledTextField = styled.input<{ error?: string; touched?: boolean }>`
+const StyledTextField = styled.input<{
+  error?: string;
+  touched?: boolean;
+  borderStyle?: string;
+}>`
   border-radius: 6px;
-  border: ${({ error, touched }) =>
-    error && touched ? '2px solid var(--error)' : 'none'};
+  border: ${({ error, touched, borderStyle }) =>
+    error && touched ? '2px solid var(--error)' : borderStyle};
   padding: 8px 10px;
   font-size: 1rem;
   width: 100%;
@@ -28,15 +32,18 @@ type Props = InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
   error?: string;
   touched?: boolean;
+  withBorder?: boolean;
 };
 
 const TextField: React.FC<Props> = (props) => {
-  const { id, label, error, touched } = props;
+  const { withBorder, id, label, error, touched } = props;
+
+  const borderStyle = withBorder ? '2px solid var(--dark)' : 'none';
 
   return (
     <StyledInputWrapper>
       {label && <StyledLabel htmlFor={id}>{label}</StyledLabel>}
-      <StyledTextField {...props} />
+      <StyledTextField {...props} borderStyle={borderStyle} />
       {error && touched && <FormError>{error}</FormError>}
     </StyledInputWrapper>
   );
