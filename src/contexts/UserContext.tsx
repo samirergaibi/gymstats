@@ -24,6 +24,7 @@ export const UserContextProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     const authListener = supabase.auth.onAuthStateChange((event, session) => {
+      console.log({ event, session });
       if (event === 'SIGNED_IN') {
         setAuthenticated(true);
       }
