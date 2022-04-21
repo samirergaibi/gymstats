@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Formik, Form } from 'formik';
+import { Formik, Form, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import Button from '../components/Button';
 import { supabase } from '../utils/supabaseClient';
@@ -46,37 +46,43 @@ const validationSchema = Yup.object({
   weight: Yup.string().required('Fyll i vikten'),
 });
 
-const addExercise = async ({
-  name,
-  categories,
-  reps,
-  sets,
-  weight,
-}: FormValues) => {
-  const user = supabase.auth.user();
-  if (!user?.id) {
-    // TODO: handle no user id
-    return null;
-  }
-
-  const formattedCategories = categories
-    .split(',')
-    .map((category) => category.toLowerCase().trim())
-    .filter(Boolean);
-
-  const { data, error } = await supabase.from('exercises').insert({
-    name: name.toLowerCase(),
-    reps,
-    sets,
-    weight,
-    categories: formattedCategories,
-    userId: user.id,
-  });
-
-  console.log({ data, error });
+type Props = {
+  setSynchronizeData: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const ExerciseForm = () => {
+const ExerciseForm: React.FC<Props> = ({ setSynchronizeData }) => {
+  const addExercise = async (
+    { name, categories, reps, sets, weight }: FormValues,
+    { resetForm }: FormikHelpers<FormValues>,
+  ) => {
+    const user = supabase.auth.user();
+    if (!user?.id) {
+      // TODO: handle no user id
+      return null;
+    }
+
+    const formattedCategories = categories
+      .split(',')
+      .map((category) => category.toLowerCase().trim())
+      .filter(Boolean);
+
+    const { error } = await supabase.from('exercises').insert({
+      name: name.toLowerCase(),
+      reps,
+      sets,
+      weight,
+      categories: formattedCategories,
+      userId: user.id,
+    });
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    resetForm();
+    setSynchronizeData((trigger) => !trigger);
+  };
+
   return (
     <Formik
       initialValues={initialValues}

@@ -51,6 +51,7 @@ const StyledExerciseWrapper = styled.div`
 
 const ExercisesPage: NextPage = () => {
   const [exercises, setExercises] = useState<Exercise[]>([]);
+  const [synchronizeData, setSynchronizeData] = useState(false);
 
   const getExercises = async () => {
     const user = supabase.auth.user();
@@ -68,7 +69,7 @@ const ExercisesPage: NextPage = () => {
 
   useEffect(() => {
     getExercises();
-  }, []);
+  }, [synchronizeData]);
 
   const categories = [
     ...new Set(
@@ -77,9 +78,7 @@ const ExercisesPage: NextPage = () => {
         .flat()
         .map((category) => category.toLowerCase()),
     ),
-  ];
-
-  console.log({ exercises, categories });
+  ].sort();
 
   return (
     <>
@@ -88,7 +87,7 @@ const ExercisesPage: NextPage = () => {
         <StyledH1>Övningar</StyledH1>
       </StyledHeaderWrapper>
 
-      <ExerciseForm />
+      <ExerciseForm setSynchronizeData={setSynchronizeData} />
 
       <>
         <StyledH2>Dina övningar</StyledH2>
@@ -103,7 +102,11 @@ const ExercisesPage: NextPage = () => {
                     .includes(category),
                 )
                 .map((exercise) => (
-                  <ExerciseCard key={exercise.id} exercise={exercise} />
+                  <ExerciseCard
+                    key={exercise.id}
+                    exercise={exercise}
+                    setExercises={setExercises}
+                  />
                 ))}
             </StyledExerciseWrapper>
           </StyledCategoryWrapper>
