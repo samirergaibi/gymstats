@@ -1,7 +1,7 @@
 import type { AppProps } from 'next/app';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
-import Layout from '../components/Layout';
-import { UserContextProvider } from '../contexts/UserContext';
+import Layout from '@components/Layout';
+import { UserContextProvider } from '@contexts/UserContext';
 
 const cssVariables = `
   :root {

@@ -1,12 +1,12 @@
 import { NextPage } from 'next';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { protectedRoute } from '../utils/protectedRoute';
-import ExerciseCard from '../components/ExerciseCard';
-import ExerciseForm from '../components/ExerciseForm';
-import { supabase } from '../utils/supabaseClient';
+import ExerciseCard from '@components/ExerciseCard';
+import ExerciseForm from '@components/ExerciseForm';
+import { protectedRoute } from '@utils/protectedRoute';
+import { supabase } from '@utils/supabaseClient';
+import { uppercase } from '@utils/uppercase';
 import { Exercise } from '../types';
-import { uppercase } from '../utils/uppercase';
 
 const StyledHeaderWrapper = styled.div`
   height: 200px;

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { supabase } from '../utils/supabaseClient';
+import { supabase } from '@utils/supabaseClient';
 import { Form, TextField } from './Form';
 
 type FormValues = {

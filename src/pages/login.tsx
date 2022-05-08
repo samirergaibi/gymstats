@@ -1,10 +1,10 @@
 import type { NextPage } from 'next';
 import Link from 'next/link';
 import styled from 'styled-components';
-import LoginForm from '../components/LoginForm';
-import { useUserContext } from '../contexts/UserContext';
-import Spinner from '../components/Spinner';
-import { redirectIfLoggedIn } from '../utils/redirectIfLoggedIn';
+import LoginForm from '@components/LoginForm';
+import Spinner from '@components/Spinner';
+import { useUserContext } from '@contexts/UserContext';
+import { redirectIfLoggedIn } from '@utils/redirectIfLoggedIn';
 
 const StyledWrapper = styled.div`
   display: flex;
