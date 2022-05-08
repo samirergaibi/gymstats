@@ -38,16 +38,25 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
       updateSupabaseCookie(event, session);
     });
 
-    () => {
+    return () => {
       authListener.data?.unsubscribe();
     };
   }, []);
 
-  useEffect(() => {
+  const verifyLogin = async () => {
     const user = supabase.auth.user();
-    if (user) {
-      setAuthenticated(true);
+    const data = await fetch('api/verifyCookie');
+    const { hasCookie } = await data.json();
+
+    const isLoggedIn = !!user && !!hasCookie;
+    setAuthenticated(isLoggedIn);
+    if (!isLoggedIn) {
+      supabase.auth.signOut();
     }
+  };
+
+  useEffect(() => {
+    verifyLogin();
   }, []);
 
   const value: IUserContext = {
