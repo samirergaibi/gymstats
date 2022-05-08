@@ -1,11 +1,10 @@
-import { useEffect } from 'react';
 import type { NextPage } from 'next';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 import styled from 'styled-components';
 import LoginForm from '../components/LoginForm';
 import { useUserContext } from '../contexts/UserContext';
 import Spinner from '../components/Spinner';
+import { redirectIfLoggedIn } from '../utils/redirectIfLoggedIn';
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -36,16 +35,12 @@ const StyledLink = styled.a`
   text-decoration: underline;
 `;
 
+export const getServerSideProps = redirectIfLoggedIn;
+
 const Login: NextPage = () => {
-  const router = useRouter();
   const { authenticated } = useUserContext();
 
-  useEffect(() => {
-    if (authenticated) {
-      router.push('/account');
-    }
-  });
-
+  // Providing user feedback before redirecting when logging in
   if (authenticated) {
     return (
       <StyledWrapper>
