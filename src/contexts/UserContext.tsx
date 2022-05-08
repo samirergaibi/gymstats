@@ -19,7 +19,11 @@ const updateSupabaseCookie = async (
   });
 };
 
-export const UserContextProvider: React.FC = ({ children }) => {
+type Props = {
+  children: React.ReactNode;
+};
+
+export const UserContextProvider: React.FC<Props> = ({ children }) => {
   const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {

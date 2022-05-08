@@ -47,6 +47,7 @@ const StyledButtonWrapper = styled.div`
 
 type Props = {
   buttonText: string;
+  children: React.ReactNode;
   error?: string;
   title?: string;
   onSubmit: (event?: FormEvent<HTMLFormElement>) => void;
