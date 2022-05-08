@@ -43,6 +43,13 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
     };
   }, []);
 
+  useEffect(() => {
+    const user = supabase.auth.user();
+    if (user) {
+      setAuthenticated(true);
+    }
+  }, []);
+
   const value: IUserContext = {
     authenticated,
   };

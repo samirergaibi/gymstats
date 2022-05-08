@@ -39,10 +39,10 @@ const Home: NextPage = () => {
       </ImageWrapper>
       <ContentWrapper>
         <p>
-          Välkommen till ett ställe där du kan dokumentera och hålla reda på
-          dina framsteg inom din träning. Här på GymStats får du enkelt en
+          Välkommen till GymStats! Stället där du kan dokumentera och hålla reda
+          på dina framsteg för din träning. Här på GymStats får du enkelt en
           överblick över ditt personliga träningsprogram som du själv utformar
-          och som du självklart kan ändra och modifiera, exakt när du vill och
+          och som du självklart kan ändra och modifiera, precis när du vill och
           hur du vill.
         </p>
         <CardWrapper>

@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import Link from 'next/link';
 import styled from 'styled-components';
 import RegisterForm from '../components/RegisterForm';
+import { redirectIfLoggedIn } from '../utils/redirectIfLoggedIn';
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -30,6 +31,8 @@ const StyledLink = styled.a`
   color: var(--blue);
   text-decoration: underline;
 `;
+
+export const getServerSideProps = redirectIfLoggedIn;
 
 const Register: NextPage = () => {
   return (

@@ -1,6 +1,8 @@
 import { NextPage } from 'next';
 import { protectedRoute } from '../utils/protectedRoute';
 
+export const getServerSideProps = protectedRoute;
+
 const AccountPage: NextPage = () => {
   return (
     <div>
@@ -10,5 +12,3 @@ const AccountPage: NextPage = () => {
 };
 
 export default AccountPage;
-
-export const getServerSideProps = protectedRoute;

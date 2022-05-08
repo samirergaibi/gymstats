@@ -49,6 +49,8 @@ const StyledExerciseWrapper = styled.div`
   gap: 20px;
 `;
 
+export const getServerSideProps = protectedRoute;
+
 const ExercisesPage: NextPage = () => {
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [synchronizeData, setSynchronizeData] = useState(false);
@@ -117,5 +119,3 @@ const ExercisesPage: NextPage = () => {
 };
 
 export default ExercisesPage;
-
-export const getServerSideProps = protectedRoute;

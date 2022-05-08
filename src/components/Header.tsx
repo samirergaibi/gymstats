@@ -22,6 +22,8 @@ const Header = () => {
       if (window.pageYOffset > startPosition) {
         setHideHeader(window.pageYOffset > lastScrollY);
         lastScrollY = window.pageYOffset || 0;
+      } else {
+        setHideHeader(false);
       }
     };
 
