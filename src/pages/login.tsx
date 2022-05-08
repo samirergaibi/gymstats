@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import LoginForm from '@components/LoginForm';
 import Spinner from '@components/Spinner';
@@ -38,10 +39,12 @@ const StyledLink = styled.a`
 export const getServerSideProps = redirectIfLoggedIn;
 
 const Login: NextPage = () => {
+  const router = useRouter();
   const { authenticated } = useUserContext();
 
-  // Providing user feedback before redirecting when logging in
   if (authenticated) {
+    router.push('/account');
+    // Providing user feedback for slow networks when loggin in
     return (
       <StyledWrapper>
         <Spinner />
