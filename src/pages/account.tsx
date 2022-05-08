@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import { protectedRoute } from '../utils/protectedRoute';
+import { protectedRoute } from '@utils/protectedRoute';
 
 export const getServerSideProps = protectedRoute;
 

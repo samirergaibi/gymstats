@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Link from 'next/link';
-import { supabase } from '../utils/supabaseClient';
-import { useUserContext } from '../contexts/UserContext';
+import { supabase } from '@utils/supabaseClient';
+import { useUserContext } from '@contexts/UserContext';
 
 type Routes = {
   action?: Function;

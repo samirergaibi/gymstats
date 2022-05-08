@@ -1,14 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import styled from 'styled-components';
-import arrowRightSvg from '../assets/arrow-right.svg';
-import featherSvg from '../assets/feather.svg';
-import setsSvg from '../assets/sets.svg';
-import repsSvg from '../assets/reps.svg';
-import trashSvg from '../assets/trash.svg';
+import arrowRightSvg from '@assets/arrow-right.svg';
+import featherSvg from '@assets/feather.svg';
+import setsSvg from '@assets/sets.svg';
+import repsSvg from '@assets/reps.svg';
+import trashSvg from '@assets/trash.svg';
+import { uppercase } from '@utils/uppercase';
+import { supabase } from '@utils/supabaseClient';
 import { Exercise } from '../types';
-import { uppercase } from '../utils/uppercase';
-import { supabase } from '../utils/supabaseClient';
 
 const StyledCard = styled.article`
   background-color: var(--primary);

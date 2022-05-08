@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { Formik, Form, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
-import Button from '../components/Button';
-import { supabase } from '../utils/supabaseClient';
-import { TextField } from '../components/Form';
+import Button from './Button';
+import { TextField } from './Form';
+import { supabase } from '@utils/supabaseClient';
 
 const StyledForm = styled(Form)`
   display: flex;

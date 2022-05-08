@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { AuthChangeEvent, Session } from '@supabase/supabase-js';
-import { supabase } from '../utils/supabaseClient';
+import { supabase } from '@utils/supabaseClient';
 
 interface IUserContext {
   authenticated: boolean;
