@@ -49,6 +49,11 @@ const StyledExerciseWrapper = styled.div`
   gap: 20px;
 `;
 
+const StyledP = styled.p`
+  padding: 0 20px 20px;
+  text-align: center;
+`;
+
 export const getServerSideProps = protectedRoute;
 
 const ExercisesPage: NextPage = () => {
@@ -56,17 +61,21 @@ const ExercisesPage: NextPage = () => {
   const [synchronizeData, setSynchronizeData] = useState(false);
 
   const getExercises = async () => {
-    const user = supabase.auth.user();
-    const { data, error } = await supabase
-      .from('exercises')
-      .select()
-      .eq('userId', user?.id);
+    try {
+      const user = supabase.auth.user();
+      const { data, error } = await supabase
+        .from('exercises')
+        .select()
+        .eq('userId', user?.id);
 
-    if (error) {
-      throw new Error(error.message);
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      setExercises(data);
+    } catch (error) {
+      console.log(error);
     }
-
-    setExercises(data ?? []);
   };
 
   useEffect(() => {
@@ -93,26 +102,33 @@ const ExercisesPage: NextPage = () => {
 
       <>
         <StyledH2>Dina övningar</StyledH2>
-        {categories.map((category) => (
-          <StyledCategoryWrapper key={category}>
-            <StyledH3>{uppercase(category)}</StyledH3>
-            <StyledExerciseWrapper>
-              {exercises
-                .filter((exercise) =>
-                  exercise.categories
-                    .map((category) => category.toLowerCase())
-                    .includes(category),
-                )
-                .map((exercise) => (
-                  <ExerciseCard
-                    key={exercise.id}
-                    exercise={exercise}
-                    setExercises={setExercises}
-                  />
-                ))}
-            </StyledExerciseWrapper>
-          </StyledCategoryWrapper>
-        ))}
+        {categories.length === 0 ? (
+          <StyledP>
+            Du har inga övningar ännu men du kan lägga till en ovanför!
+            &#128170;
+          </StyledP>
+        ) : (
+          categories.map((category) => (
+            <StyledCategoryWrapper key={category}>
+              <StyledH3>{uppercase(category)}</StyledH3>
+              <StyledExerciseWrapper>
+                {exercises
+                  .filter((exercise) =>
+                    exercise.categories
+                      .map((category) => category.toLowerCase())
+                      .includes(category),
+                  )
+                  .map((exercise) => (
+                    <ExerciseCard
+                      key={exercise.id}
+                      exercise={exercise}
+                      setExercises={setExercises}
+                    />
+                  ))}
+              </StyledExerciseWrapper>
+            </StyledCategoryWrapper>
+          ))
+        )}
       </>
     </>
   );
