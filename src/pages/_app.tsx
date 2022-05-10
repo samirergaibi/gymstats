@@ -10,6 +10,7 @@ const cssVariables = `
     --blue: #2B70C1;
     --peach: #F76863;
     --dark: #323232;
+    --light-gray: #CFCCCC;
 
     --error: #F76863;
 
