@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
 import styled from 'styled-components';
 import arrowRightSvg from '@assets/arrow-right.svg';
 import featherSvg from '@assets/feather.svg';
@@ -8,6 +9,7 @@ import repsSvg from '@assets/reps.svg';
 import trashSvg from '@assets/trash.svg';
 import { uppercase } from '@utils/uppercase';
 import { supabase } from '@utils/supabaseClient';
+import Modal from './Modal';
 import { Exercise } from '../types';
 
 const StyledCard = styled.article`
@@ -71,6 +73,12 @@ type Props = {
 };
 
 const ExerciseCard: React.FC<Props> = ({ exercise, setExercises }) => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
   const removeExercise = async () => {
     const { error } = await supabase
       .from('exercises')
@@ -81,44 +89,50 @@ const ExerciseCard: React.FC<Props> = ({ exercise, setExercises }) => {
       throw new Error(error.message);
     }
 
+    setModalIsOpen(false);
     setExercises((exercises) => exercises.filter((e) => e.id !== exercise.id));
   };
 
   return (
-    <StyledCard key={exercise.id}>
-      <StyledHeaderWrapper>
-        <StyledH4>{uppercase(exercise.name)}</StyledH4>
-        <StyledButton onClick={removeExercise}>
-          <StyledTrash alt="Trash icon" src={trashSvg} />
-        </StyledButton>
-      </StyledHeaderWrapper>
-      <StyledGrid>
-        <StyledItem>
-          <Image alt="Repetition icon" src={repsSvg} />
-          <p>Reps&nbsp;</p>
-          <p>{exercise.reps} st</p>
-        </StyledItem>
-        <div />
-        <StyledItem>
-          <Image alt="Lightning icon" src={setsSvg} />
-          <p>Sets&nbsp;</p>
-          <p>{exercise.sets} st</p>
-        </StyledItem>
-        <StyledItem>
-          <Image alt="Feather icon" src={featherSvg} />
-          <p>Vikt&nbsp;</p>
-          <p>{exercise.weight} kg</p>
-        </StyledItem>
-      </StyledGrid>
-      <StyledLinkWithIcon>
-        <Link href="/" passHref>
-          <StyledLink>
-            <span>Gå till senaste träningspasset</span>
-            <Image alt="Arrow pointing right icon" src={arrowRightSvg} />
-          </StyledLink>
-        </Link>
-      </StyledLinkWithIcon>
-    </StyledCard>
+    <>
+      {modalIsOpen && (
+        <Modal cancel={setModalIsOpen} confirm={removeExercise} />
+      )}
+      <StyledCard key={exercise.id}>
+        <StyledHeaderWrapper>
+          <StyledH4>{uppercase(exercise.name)}</StyledH4>
+          <StyledButton onClick={openModal}>
+            <StyledTrash alt="Trash icon" src={trashSvg} />
+          </StyledButton>
+        </StyledHeaderWrapper>
+        <StyledGrid>
+          <StyledItem>
+            <Image alt="Repetition icon" src={repsSvg} />
+            <p>Reps&nbsp;</p>
+            <p>{exercise.reps} st</p>
+          </StyledItem>
+          <div />
+          <StyledItem>
+            <Image alt="Lightning icon" src={setsSvg} />
+            <p>Sets&nbsp;</p>
+            <p>{exercise.sets} st</p>
+          </StyledItem>
+          <StyledItem>
+            <Image alt="Feather icon" src={featherSvg} />
+            <p>Vikt&nbsp;</p>
+            <p>{exercise.weight} kg</p>
+          </StyledItem>
+        </StyledGrid>
+        <StyledLinkWithIcon>
+          <Link href="/" passHref>
+            <StyledLink>
+              <span>Gå till senaste träningspasset</span>
+              <Image alt="Arrow pointing right icon" src={arrowRightSvg} />
+            </StyledLink>
+          </Link>
+        </StyledLinkWithIcon>
+      </StyledCard>
+    </>
   );
 };
 

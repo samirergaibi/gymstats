@@ -10,7 +10,7 @@ const StyledButton = styled.button<{ variant: string }>`
   cursor: pointer;
 `;
 
-type Props = {
+type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   children: React.ReactNode;
   type?: 'button' | 'submit' | 'reset';
   variant?: 'red' | 'blue';
