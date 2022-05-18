@@ -8,7 +8,7 @@ export const redirectIfLoggedIn: GetServerSideProps = async ({ req }) => {
   if (user) {
     return {
       redirect: {
-        destination: Paths.ACCOUNT,
+        destination: Paths.EXERCISES,
         permanent: false,
       },
     };

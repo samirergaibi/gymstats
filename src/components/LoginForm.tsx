@@ -41,7 +41,7 @@ const LoginForm: React.FC = () => {
     }
     if (session && user) {
       // TODO: route to correct login page when it exists
-      router.push(Paths.ACCOUNT);
+      router.push(Paths.EXERCISES);
     }
   };
 
