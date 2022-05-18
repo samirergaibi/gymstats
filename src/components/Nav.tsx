@@ -44,7 +44,7 @@ const loggedOutRoutes = [
 ];
 
 const loggedInRoutes = [
-  { href: Paths.ACCOUNT, text: 'Konto' },
+  { href: Paths.WORKOUTS, text: 'Träningspass' },
   { href: Paths.EXERCISES, text: 'Övningar' },
   { action: logout, href: Paths.LOGIN, text: 'Logga ut' },
 ];
