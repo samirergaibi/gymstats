@@ -44,7 +44,7 @@ const Login: NextPage = () => {
   const { authenticated } = useUserContext();
 
   if (authenticated) {
-    router.push(Paths.ACCOUNT);
+    router.push(Paths.EXERCISES);
     // Providing user feedback for slow networks when loggin in
     return (
       <StyledWrapper>
