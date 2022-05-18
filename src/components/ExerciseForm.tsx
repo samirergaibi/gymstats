@@ -1,13 +1,12 @@
 import dynamic from 'next/dynamic';
-import Image from 'next/image';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { Formik, Form, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
+import { ArrowDownCircleIcon } from '@icons';
+import { supabase } from '@utils/supabaseClient';
 import Button from './Button';
 import { TextField } from './Form';
-import { supabase } from '@utils/supabaseClient';
-import arrowRightSvg from '@assets/arrow-down-circle.svg';
 
 const COLLAPSE_TIME_IN_SECONDS = 0.25;
 
@@ -49,7 +48,7 @@ const StyledButton = styled(Button)`
   margin-top: 10px;
 `;
 
-const Arrow = styled(Image)<{
+const StyledArrowIcon = styled(ArrowDownCircleIcon)<{
   $isOpen: boolean;
 }>`
   transform: ${({ $isOpen }) => ($isOpen ? 'rotate(-180deg)' : 'rotate(0deg)')};
@@ -127,11 +126,7 @@ const ExerciseForm: React.FC<Props> = ({ setSynchronizeData }) => {
         trigger={
           <CollapseButton>
             <p>Lägg till en ny övning</p>
-            <Arrow
-              alt="Arrow pointing right icon"
-              src={arrowRightSvg}
-              $isOpen={isOpen}
-            />
+            <StyledArrowIcon $isOpen={isOpen} />
           </CollapseButton>
         }
         onOpening={() => setIsOpen(true)}
