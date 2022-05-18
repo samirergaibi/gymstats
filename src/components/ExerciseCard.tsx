@@ -1,13 +1,14 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { Paths } from '@constants';
-import arrowRightSvg from '@assets/arrow-right.svg';
-import featherSvg from '@assets/feather.svg';
-import setsSvg from '@assets/sets.svg';
-import repsSvg from '@assets/reps.svg';
-import trashSvg from '@assets/trash.svg';
+import {
+  ArrowRightIcon,
+  FeatherIcon,
+  RepetitionIcon,
+  SetsIcon,
+  TrashIcon,
+} from '@icons';
 import { uppercase } from '@utils/uppercase';
 import { supabase } from '@utils/supabaseClient';
 import Modal from './Modal';
@@ -34,6 +35,7 @@ const StyledGrid = styled.div`
 
 const StyledItem = styled.div`
   display: flex;
+  align-items: center;
   gap: 5px;
 `;
 
@@ -56,11 +58,9 @@ const StyledHeaderWrapper = styled.div`
   justify-content: space-between;
 `;
 
-const StyledTrash = styled(Image)`
-  color: red;
-  fill: red;
-  stroke: red;
-  currentcolor: red;
+const ActionWrapper = styled.div`
+  display: flex;
+  gap: 15px;
 `;
 
 const StyledButton = styled.button`
@@ -102,24 +102,26 @@ const ExerciseCard: React.FC<Props> = ({ exercise, setExercises }) => {
       <StyledCard key={exercise.id}>
         <StyledHeaderWrapper>
           <StyledH4>{uppercase(exercise.name)}</StyledH4>
-          <StyledButton onClick={openModal}>
-            <StyledTrash alt="Trash icon" src={trashSvg} />
-          </StyledButton>
+          <ActionWrapper>
+            <StyledButton onClick={openModal}>
+              <TrashIcon color="black" />
+            </StyledButton>
+          </ActionWrapper>
         </StyledHeaderWrapper>
         <StyledGrid>
           <StyledItem>
-            <Image alt="Repetition icon" src={repsSvg} />
+            <RepetitionIcon />
             <p>Reps&nbsp;</p>
             <p>{exercise.reps} st</p>
           </StyledItem>
           <div />
           <StyledItem>
-            <Image alt="Lightning icon" src={setsSvg} />
+            <SetsIcon />
             <p>Sets&nbsp;</p>
             <p>{exercise.sets} st</p>
           </StyledItem>
           <StyledItem>
-            <Image alt="Feather icon" src={featherSvg} />
+            <FeatherIcon />
             <p>Vikt&nbsp;</p>
             <p>{exercise.weight} kg</p>
           </StyledItem>
@@ -128,7 +130,7 @@ const ExerciseCard: React.FC<Props> = ({ exercise, setExercises }) => {
           <Link href={Paths.ROOT} passHref>
             <StyledLink>
               <span>Gå till senaste träningspasset</span>
-              <Image alt="Arrow pointing right icon" src={arrowRightSvg} />
+              <ArrowRightIcon />
             </StyledLink>
           </Link>
         </StyledLinkWithIcon>
