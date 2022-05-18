@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { Paths } from '@constants';
 import { supabase } from '@utils/supabaseClient';
 import { Form, TextField } from './Form';
 
@@ -40,7 +41,7 @@ const LoginForm: React.FC = () => {
     }
     if (session && user) {
       // TODO: route to correct login page when it exists
-      router.push('/account');
+      router.push(Paths.ACCOUNT);
     }
   };
 

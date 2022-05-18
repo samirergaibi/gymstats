@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { Paths } from '@constants';
 import { supabase } from '@utils/supabaseClient';
 import { Form, TextField } from './Form';
 
@@ -50,7 +51,7 @@ const RegisterForm = () => {
       throw new Error(JSON.stringify(error));
     }
 
-    router.push('/login');
+    router.push(Paths.LOGIN);
   };
 
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =

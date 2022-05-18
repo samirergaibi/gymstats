@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import LoginForm from '@components/LoginForm';
 import Spinner from '@components/Spinner';
+import { Paths } from '@constants';
 import { useUserContext } from '@contexts/UserContext';
 import { redirectIfLoggedIn } from '@utils/redirectIfLoggedIn';
 
@@ -43,7 +44,7 @@ const Login: NextPage = () => {
   const { authenticated } = useUserContext();
 
   if (authenticated) {
-    router.push('/account');
+    router.push(Paths.ACCOUNT);
     // Providing user feedback for slow networks when loggin in
     return (
       <StyledWrapper>
@@ -59,7 +60,7 @@ const Login: NextPage = () => {
       <LoginForm />
       <StyledP>
         Ny här?{' '}
-        <Link href="/register" passHref>
+        <Link href={Paths.REGISTER} passHref>
           <StyledLink>Skapa konto</StyledLink>
         </Link>
       </StyledP>

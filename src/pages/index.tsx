@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import Image from 'next/image';
 import styled from 'styled-components';
+import { Paths } from '@constants';
 import pilatesSvg from '@assets/pilates-2.svg';
 import userSvg from '@assets/user.svg';
 import dumbellSvg from '@assets/dumbells.svg';
@@ -48,13 +49,13 @@ const Home: NextPage = () => {
         <CardWrapper>
           <SmallCard
             backgroundColor="var(--secondary)"
-            href="/login"
+            href={Paths.LOGIN}
             imageNode={<Image alt="User illustration" src={userSvg} />}
             text="Logga in"
           />
           <SmallCard
             backgroundColor="var(--primary)"
-            href="/register"
+            href={Paths.REGISTER}
             imageNode={<Image alt="Dumbells illustration" src={dumbellSvg} />}
             text="Skapa konto"
           />
