@@ -18,8 +18,9 @@
     "paths": {
       "@assets/*": ["assets/*"],
       "@components/*": ["components/*"],
+      "@constants": ["constants.ts"],
       "@contexts/*": ["contexts/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

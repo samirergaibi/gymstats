@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import Link from 'next/link';
 import styled from 'styled-components';
+import { Paths } from '@constants';
 import RegisterForm from '@components/RegisterForm';
 import { redirectIfLoggedIn } from '@utils/redirectIfLoggedIn';
 
@@ -42,7 +43,7 @@ const Register: NextPage = () => {
       <RegisterForm />
       <StyledP>
         Har du redan ett konto?{' '}
-        <Link href="/login" passHref>
+        <Link href={Paths.LOGIN} passHref>
           <StyledLink>Logga in</StyledLink>
         </Link>
       </StyledP>

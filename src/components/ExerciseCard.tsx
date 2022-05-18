@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import styled from 'styled-components';
+import { Paths } from '@constants';
 import arrowRightSvg from '@assets/arrow-right.svg';
 import featherSvg from '@assets/feather.svg';
 import setsSvg from '@assets/sets.svg';
@@ -124,7 +125,7 @@ const ExerciseCard: React.FC<Props> = ({ exercise, setExercises }) => {
           </StyledItem>
         </StyledGrid>
         <StyledLinkWithIcon>
-          <Link href="/" passHref>
+          <Link href={Paths.ROOT} passHref>
             <StyledLink>
               <span>Gå till senaste träningspasset</span>
               <Image alt="Arrow pointing right icon" src={arrowRightSvg} />

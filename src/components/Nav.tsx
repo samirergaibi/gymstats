@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Link from 'next/link';
+import { Paths } from '@constants';
 import { supabase } from '@utils/supabaseClient';
 import { useUserContext } from '@contexts/UserContext';
 
@@ -37,15 +38,15 @@ async function logout() {
 }
 
 const loggedOutRoutes = [
-  { href: '/', text: 'Hem' },
-  { href: '/about', text: 'Om Gymstats' },
-  { href: '/login', text: 'Logga in' },
+  { href: Paths.ROOT, text: 'Hem' },
+  { href: Paths.ABOUT, text: 'Om Gymstats' },
+  { href: Paths.LOGIN, text: 'Logga in' },
 ];
 
 const loggedInRoutes = [
-  { href: '/account', text: 'Konto' },
-  { href: '/exercises', text: 'Övningar' },
-  { action: logout, href: '/login', text: 'Logga ut' },
+  { href: Paths.ACCOUNT, text: 'Konto' },
+  { href: Paths.EXERCISES, text: 'Övningar' },
+  { action: logout, href: Paths.LOGIN, text: 'Logga ut' },
 ];
 
 const Nav: React.FC = () => {

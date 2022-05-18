@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next';
+import { Paths } from '@constants';
 import { supabase } from './supabaseClient';
 
 export const redirectIfLoggedIn: GetServerSideProps = async ({ req }) => {
@@ -7,7 +8,7 @@ export const redirectIfLoggedIn: GetServerSideProps = async ({ req }) => {
   if (user) {
     return {
       redirect: {
-        destination: '/account',
+        destination: Paths.EXERCISES,
         permanent: false,
       },
     };
