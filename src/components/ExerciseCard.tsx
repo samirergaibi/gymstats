@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Paths } from '@constants';
 import {
   ArrowRightIcon,
+  EditIcon,
   FeatherIcon,
   RepetitionIcon,
   SetsIcon,
@@ -11,8 +12,9 @@ import {
 } from '@icons';
 import { uppercase } from '@utils/uppercase';
 import { supabase } from '@utils/supabaseClient';
+import { Exercise } from '@types';
+import { useExerciseContext } from '@contexts/ExerciseContext';
 import Modal from './Modal';
-import { Exercise } from '../types';
 
 const StyledCard = styled.article`
   background-color: var(--primary);
@@ -70,10 +72,11 @@ const StyledButton = styled.button`
 
 type Props = {
   exercise: Exercise;
-  setExercises: React.Dispatch<React.SetStateAction<Exercise[]>>;
 };
 
-const ExerciseCard: React.FC<Props> = ({ exercise, setExercises }) => {
+const ExerciseCard: React.FC<Props> = ({ exercise }) => {
+  const { editExercise, setExercises } = useExerciseContext();
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const openModal = () => {
@@ -105,6 +108,9 @@ const ExerciseCard: React.FC<Props> = ({ exercise, setExercises }) => {
           <ActionWrapper>
             <StyledButton onClick={openModal}>
               <TrashIcon color="black" />
+            </StyledButton>
+            <StyledButton onClick={() => editExercise(exercise)}>
+              <EditIcon color="black" />
             </StyledButton>
           </ActionWrapper>
         </StyledHeaderWrapper>

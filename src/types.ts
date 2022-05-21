@@ -11,3 +11,11 @@ export type Exercise = {
   weight: number;
   id: string;
 };
+
+export type ExerciseFormValues = {
+  muscleGroups: string;
+  name: string;
+  reps: string;
+  sets: string;
+  weight: string;
+};
