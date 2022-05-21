@@ -56,7 +56,7 @@ const StyledArrowIcon = styled(ArrowDownCircleIcon)<{
 `;
 
 const initialValues = {
-  categories: '',
+  muscleGroups: '',
   name: '',
   reps: '',
   sets: '',
@@ -64,7 +64,7 @@ const initialValues = {
 };
 
 type FormValues = {
-  categories: string;
+  muscleGroups: string;
   name: string;
   reps: string;
   sets: string;
@@ -72,7 +72,7 @@ type FormValues = {
 };
 
 const validationSchema = Yup.object({
-  categories: Yup.string().required('Fyll i en kategori'),
+  muscleGroups: Yup.string().required('Fyll i en kategori'),
   name: Yup.string().required('Fyll i en övning'),
   reps: Yup.string().required('Fyll i antalet repetition'),
   sets: Yup.string().required('Fyll i antalet sets'),
@@ -87,7 +87,7 @@ const ExerciseForm: React.FC<Props> = ({ setSynchronizeData }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const addExercise = async (
-    { name, categories, reps, sets, weight }: FormValues,
+    { name, muscleGroups, reps, sets, weight }: FormValues,
     { resetForm }: FormikHelpers<FormValues>,
   ) => {
     const user = supabase.auth.user();
@@ -96,9 +96,9 @@ const ExerciseForm: React.FC<Props> = ({ setSynchronizeData }) => {
       return null;
     }
 
-    const formattedCategories = categories
+    const formattedmuscleGroups = muscleGroups
       .split(',')
-      .map((category) => category.toLowerCase().trim())
+      .map((muscleGroup) => muscleGroup.toLowerCase().trim())
       .filter(Boolean);
 
     const { error } = await supabase.from('exercises').insert({
@@ -106,7 +106,7 @@ const ExerciseForm: React.FC<Props> = ({ setSynchronizeData }) => {
       reps,
       sets,
       weight,
-      categories: formattedCategories,
+      muscleGroups: formattedmuscleGroups,
       userId: user.id,
     });
 
@@ -141,15 +141,15 @@ const ExerciseForm: React.FC<Props> = ({ setSynchronizeData }) => {
             return (
               <StyledForm>
                 <TextField
-                  id="categories"
-                  label="Kategori/Kategorier"
+                  id="muscleGroups"
+                  label="Muskelgrupp(er)"
                   type="text"
                   placeholder="t.ex. Biceps, Bröst"
-                  value={values.categories}
+                  value={values.muscleGroups}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  error={errors.categories}
-                  touched={touched.categories}
+                  error={errors.muscleGroups}
+                  touched={touched.muscleGroups}
                   withBorder
                 />
                 <TextField

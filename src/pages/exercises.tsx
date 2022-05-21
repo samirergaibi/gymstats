@@ -38,7 +38,7 @@ const StyledH3 = styled.h3`
   margin-bottom: 10px;
 `;
 
-const StyledCategoryWrapper = styled.div`
+const StyledMuscleGroupsWrapper = styled.div`
   margin: 0 20px 20px 20px;
 `;
 
@@ -82,12 +82,12 @@ const ExercisesPage: NextPage = () => {
     getExercises();
   }, [synchronizeData]);
 
-  const categories = [
+  const muscleGroups = [
     ...new Set(
       exercises
-        .map((exercise) => exercise.categories)
+        .map((exercise) => exercise.muscleGroups)
         .flat()
-        .map((category) => category.toLowerCase()),
+        .map((muscleGroup) => muscleGroup.toLowerCase()),
     ),
   ].sort();
 
@@ -102,21 +102,21 @@ const ExercisesPage: NextPage = () => {
 
       <>
         <StyledH2>Dina övningar</StyledH2>
-        {categories.length === 0 ? (
+        {muscleGroups.length === 0 ? (
           <StyledP>
             Du har inga övningar ännu men du kan lägga till en ovanför!
             &#128170;
           </StyledP>
         ) : (
-          categories.map((category) => (
-            <StyledCategoryWrapper key={category}>
-              <StyledH3>{uppercase(category)}</StyledH3>
+          muscleGroups.map((muscleGroup) => (
+            <StyledMuscleGroupsWrapper key={muscleGroup}>
+              <StyledH3>{uppercase(muscleGroup)}</StyledH3>
               <StyledExerciseWrapper>
                 {exercises
                   .filter((exercise) =>
-                    exercise.categories
-                      .map((category) => category.toLowerCase())
-                      .includes(category),
+                    exercise.muscleGroups
+                      .map((muscleGroup) => muscleGroup.toLowerCase())
+                      .includes(muscleGroup),
                   )
                   .map((exercise) => (
                     <ExerciseCard
@@ -126,7 +126,7 @@ const ExercisesPage: NextPage = () => {
                     />
                   ))}
               </StyledExerciseWrapper>
-            </StyledCategoryWrapper>
+            </StyledMuscleGroupsWrapper>
           ))
         )}
       </>
