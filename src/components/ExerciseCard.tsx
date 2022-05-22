@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import styled from 'styled-components';
-import { Paths } from '@constants';
+import { useFormikContext } from 'formik';
+import { Paths, DBTable } from '@constants';
 import {
   ArrowRightIcon,
   EditIcon,
@@ -12,7 +13,7 @@ import {
 } from '@icons';
 import { uppercase } from '@utils/uppercase';
 import { supabase } from '@utils/supabaseClient';
-import { Exercise } from '@types';
+import { Exercise, ExerciseFormValues } from '@types';
 import { useExerciseContext } from '@contexts/ExerciseContext';
 import Modal from './Modal';
 
@@ -75,7 +76,8 @@ type Props = {
 };
 
 const ExerciseCard: React.FC<Props> = ({ exercise }) => {
-  const { editExercise, setExercises } = useExerciseContext();
+  const { setValues } = useFormikContext<ExerciseFormValues>();
+  const { setExercises, setFormIsOpen, setEditValues } = useExerciseContext();
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -85,9 +87,9 @@ const ExerciseCard: React.FC<Props> = ({ exercise }) => {
 
   const removeExercise = async () => {
     const { error } = await supabase
-      .from('exercises')
+      .from(DBTable.EXERCISES)
       .delete()
-      .match({ id: exercise.id });
+      .eq('id', exercise.id);
 
     if (error) {
       throw new Error(error.message);
@@ -95,6 +97,23 @@ const ExerciseCard: React.FC<Props> = ({ exercise }) => {
 
     setModalIsOpen(false);
     setExercises((exercises) => exercises.filter((e) => e.id !== exercise.id));
+  };
+
+  const editExercise = () => {
+    const { muscleGroups, name, reps, sets, weight } = exercise;
+    setFormIsOpen(true);
+    scrollTo({
+      behavior: 'smooth',
+      top: 0,
+    });
+    setValues({
+      muscleGroups: muscleGroups.toString(),
+      name,
+      reps: reps.toString(),
+      sets: sets.toString(),
+      weight: weight.toString(),
+    });
+    setEditValues({ isEditing: true, exerciceId: exercise.id });
   };
 
   return (
@@ -109,7 +128,7 @@ const ExerciseCard: React.FC<Props> = ({ exercise }) => {
             <StyledButton onClick={openModal}>
               <TrashIcon color="black" />
             </StyledButton>
-            <StyledButton onClick={() => editExercise(exercise)}>
+            <StyledButton onClick={editExercise}>
               <EditIcon color="black" />
             </StyledButton>
           </ActionWrapper>

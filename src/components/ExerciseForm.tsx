@@ -54,10 +54,29 @@ const StyledArrowIcon = styled(ArrowDownCircleIcon)<{
   transition: ${COLLAPSE_TIME_IN_SECONDS}s transform;
 `;
 
+const EditingWrapper = styled.div`
+  display: flex;
+  gap: 15px;
+`;
+
 const ExerciseForm = () => {
-  const { formIsOpen, setFormIsOpen } = useExerciseContext();
-  const { values, touched, handleChange, handleBlur, errors } =
-    useFormikContext<ExerciseFormValues>();
+  const { formIsOpen, setFormIsOpen, editValues, setEditValues } =
+    useExerciseContext();
+  const {
+    values,
+    touched,
+    handleChange,
+    handleBlur,
+    errors,
+    resetForm,
+    setErrors,
+  } = useFormikContext<ExerciseFormValues>();
+
+  const abortEdit = () => {
+    resetForm();
+    setErrors({});
+    setEditValues({ isEditing: false });
+  };
 
   return (
     <Wrapper>
@@ -66,7 +85,11 @@ const ExerciseForm = () => {
         transitionTime={COLLAPSE_TIME_IN_SECONDS * 1000}
         trigger={
           <CollapseButton>
-            <p>Lägg till en ny övning</p>
+            <p>
+              {editValues.isEditing
+                ? 'Redigera övningen'
+                : 'Lägg till en ny övning'}
+            </p>
             <StyledArrowIcon $isOpen={formIsOpen} />
           </CollapseButton>
         }
@@ -135,9 +158,20 @@ const ExerciseForm = () => {
             touched={touched.weight}
             withBorder
           />
-          <StyledButton variant="blue" type="submit">
-            Lägg till övning
-          </StyledButton>
+          {editValues.isEditing ? (
+            <EditingWrapper>
+              <StyledButton variant="blue" type="submit">
+                Spara ändring
+              </StyledButton>
+              <StyledButton variant="red" onClick={abortEdit} type="button">
+                Avbryt
+              </StyledButton>
+            </EditingWrapper>
+          ) : (
+            <StyledButton variant="blue" type="submit">
+              Lägg till övning
+            </StyledButton>
+          )}
         </StyledForm>
       </DynamicCollapsible>
       <CollapseLine />
