@@ -6,3 +6,7 @@ export enum Paths {
   ROOT = '/',
   WORKOUTS = '/workouts',
 }
+
+export enum DBTable {
+  EXERCISES = 'exercises',
+}

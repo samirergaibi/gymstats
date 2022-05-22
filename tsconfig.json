@@ -22,6 +22,7 @@
       "@contexts/*": ["contexts/*"],
       "@icons": ["icons/index.ts"],
       "@utils/*": ["utils/*"],
+      "@types*": ["types.ts"], 
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

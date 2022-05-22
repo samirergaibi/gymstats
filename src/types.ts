@@ -4,10 +4,18 @@ export type AuthenticationData = {
 };
 
 export type Exercise = {
-  categories: string[];
+  muscleGroups: string[];
   name: string;
   reps: number;
   sets: number;
   weight: number;
   id: string;
+};
+
+export type ExerciseFormValues = {
+  muscleGroups: string;
+  name: string;
+  reps: string;
+  sets: string;
+  weight: string;
 };
