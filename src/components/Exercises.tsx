@@ -11,6 +11,7 @@ const StyledH2 = styled.h2`
 const StyledH3 = styled.h3`
   font-size: 1.2rem;
   margin-bottom: 10px;
+  text-decoration: underline;
 `;
 
 const StyledMuscleGroupsWrapper = styled.div`
