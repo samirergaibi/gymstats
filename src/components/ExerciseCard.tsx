@@ -1,10 +1,8 @@
-import Link from 'next/link';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { useFormikContext } from 'formik';
-import { Paths, DBTable } from '@constants';
+import { DBTable } from '@constants';
 import {
-  ArrowRightIcon,
   EditIcon,
   FeatherIcon,
   RepetitionIcon,
@@ -40,20 +38,6 @@ const StyledItem = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
-`;
-
-const StyledLinkWithIcon = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-`;
-
-const StyledLink = styled.a`
-  display: flex;
-  gap: 3px;
-  color: black;
-  font-weight: var(--medium-bold);
-  text-decoration: underline;
 `;
 
 const StyledHeaderWrapper = styled.div`
@@ -151,14 +135,6 @@ const ExerciseCard: React.FC<Props> = ({ exercise }) => {
             <p>{exercise.weight} kg</p>
           </StyledItem>
         </StyledGrid>
-        <StyledLinkWithIcon>
-          <Link href={Paths.ROOT} passHref>
-            <StyledLink>
-              <span>Gå till senaste träningspasset</span>
-              <ArrowRightIcon />
-            </StyledLink>
-          </Link>
-        </StyledLinkWithIcon>
       </StyledCard>
     </>
   );
