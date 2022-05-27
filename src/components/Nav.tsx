@@ -42,6 +42,7 @@ async function logout() {
 
 const loggedOutRoutes = [
   { href: Paths.ROOT, text: 'Hem' },
+  { href: Paths.REGISTER, text: 'Skapa konto' },
   { href: Paths.LOGIN, text: 'Logga in' },
 ];
 
