@@ -42,7 +42,6 @@ async function logout() {
 
 const loggedOutRoutes = [
   { href: Paths.ROOT, text: 'Hem' },
-  { href: Paths.ABOUT, text: 'Om Gymstats' },
   { href: Paths.LOGIN, text: 'Logga in' },
 ];
 
