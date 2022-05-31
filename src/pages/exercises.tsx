@@ -9,13 +9,18 @@ const StyledHeaderWrapper = styled.div`
   height: 200px;
   width: 100%;
   position: relative;
+  @media (min-width: 600px) {
+    height: 400px;
+    font-size: 1.2rem;
+  }
 `;
 const StyledHeaderImage = styled.div`
   height: 100%;
   width: 100%;
   background-image: url('/exercises-header.jpg');
   background-size: cover;
-  filter: grayscale(60%) contrast(150%) brightness(70%);
+  filter: grayscale(70%) contrast(150%) brightness(50%);
+  background-position: center;
 `;
 const StyledH1 = styled.h1`
   color: white;

@@ -15,6 +15,23 @@ const DynamicCollapsible = dynamic(() => import('react-collapsible'), {
 
 const Wrapper = styled.div`
   margin: 20px 0;
+  @media (min-width: 600px) {
+    margin: 60px 0;
+  }
+`;
+
+const CollapsibleWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const SizeWrapper = styled.div`
+  width: 250px;
+  @media (min-width: 600px) {
+    width: 450px;
+  }
 `;
 
 const CollapseButton = styled.button`
@@ -29,9 +46,7 @@ const CollapseButton = styled.button`
 `;
 
 const CollapseLine = styled.div`
-  width: 250px;
   height: 1px;
-  margin: 0 auto;
   background-color: var(--light-gray);
 `;
 
@@ -80,101 +95,105 @@ const ExerciseForm = () => {
 
   return (
     <Wrapper>
-      <CollapseLine />
-      <DynamicCollapsible
-        transitionTime={COLLAPSE_TIME_IN_SECONDS * 1000}
-        trigger={
-          <CollapseButton>
-            <p>
-              {editValues.isEditing
-                ? 'Redigera övningen'
-                : 'Lägg till en ny övning'}
-            </p>
-            <StyledArrowIcon $isOpen={formIsOpen} />
-          </CollapseButton>
-        }
-        onOpening={() => setFormIsOpen(true)}
-        onClosing={() => setFormIsOpen(false)}
-        open={formIsOpen}
-      >
-        <StyledForm>
-          <TextField
-            id="muscleGroups"
-            label="Muskelgrupp(er)"
-            type="text"
-            placeholder="t.ex. Biceps, Bröst"
-            value={values.muscleGroups}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={errors.muscleGroups}
-            touched={touched.muscleGroups}
-            withBorder
-          />
-          <TextField
-            id="name"
-            label="Övning"
-            type="text"
-            placeholder="t.ex. Hammer curls"
-            value={values.name}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={errors.name}
-            touched={touched.name}
-            withBorder
-          />
-          <TextField
-            id="reps"
-            label="Reps"
-            type="number"
-            placeholder="t.ex. 8"
-            value={values.reps}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={errors.reps}
-            touched={touched.reps}
-            withBorder
-          />
-          <TextField
-            id="sets"
-            label="Sets"
-            type="number"
-            placeholder="t.ex. 4"
-            value={values.sets}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={errors.sets}
-            touched={touched.sets}
-            withBorder
-          />
-          <TextField
-            id="weight"
-            label="Vikt (kg)"
-            type="number"
-            placeholder="t.ex. 20"
-            value={values.weight}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={errors.weight}
-            touched={touched.weight}
-            withBorder
-          />
-          {editValues.isEditing ? (
-            <EditingWrapper>
-              <StyledButton variant="blue" type="submit">
-                Spara ändring
-              </StyledButton>
-              <StyledButton variant="red" onClick={abortEdit} type="button">
-                Avbryt
-              </StyledButton>
-            </EditingWrapper>
-          ) : (
-            <StyledButton variant="blue" type="submit">
-              Lägg till övning
-            </StyledButton>
-          )}
-        </StyledForm>
-      </DynamicCollapsible>
-      <CollapseLine />
+      <CollapsibleWrapper>
+        <SizeWrapper>
+          <CollapseLine />
+          <DynamicCollapsible
+            transitionTime={COLLAPSE_TIME_IN_SECONDS * 1000}
+            trigger={
+              <CollapseButton>
+                <p>
+                  {editValues.isEditing
+                    ? 'Redigera övningen'
+                    : 'Lägg till en ny övning'}
+                </p>
+                <StyledArrowIcon $isOpen={formIsOpen} />
+              </CollapseButton>
+            }
+            onOpening={() => setFormIsOpen(true)}
+            onClosing={() => setFormIsOpen(false)}
+            open={formIsOpen}
+          >
+            <StyledForm>
+              <TextField
+                id="muscleGroups"
+                label="Muskelgrupp(er)"
+                type="text"
+                placeholder="t.ex. Biceps, Bröst"
+                value={values.muscleGroups}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={errors.muscleGroups}
+                touched={touched.muscleGroups}
+                withBorder
+              />
+              <TextField
+                id="name"
+                label="Övning"
+                type="text"
+                placeholder="t.ex. Hammer curls"
+                value={values.name}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={errors.name}
+                touched={touched.name}
+                withBorder
+              />
+              <TextField
+                id="reps"
+                label="Reps"
+                type="number"
+                placeholder="t.ex. 8"
+                value={values.reps}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={errors.reps}
+                touched={touched.reps}
+                withBorder
+              />
+              <TextField
+                id="sets"
+                label="Sets"
+                type="number"
+                placeholder="t.ex. 4"
+                value={values.sets}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={errors.sets}
+                touched={touched.sets}
+                withBorder
+              />
+              <TextField
+                id="weight"
+                label="Vikt (kg)"
+                type="number"
+                placeholder="t.ex. 20"
+                value={values.weight}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={errors.weight}
+                touched={touched.weight}
+                withBorder
+              />
+              {editValues.isEditing ? (
+                <EditingWrapper>
+                  <StyledButton variant="blue" type="submit">
+                    Spara ändring
+                  </StyledButton>
+                  <StyledButton variant="red" onClick={abortEdit} type="button">
+                    Avbryt
+                  </StyledButton>
+                </EditingWrapper>
+              ) : (
+                <StyledButton variant="blue" type="submit">
+                  Lägg till övning
+                </StyledButton>
+              )}
+            </StyledForm>
+          </DynamicCollapsible>
+          <CollapseLine />
+        </SizeWrapper>
+      </CollapsibleWrapper>
     </Wrapper>
   );
 };

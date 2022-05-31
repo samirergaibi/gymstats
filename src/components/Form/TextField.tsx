@@ -10,6 +10,7 @@ const StyledLabel = styled.label`
 const StyledInputWrapper = styled.div`
   display: grid;
   gap: 5px;
+  width: 100%;
 `;
 
 const StyledTextField = styled.input<{
