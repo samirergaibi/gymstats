@@ -4,8 +4,14 @@ import { uppercase } from '@utils/uppercase';
 import { useExerciseContext } from '@contexts/ExerciseContext';
 
 const StyledH2 = styled.h2`
-  text-align: center;
-  margin-bottom: 10px;
+  margin: 30px 20px;
+  font-size: 1.6rem;
+`;
+
+const ExerciseGroupsWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  column-gap: 60px;
 `;
 
 const StyledH3 = styled.h3`
@@ -14,11 +20,11 @@ const StyledH3 = styled.h3`
   text-decoration: underline;
 `;
 
-const StyledMuscleGroupsWrapper = styled.div`
+const MuscleGroupWrapper = styled.div`
   margin: 0 20px 20px 20px;
 `;
 
-const StyledExerciseWrapper = styled.div`
+const ExerciseWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   flex-direction: column;
@@ -50,22 +56,24 @@ const Exercises = () => {
           Du har inga övningar ännu men du kan lägga till en ovanför! &#128170;
         </StyledP>
       ) : (
-        muscleGroups.map((muscleGroup) => (
-          <StyledMuscleGroupsWrapper key={muscleGroup}>
-            <StyledH3>{uppercase(muscleGroup)}</StyledH3>
-            <StyledExerciseWrapper>
-              {exercises
-                .filter((exercise) =>
-                  exercise.muscleGroups
-                    .map((muscleGroup) => muscleGroup.toLowerCase())
-                    .includes(muscleGroup),
-                )
-                .map((exercise) => (
-                  <ExerciseCard key={exercise.id} exercise={exercise} />
-                ))}
-            </StyledExerciseWrapper>
-          </StyledMuscleGroupsWrapper>
-        ))
+        <ExerciseGroupsWrapper>
+          {muscleGroups.map((muscleGroup) => (
+            <MuscleGroupWrapper key={muscleGroup}>
+              <StyledH3>{uppercase(muscleGroup)}</StyledH3>
+              <ExerciseWrapper>
+                {exercises
+                  .filter((exercise) =>
+                    exercise.muscleGroups
+                      .map((muscleGroup) => muscleGroup.toLowerCase())
+                      .includes(muscleGroup),
+                  )
+                  .map((exercise) => (
+                    <ExerciseCard key={exercise.id} exercise={exercise} />
+                  ))}
+              </ExerciseWrapper>
+            </MuscleGroupWrapper>
+          ))}
+        </ExerciseGroupsWrapper>
       )}
     </>
   );
