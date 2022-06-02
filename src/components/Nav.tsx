@@ -32,6 +32,9 @@ const StyledList = styled.ul`
 
 async function logout() {
   const { error } = await supabase.auth.signOut();
+  if (typeof window !== 'undefined') {
+    window.location.href = Paths.LOGIN;
+  }
   if (error) {
     throw new Error(JSON.stringify(error));
   }
