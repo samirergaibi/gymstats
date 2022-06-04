@@ -1,5 +1,6 @@
 import { NextPage } from 'next';
 import styled from 'styled-components';
+import { AuthUser } from '@supabase/supabase-js';
 import ExerciseForm from '@components/ExerciseForm';
 import Exercises from '@components/Exercises';
 import { protectedRoute } from '@utils/protectedRoute';
@@ -32,17 +33,23 @@ const StyledH1 = styled.h1`
 
 export const getServerSideProps = protectedRoute;
 
-const ExercisesPage: NextPage = () => (
-  <ExerciseContextProvider>
-    <>
-      <StyledHeaderWrapper>
-        <StyledHeaderImage />
-        <StyledH1>Övningar</StyledH1>
-      </StyledHeaderWrapper>
-      <ExerciseForm />
-      <Exercises />
-    </>
-  </ExerciseContextProvider>
-);
+type Props = {
+  user: AuthUser;
+};
+
+const ExercisesPage: NextPage<Props> = ({ user }) => {
+  return (
+    <ExerciseContextProvider user={user}>
+      <>
+        <StyledHeaderWrapper>
+          <StyledHeaderImage />
+          <StyledH1>Övningar</StyledH1>
+        </StyledHeaderWrapper>
+        <ExerciseForm />
+        <Exercises />
+      </>
+    </ExerciseContextProvider>
+  );
+};
 
 export default ExercisesPage;
