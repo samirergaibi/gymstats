@@ -40,7 +40,6 @@ const LoginForm: React.FC = () => {
       setApiError('Ogiltiga inloggningsuppgifter');
     }
     if (session && user) {
-      // TODO: route to correct login page when it exists
       router.push(Paths.EXERCISES);
     }
   };

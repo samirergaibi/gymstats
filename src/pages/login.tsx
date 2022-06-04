@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import { useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
@@ -43,9 +44,19 @@ const Login: NextPage = () => {
   const router = useRouter();
   const { authenticated } = useUserContext();
 
+  // Handle when supabase is logged in on the client but not server
+  useEffect(() => {
+    let interval: NodeJS.Timer;
+    if (authenticated) {
+      interval = setInterval(() => {
+        console.log('trying to redirect');
+        router.push(Paths.EXERCISES);
+      }, 200);
+    }
+    return () => clearInterval(interval);
+  }, [authenticated]);
+
   if (authenticated) {
-    router.push(Paths.EXERCISES);
-    // Providing user feedback for slow networks when loggin in
     return (
       <StyledWrapper>
         <Spinner />

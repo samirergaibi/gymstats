@@ -6,6 +6,7 @@ import {
   Dispatch,
   SetStateAction,
 } from 'react';
+import { AuthUser } from '@supabase/supabase-js';
 import { Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import { DBTable } from '@constants';
@@ -50,9 +51,13 @@ export const ExerciseContext = createContext<IExerciseContext | undefined>(
 
 type Props = {
   children: React.ReactNode;
+  user: AuthUser;
 };
 
-export const ExerciseContextProvider: React.FC<Props> = ({ children }) => {
+export const ExerciseContextProvider: React.FC<Props> = ({
+  children,
+  user,
+}) => {
   const [editValues, setEditValues] = useState<ExerciseEditValues>({
     isEditing: false,
   });
@@ -64,7 +69,6 @@ export const ExerciseContextProvider: React.FC<Props> = ({ children }) => {
     { name, muscleGroups, reps, sets, weight }: ExerciseFormValues,
     { resetForm }: FormikHelpers<ExerciseFormValues>,
   ) => {
-    const user = supabase.auth.user();
     if (!user?.id) {
       // TODO: handle no user id
       return null;
@@ -117,7 +121,6 @@ export const ExerciseContextProvider: React.FC<Props> = ({ children }) => {
 
   const getExercises = async () => {
     try {
-      const user = supabase.auth.user();
       const { data, error } = await supabase
         .from(DBTable.EXERCISES)
         .select()
@@ -129,7 +132,7 @@ export const ExerciseContextProvider: React.FC<Props> = ({ children }) => {
 
       setExercises(data);
     } catch (error) {
-      console.log(error);
+      console.log('MONITOR THIS ERROR: ', error);
     }
   };
 
