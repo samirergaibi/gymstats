@@ -1,11 +1,4 @@
-import {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  Dispatch,
-  SetStateAction,
-} from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 import { AuthChangeEvent, Session } from '@supabase/supabase-js';
 import { supabase } from '@utils/supabaseClient';
 
