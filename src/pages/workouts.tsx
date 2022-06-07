@@ -1,6 +1,5 @@
 import { NextPage } from 'next';
 import styled from 'styled-components';
-import { protectedRoute } from '@utils/protectedRoute';
 
 const StyledP = styled.p`
   font-weight: var(--medium-bold);
@@ -14,8 +13,6 @@ const ConstructionWorker = styled.span`
   font-size: 24px;
   margin-left: 5px;
 `;
-
-export const getServerSideProps = protectedRoute;
 
 const WorkoutPage: NextPage = () => {
   return (

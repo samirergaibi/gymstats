@@ -3,7 +3,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { Paths } from '@constants';
 import RegisterForm from '@components/RegisterForm';
-import { redirectIfLoggedIn } from '@utils/redirectIfLoggedIn';
+import { useRedirectIfLoggedIn } from '@hooks/useRedirectIfLoggedIn';
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -33,9 +33,9 @@ const StyledLink = styled.a`
   text-decoration: underline;
 `;
 
-export const getServerSideProps = redirectIfLoggedIn;
-
 const Register: NextPage = () => {
+  useRedirectIfLoggedIn();
+
   return (
     <StyledWrapper>
       <StyledH1>Skapa konto hos GymStat!</StyledH1>

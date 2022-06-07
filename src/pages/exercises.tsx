@@ -1,10 +1,10 @@
 import { NextPage } from 'next';
 import styled from 'styled-components';
-import { AuthUser } from '@supabase/supabase-js';
 import ExerciseForm from '@components/ExerciseForm';
 import Exercises from '@components/Exercises';
-import { protectedRoute } from '@utils/protectedRoute';
+import Spinner from '@components/Spinner';
 import { ExerciseContextProvider } from '@contexts/ExerciseContext';
+import { useUserContext } from '@contexts/UserContext';
 
 const StyledHeaderWrapper = styled.div`
   height: 200px;
@@ -31,13 +31,25 @@ const StyledH1 = styled.h1`
   padding-left: 10px;
 `;
 
-export const getServerSideProps = protectedRoute;
+const StyledWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  margin-top: 20px;
+`;
 
-type Props = {
-  user: AuthUser;
-};
+const ExercisesPage: NextPage = () => {
+  const { authenticated, user } = useUserContext();
 
-const ExercisesPage: NextPage<Props> = ({ user }) => {
+  if (!authenticated || !user) {
+    return (
+      <StyledWrapper>
+        <Spinner />
+      </StyledWrapper>
+    );
+  }
+
   return (
     <ExerciseContextProvider user={user}>
       <>

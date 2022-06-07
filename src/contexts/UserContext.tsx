@@ -1,23 +1,13 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { AuthChangeEvent, Session } from '@supabase/supabase-js';
+import { AuthUser } from '@supabase/supabase-js';
 import { supabase } from '@utils/supabaseClient';
 
 interface IUserContext {
   authenticated: boolean;
+  user: AuthUser | null;
 }
 
 export const UserContext = createContext<IUserContext | undefined>(undefined);
-
-const updateSupabaseCookie = async (
-  event: AuthChangeEvent,
-  session: Session | null,
-) => {
-  await fetch('/api/auth', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ event, session }),
-  });
-};
 
 type Props = {
   children: React.ReactNode;
@@ -25,6 +15,8 @@ type Props = {
 
 export const UserContextProvider: React.FC<Props> = ({ children }) => {
   const [authenticated, setAuthenticated] = useState(false);
+
+  const user = supabase.auth.user();
 
   useEffect(() => {
     const authListener = supabase.auth.onAuthStateChange((event, session) => {
@@ -35,7 +27,6 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
       if (event === 'SIGNED_OUT') {
         setAuthenticated(false);
       }
-      updateSupabaseCookie(event, session);
     });
 
     return () => {
@@ -45,8 +36,7 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
 
   // TODO: Without this nav doesnt work on logged in pages, find a better way
   const setInitialLoginStatus = async () => {
-    const data = await fetch('api/verify-login');
-    const { isLoggedIn } = await data.json();
+    const isLoggedIn = !!user;
 
     setAuthenticated(isLoggedIn);
     if (!isLoggedIn) {
@@ -60,6 +50,7 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
 
   const value: IUserContext = {
     authenticated,
+    user,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
