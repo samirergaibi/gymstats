@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import ExerciseCard from '@components/ExerciseCard';
+import Spinner from '@components/Spinner';
 import { uppercase } from '@utils/uppercase';
 import { useExerciseContext } from '@contexts/ExerciseContext';
 
@@ -36,8 +37,24 @@ const StyledP = styled.p`
   text-align: center;
 `;
 
+const StyledWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  margin-top: 20px;
+`;
+
 const Exercises = () => {
-  const { exercises } = useExerciseContext();
+  const { exercises, loading } = useExerciseContext();
+
+  if (loading) {
+    return (
+      <StyledWrapper>
+        <Spinner />
+      </StyledWrapper>
+    );
+  }
 
   const muscleGroups = [
     ...new Set(

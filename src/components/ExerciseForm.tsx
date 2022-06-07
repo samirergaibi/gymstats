@@ -1,5 +1,5 @@
-import dynamic from 'next/dynamic';
 import styled from 'styled-components';
+import Collapsible from 'react-collapsible';
 import { Form, useFormikContext } from 'formik';
 import { ArrowDownCircleIcon } from '@icons';
 import { ExerciseFormValues } from '@types';
@@ -8,10 +8,6 @@ import Button from './Button';
 import { TextField } from './Form';
 
 const COLLAPSE_TIME_IN_SECONDS = 0.25;
-
-const DynamicCollapsible = dynamic(() => import('react-collapsible'), {
-  ssr: false,
-});
 
 const Wrapper = styled.div`
   margin: 20px 0;
@@ -98,7 +94,7 @@ const ExerciseForm = () => {
       <CollapsibleWrapper>
         <SizeWrapper>
           <CollapseLine />
-          <DynamicCollapsible
+          <Collapsible
             transitionTime={COLLAPSE_TIME_IN_SECONDS * 1000}
             trigger={
               <CollapseButton>
@@ -190,7 +186,7 @@ const ExerciseForm = () => {
                 </StyledButton>
               )}
             </StyledForm>
-          </DynamicCollapsible>
+          </Collapsible>
           <CollapseLine />
         </SizeWrapper>
       </CollapsibleWrapper>

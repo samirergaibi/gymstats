@@ -1,13 +1,9 @@
 import type { NextPage } from 'next';
-import { useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import LoginForm from '@components/LoginForm';
-import Spinner from '@components/Spinner';
 import { Paths } from '@constants';
-import { useUserContext } from '@contexts/UserContext';
-import { redirectIfLoggedIn } from '@utils/redirectIfLoggedIn';
+import { useRedirectIfLoggedIn } from '@hooks/useRedirectIfLoggedIn';
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -38,31 +34,8 @@ const StyledLink = styled.a`
   text-decoration: underline;
 `;
 
-export const getServerSideProps = redirectIfLoggedIn;
-
 const Login: NextPage = () => {
-  const router = useRouter();
-  const { authenticated } = useUserContext();
-
-  // Handle when supabase is logged in on the client but not server
-  useEffect(() => {
-    let interval: NodeJS.Timer;
-    if (authenticated) {
-      interval = setInterval(() => {
-        console.log('trying to redirect');
-        router.push(Paths.EXERCISES);
-      }, 200);
-    }
-    return () => clearInterval(interval);
-  }, [authenticated]);
-
-  if (authenticated) {
-    return (
-      <StyledWrapper>
-        <Spinner />
-      </StyledWrapper>
-    );
-  }
+  useRedirectIfLoggedIn();
 
   return (
     <StyledWrapper>

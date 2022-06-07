@@ -20,6 +20,7 @@
       "@components/*": ["components/*"],
       "@constants": ["constants.ts"],
       "@contexts/*": ["contexts/*"],
+      "@hooks/*": ["hooks/*"], 
       "@icons": ["icons/index.ts"],
       "@utils/*": ["utils/*"],
       "@types*": ["types.ts"], 

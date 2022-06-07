@@ -2,6 +2,7 @@
   "name": "gymstats",
   "private": true,
   "scripts": {
+    "clean": "rm -rf .next",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

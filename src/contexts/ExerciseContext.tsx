@@ -39,6 +39,7 @@ interface IExerciseContext {
   editValues: ExerciseEditValues;
   exercises: Exercise[];
   formIsOpen: boolean;
+  loading?: boolean;
   setEditValues: Dispatch<SetStateAction<ExerciseEditValues>>;
   setExercises: Dispatch<SetStateAction<Exercise[]>>;
   setFormIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -64,6 +65,7 @@ export const ExerciseContextProvider: React.FC<Props> = ({
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [formIsOpen, setFormIsOpen] = useState(false);
   const [synchronizeData, setSynchronizeData] = useState(false);
+  const [loading, setLoading] = useState<boolean>();
 
   const addExercise = async (
     { name, muscleGroups, reps, sets, weight }: ExerciseFormValues,
@@ -121,10 +123,14 @@ export const ExerciseContextProvider: React.FC<Props> = ({
 
   const getExercises = async () => {
     try {
+      if (!synchronizeData && exercises.length === 0) {
+        setLoading(true);
+      }
       const { data, error } = await supabase
         .from(DBTable.EXERCISES)
         .select()
         .eq('userId', user?.id);
+      setLoading(false);
 
       if (error) {
         throw new Error(error.message);
@@ -144,6 +150,7 @@ export const ExerciseContextProvider: React.FC<Props> = ({
     editValues,
     exercises,
     formIsOpen,
+    loading,
     setEditValues,
     setExercises,
     setFormIsOpen,
