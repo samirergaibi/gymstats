@@ -23,6 +23,10 @@ const StyledConfirmModal = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 20px;
+
+  @media screen and (min-width: 600px) {
+    width: 500px;
+  }
 `;
 
 const P = styled.p`
