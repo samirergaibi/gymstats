@@ -11,6 +11,7 @@ const cssVariables = `
     --peach: #F76863;
     --dark: #323232;
     --light-gray: #CFCCCC;
+    --link: #408AE0;
 
     --error: #F76863;
 
