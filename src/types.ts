@@ -19,3 +19,12 @@ export type ExerciseFormValues = {
   sets: string;
   weight: string;
 };
+
+export type WorkoutExercise = {
+  name: string;
+  reps: number | null;
+  sets: number | null;
+  weight: number | null;
+  id: string;
+  isEditing: boolean;
+};

@@ -15,6 +15,7 @@ import { uppercase } from '@utils/uppercase';
 import { supabase } from '@utils/supabaseClient';
 import { Exercise, ExerciseFormValues } from '@types';
 import { useExerciseContext } from '@contexts/ExerciseContext';
+import Button from '@components/Button';
 import Modal from './Modal';
 
 const StyledCard = styled.article`
@@ -64,11 +65,6 @@ const StyledHeaderWrapper = styled.div`
 const ActionWrapper = styled.div`
   display: flex;
   gap: 15px;
-`;
-
-const StyledButton = styled.button`
-  all: unset;
-  cursor: pointer;
 `;
 
 type Props = {
@@ -125,12 +121,12 @@ const ExerciseCard: React.FC<Props> = ({ exercise }) => {
         <StyledHeaderWrapper>
           <StyledH4>{uppercase(exercise.name)}</StyledH4>
           <ActionWrapper>
-            <StyledButton onClick={openModal}>
+            <Button variant="unstyled" onClick={openModal}>
               <TrashIcon color="black" />
-            </StyledButton>
-            <StyledButton onClick={editExercise}>
+            </Button>
+            <Button variant="unstyled" onClick={editExercise}>
               <EditIcon color="black" />
-            </StyledButton>
+            </Button>
           </ActionWrapper>
         </StyledHeaderWrapper>
         <StyledGrid>
