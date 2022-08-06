@@ -4,6 +4,7 @@ import 'dayjs/locale/sv';
 import dayjs from 'dayjs';
 import { v4 as uuidv4 } from 'uuid';
 import { WorkoutExercise } from '@types';
+import { PlusCircleIcon } from '@icons';
 import Hero from '@components/Hero';
 import Link from '@components/Link';
 import TextField from '@components/Form/TextField';
@@ -34,6 +35,9 @@ const StartWorkoutForm = styled.form`
 
 const StyledButton = styled(Button)`
   margin-top: 15px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 `;
 
 const WorkoutWrapper = styled.div`
@@ -137,7 +141,8 @@ const NewWorkout = () => {
               ))}
             </ExerciseList>
             <StyledButton variant="blue" onClick={addExercise}>
-              Ny övning
+              <PlusCircleIcon />
+              <span>Ny övning</span>
             </StyledButton>
             <Section>
               <SectionHeading>Klar med träningspasset?</SectionHeading>
