@@ -20,11 +20,11 @@ export type ExerciseFormValues = {
   weight: string;
 };
 
-export type WorkoutExercise = {
+export type WorkoutExerciseFormValues = {
   name: string;
-  reps: number | null;
-  sets: number | null;
-  weight: number | null;
+  reps: string;
+  sets: string;
+  weight: string;
   id: string;
   isEditing: boolean;
 };

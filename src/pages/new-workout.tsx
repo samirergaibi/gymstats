@@ -2,24 +2,14 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import 'dayjs/locale/sv';
 import dayjs from 'dayjs';
-import { v4 as uuidv4 } from 'uuid';
-import { WorkoutExercise } from '@types';
-import { PlusCircleIcon } from '@icons';
 import Hero from '@components/Hero';
 import Link from '@components/Link';
 import TextField from '@components/Form/TextField';
 import Button from '@components/Button';
-import Card from '@components/Card';
+import WorkoutStarted from '@components/Workout/WorkoutStarted';
+import { Section, SectionHeading } from '@components/Workout/styles';
 
 const WORKOUT_NAME = 'workoutName';
-
-const Section = styled.section`
-  margin: 30px 10px;
-`;
-
-const SectionHeading = styled.h2`
-  margin-bottom: 10px;
-`;
 
 const NoTemplateText = styled.p`
   font-weight: var(--medium-bold);
@@ -40,44 +30,11 @@ const StyledButton = styled(Button)`
   gap: 5px;
 `;
 
-const WorkoutWrapper = styled.div`
-  margin-top: 15px;
-`;
-
-const StyledP = styled.p`
-  margin-top: 15px;
-`;
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  gap: 15px;
-  margin-top: 15px;
-`;
-
-const ExerciseList = styled.ul`
-  all: unset;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-`;
-
 const getDefaultName = () =>
   `Inget namn (${dayjs().locale('sv').format('D MMMM YYYY')})`;
 
-const initialExercises = {
-  name: '',
-  reps: null,
-  sets: null,
-  weight: null,
-  id: uuidv4(),
-  isEditing: true,
-};
-
 const NewWorkout = () => {
   const [workoutName, setWorkoutName] = useState('');
-  const [exercises, setExercises] = useState<WorkoutExercise[]>([
-    initialExercises,
-  ]);
 
   const startWorkout = (e: React.FormEvent) => {
     e.preventDefault();
@@ -88,15 +45,6 @@ const NewWorkout = () => {
     } else {
       setWorkoutName(getDefaultName());
     }
-  };
-
-  const cancelWorkout = () => {
-    setWorkoutName('');
-    setExercises([initialExercises]);
-  };
-
-  const addExercise = () => {
-    setExercises([...exercises, { ...initialExercises, id: uuidv4() }]);
   };
 
   return (
@@ -127,42 +75,10 @@ const NewWorkout = () => {
           lägga till övningar under träningspasset.
         </p>
         {workoutName ? (
-          <WorkoutWrapper>
-            <SectionHeading>{workoutName}</SectionHeading>
-            <ExerciseList>
-              {exercises.map((exercise) => (
-                <li key={exercise.id}>
-                  <Card
-                    exercise={exercise}
-                    exercises={exercises}
-                    setExercises={setExercises}
-                  />
-                </li>
-              ))}
-            </ExerciseList>
-            <StyledButton variant="blue" onClick={addExercise}>
-              <PlusCircleIcon />
-              <span>Ny övning</span>
-            </StyledButton>
-            <Section>
-              <SectionHeading>Klar med träningspasset?</SectionHeading>
-              <p>
-                Klicka på “Klar” för att spara ditt träningspass, du kan gå
-                tillbaka och se information om ditt träningspass på sidan för
-                alla träningspass.{' '}
-              </p>
-              <StyledP>
-                Klicka “Avbryt” för att avsluta träningspasset utan att spara
-                det.
-              </StyledP>
-              <ButtonWrapper>
-                <Button variant="blue">Klar</Button>
-                <Button variant="red" onClick={cancelWorkout}>
-                  Avbryt
-                </Button>
-              </ButtonWrapper>
-            </Section>
-          </WorkoutWrapper>
+          <WorkoutStarted
+            workoutName={workoutName}
+            setWorkoutName={setWorkoutName}
+          />
         ) : (
           <StartWorkoutForm onSubmit={startWorkout}>
             <label>Namn på träningspass</label>
