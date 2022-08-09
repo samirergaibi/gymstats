@@ -7,12 +7,8 @@ import { PlusCircleIcon } from '@icons';
 import Button from '@components/Button';
 import WorkoutExerciseCard from '@components/Workout/WorkoutExerciseCard';
 import Modal from '@components/Modal';
-import { Section, SectionHeading } from './styles';
+import { Section, WorkoutHeading } from './styles';
 import { validationSchema } from './validationSchema';
-
-const WorkoutHeading = styled.h3`
-  margin-bottom: 10px;
-`;
 
 const StyledButton = styled(Button)`
   display: flex;
@@ -169,7 +165,7 @@ const WorkoutStarted: React.FC<Props> = ({ workoutName, setWorkoutName }) => {
         {timer && <strong>⏱️ {timer}</strong>}
       </ButtonTimerWrapper>
       <Section>
-        <SectionHeading>Klar med träningspasset?</SectionHeading>
+        <WorkoutHeading>Klar med träningspasset?</WorkoutHeading>
         <p>
           Klicka på “Klar” för att spara ditt träningspass, du kan gå tillbaka
           och se information om ditt träningspass på sidan för alla

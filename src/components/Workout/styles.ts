@@ -13,6 +13,7 @@ export const Section = styled.section`
   margin: 30px 10px;
 `;
 
-export const SectionHeading = styled.h2`
+export const WorkoutHeading = styled.h2`
+  font-size: 1.4rem;
   margin-bottom: 10px;
 `;

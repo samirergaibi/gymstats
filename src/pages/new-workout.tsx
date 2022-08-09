@@ -7,15 +7,14 @@ import Link from '@components/Link';
 import TextField from '@components/Form/TextField';
 import Button from '@components/Button';
 import WorkoutStarted from '@components/Workout/WorkoutStarted';
-import { Section, SectionHeading } from '@components/Workout/styles';
+import { Section, WorkoutHeading } from '@components/Workout/styles';
 
 const WORKOUT_NAME = 'workoutName';
 
 const NoTemplateText = styled.p`
+  font-style: italic;
   font-weight: var(--medium-bold);
-  text-align: center;
-  text-decoration: underline;
-  margin-top: 20px;
+  margin-top: 15px;
 `;
 
 const StartWorkoutForm = styled.form`
@@ -28,6 +27,12 @@ const StyledButton = styled(Button)`
   display: flex;
   align-items: center;
   gap: 5px;
+`;
+
+const StartedText = styled.p`
+  font-style: italic;
+  font-weight: var(--medium-bold);
+  margin-top: 15px;
 `;
 
 const getDefaultName = () =>
@@ -51,7 +56,7 @@ const NewWorkout = () => {
     <>
       <Hero imgUrl="/new-workout-hero.jpg" title="Nytt träningspass" />
       <Section>
-        <SectionHeading>Starta från mall</SectionHeading>
+        <WorkoutHeading>Starta från mall</WorkoutHeading>
         <p>
           Kör du ofta likadana träningspass, eller roterar mellan några olika?
           {/* TODO: REAL LINK */}
@@ -69,17 +74,15 @@ const NewWorkout = () => {
         )}
       </Section>
       <Section>
-        <SectionHeading>Starta nytt träningspass</SectionHeading>
+        <WorkoutHeading>Starta nytt träningspass</WorkoutHeading>
         <p>
           Ingen mall? Ingen fara, du kan bygga ett träningspass as you go och
           lägga till övningar under träningspasset.
         </p>
-        {workoutName ? (
-          <WorkoutStarted
-            workoutName={workoutName}
-            setWorkoutName={setWorkoutName}
-          />
-        ) : (
+        {workoutName && (
+          <StartedText>Du har påbörjat ett träningspass 👇</StartedText>
+        )}
+        {!workoutName && (
           <StartWorkoutForm onSubmit={startWorkout}>
             <label>Namn på träningspass</label>
             <TextField
@@ -94,6 +97,14 @@ const NewWorkout = () => {
           </StartWorkoutForm>
         )}
       </Section>
+      {workoutName && (
+        <Section>
+          <WorkoutStarted
+            workoutName={workoutName}
+            setWorkoutName={setWorkoutName}
+          />
+        </Section>
+      )}
     </>
   );
 };
