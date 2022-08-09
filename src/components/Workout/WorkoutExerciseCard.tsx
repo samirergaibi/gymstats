@@ -83,7 +83,6 @@ const WorkoutExerciseCard: React.FC<Props> = ({ exercises, setExercises }) => {
     handleSubmit,
     handleBlur,
   } = useFormikContext<WorkoutExerciseFormValues>();
-  console.log(touched);
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
