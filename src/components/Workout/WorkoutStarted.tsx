@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 import { Formik } from 'formik';
@@ -15,7 +15,6 @@ const WorkoutHeading = styled.h3`
 `;
 
 const StyledButton = styled(Button)`
-  margin-top: 15px;
   display: flex;
   align-items: center;
   gap: 5px;
@@ -42,6 +41,13 @@ const ExerciseList = styled.ul`
   gap: 15px;
 `;
 
+const ButtonTimerWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 15px;
+`;
+
 const initialExercises = {
   name: '',
   reps: '',
@@ -61,6 +67,7 @@ const WorkoutStarted: React.FC<Props> = ({ workoutName, setWorkoutName }) => {
     initialExercises,
   ]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [timer, setTimer] = useState<string>();
 
   const cancelWorkout = () => {
     setWorkoutName('');
@@ -79,6 +86,37 @@ const WorkoutStarted: React.FC<Props> = ({ workoutName, setWorkoutName }) => {
   const cancelModal = () => {
     setModalIsOpen(false);
   };
+
+  useEffect(() => {
+    const startTime = Date.now() / 1000;
+    const timer = setInterval(() => {
+      if (startTime) {
+        const now = Date.now() / 1000;
+        const seconds = Math.round(now - startTime);
+        const secondsToDisplay = seconds % 60;
+
+        const minutes = Math.floor(seconds / 60);
+        const minutesToDisplay = minutes % 60;
+
+        const hours = Math.floor(minutes / 60);
+        const hoursToDisplay = hours % 60;
+
+        let displayString = '';
+        if (seconds >= 3600) {
+          displayString += `${hoursToDisplay} tim `;
+        }
+        if (seconds >= 60) {
+          displayString += `${minutesToDisplay} min `;
+        }
+        displayString += `${secondsToDisplay} sek`;
+        setTimer(displayString);
+      }
+    }, 1000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
 
   return (
     <WorkoutWrapper>
@@ -123,10 +161,13 @@ const WorkoutStarted: React.FC<Props> = ({ workoutName, setWorkoutName }) => {
           </Formik>
         ))}
       </ExerciseList>
-      <StyledButton variant="blue" onClick={addExercise}>
-        <PlusCircleIcon />
-        <span>Ny övning</span>
-      </StyledButton>
+      <ButtonTimerWrapper>
+        <StyledButton variant="blue" onClick={addExercise}>
+          <PlusCircleIcon />
+          <span>Ny övning</span>
+        </StyledButton>
+        {timer && <strong>⏱️ {timer}</strong>}
+      </ButtonTimerWrapper>
       <Section>
         <SectionHeading>Klar med träningspasset?</SectionHeading>
         <p>
