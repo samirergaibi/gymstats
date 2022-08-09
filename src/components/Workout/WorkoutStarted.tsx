@@ -131,34 +131,34 @@ const WorkoutStarted: React.FC<Props> = ({ workoutName, setWorkoutName }) => {
       <WorkoutHeading>{workoutName}</WorkoutHeading>
       <ExerciseList>
         {exercises.map((exercise) => (
-          <Formik
-            validationSchema={validationSchema}
-            initialValues={exercise}
-            onSubmit={(values, { setValues }) => {
-              const updatedExercises = exercises.map((ex) => {
-                if (ex.id === values.id) {
-                  return {
-                    ...ex,
-                    name: values.name,
-                    reps: values.reps,
-                    sets: values.sets,
-                    weight: values.weight,
-                    isEditing: false,
-                  };
-                }
-                return ex;
-              });
-              setExercises(updatedExercises);
-              setValues({ ...values, isEditing: false });
-            }}
-          >
-            <li key={exercise.id}>
+          <li key={exercise.id}>
+            <Formik
+              validationSchema={validationSchema}
+              initialValues={exercise}
+              onSubmit={(values, { setValues }) => {
+                const updatedExercises = exercises.map((ex) => {
+                  if (ex.id === values.id) {
+                    return {
+                      ...ex,
+                      name: values.name,
+                      reps: values.reps,
+                      sets: values.sets,
+                      weight: values.weight,
+                      isEditing: false,
+                    };
+                  }
+                  return ex;
+                });
+                setExercises(updatedExercises);
+                setValues({ ...values, isEditing: false });
+              }}
+            >
               <WorkoutExerciseCard
                 exercises={exercises}
                 setExercises={setExercises}
               />
-            </li>
-          </Formik>
+            </Formik>
+          </li>
         ))}
       </ExerciseList>
       <ButtonTimerWrapper>
