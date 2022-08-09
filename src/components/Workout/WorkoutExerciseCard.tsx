@@ -50,6 +50,10 @@ const ExerciseHeading = styled.h3`
   color: white;
 `;
 
+const ExerciseName = styled.span`
+  width: 45px;
+`;
+
 const TrashButton: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement>> = ({
   onClick,
   disabled,
@@ -170,21 +174,21 @@ const WorkoutExerciseCard: React.FC<Props> = ({ exercises, setExercises }) => {
       <BottomWrapper>
         <ValueWrapper>
           <RepetitionIcon color="white" />
-          <p>
-            Reps <strong>{values.reps || '_'}</strong> st
-          </p>
+          <ExerciseName>Reps</ExerciseName>
+          <strong>{values.reps}</strong>
+          <span>st</span>
         </ValueWrapper>
         <ValueWrapper>
           <SetsIcon color="white" />
-          <p>
-            Sets <strong>{values.sets || '_'}</strong> st
-          </p>
+          <ExerciseName>Sets</ExerciseName>
+          <strong>{values.sets}</strong>
+          <span>st</span>
         </ValueWrapper>
         <ValueWrapper>
           <FeatherIcon color="white" />
-          <p>
-            Vikt <strong>{values.weight || '_'}</strong> kg
-          </p>
+          <ExerciseName>Vikt</ExerciseName>
+          <strong>{values.weight}</strong>
+          <span>kg</span>
         </ValueWrapper>
       </BottomWrapper>
     </Wrapper>
