@@ -70,12 +70,13 @@ const TrashButton: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement>> = ({
 
 type Props = {
   exercises: WorkoutExerciseFormValues[];
-  setExercises: React.Dispatch<
-    React.SetStateAction<WorkoutExerciseFormValues[]>
-  >;
+  setWorkoutExercises: (workoutExercises: WorkoutExerciseFormValues[]) => void;
 };
 
-const WorkoutExerciseCard: React.FC<Props> = ({ exercises, setExercises }) => {
+const WorkoutExerciseCard: React.FC<Props> = ({
+  exercises,
+  setWorkoutExercises,
+}) => {
   const IsOnlyOneExercise = exercises.length <= 1;
 
   const {
@@ -92,7 +93,7 @@ const WorkoutExerciseCard: React.FC<Props> = ({ exercises, setExercises }) => {
 
   const removeExercise = () => {
     const updatedExercises = exercises.filter((ex) => ex.id !== values.id);
-    setExercises(updatedExercises);
+    setWorkoutExercises(updatedExercises);
   };
 
   const openModal = () => {

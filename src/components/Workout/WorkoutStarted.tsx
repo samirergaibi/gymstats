@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 import { Formik } from 'formik';
-import { WorkoutExerciseFormValues } from '@types';
 import { DBTable } from '@constants';
 import { useUserContext } from '@contexts/UserContext';
 import { supabase } from '@utils/supabaseClient';
@@ -13,6 +12,7 @@ import Modal from '@components/Modal';
 import { Section, WorkoutHeading } from './styles';
 import { validationSchema } from './validationSchema';
 import Timer from './Timer';
+import { useWorkoutContext } from '@contexts/WorkoutContext';
 
 const StyledButton = styled(Button)`
   display: flex;
@@ -62,24 +62,36 @@ type Props = {
   setWorkoutName: (workoutName: string) => void;
 };
 
-// Start time in seconds
-const startTime = Date.now() / 1000;
 const WorkoutStarted: React.FC<Props> = ({ workoutName, setWorkoutName }) => {
   const { user } = useUserContext();
+  const {
+    workoutStorage,
+    setWorkoutExercises,
+    clearWorkoutStorage,
+    setWorkoutStartTime,
+  } = useWorkoutContext();
+  const exercises = workoutStorage?.exercises?.length
+    ? workoutStorage.exercises
+    : [initialExercises];
 
-  const [exercises, setExercises] = useState<WorkoutExerciseFormValues[]>([
-    initialExercises,
-  ]);
+  // Start time in seconds
+  const startTime = workoutStorage?.startTime || Date.now() / 1000;
+
+  useEffect(() => {
+    setWorkoutExercises(exercises);
+    setWorkoutStartTime(startTime);
+  }, []);
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const cancelWorkout = () => {
     setWorkoutName('');
-    setExercises([initialExercises]);
+    clearWorkoutStorage();
     setModalIsOpen(false);
   };
 
   const addExercise = () => {
-    setExercises([...exercises, { ...initialExercises, id: uuidv4() }]);
+    setWorkoutExercises([...exercises, { ...initialExercises, id: uuidv4() }]);
   };
 
   const openModal = () => {
@@ -107,6 +119,8 @@ const WorkoutStarted: React.FC<Props> = ({ workoutName, setWorkoutName }) => {
 
     if (error) {
       throw new Error(error.message);
+    } else {
+      clearWorkoutStorage();
     }
   };
 
@@ -141,13 +155,13 @@ const WorkoutStarted: React.FC<Props> = ({ workoutName, setWorkoutName }) => {
                   }
                   return ex;
                 });
-                setExercises(updatedExercises);
+                setWorkoutExercises(updatedExercises);
                 setValues({ ...values, isEditing: false });
               }}
             >
               <WorkoutExerciseCard
                 exercises={exercises}
-                setExercises={setExercises}
+                setWorkoutExercises={setWorkoutExercises}
               />
             </Formik>
           </li>

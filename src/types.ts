@@ -23,6 +23,7 @@ export type ExerciseFormValues = {
 // Temporary until decided how to proceed with workouts & exercises
 type TempExercise = Omit<Exercise, 'muscleGroups'> & {
   idEditing: boolean;
+  id: string;
 };
 
 export type Workout = {
@@ -41,4 +42,11 @@ export type WorkoutExerciseFormValues = {
   weight: string;
   id: string;
   isEditing: boolean;
+};
+
+export type WorkoutStorage = {
+  exercises?: WorkoutExerciseFormValues[];
+  isTemplate?: boolean;
+  startTime?: number;
+  workoutName?: string;
 };
