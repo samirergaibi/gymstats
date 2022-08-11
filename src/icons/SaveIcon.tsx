@@ -9,9 +9,9 @@ const SaveIcon: React.FC<Props> = ({ color = 'currentColor', ...props }) => (
     height="24"
     fill="none"
     stroke={color}
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
     {...props}
   >
     <path d="m9 11 3 3L22 4" />
