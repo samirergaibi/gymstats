@@ -10,4 +10,5 @@ export enum Paths {
 
 export enum DBTable {
   EXERCISES = 'exercises',
+  WORKOUTS = 'workouts',
 }

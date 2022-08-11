@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 
-const Timer = () => {
+type Props = {
+  startTime: number;
+};
+
+const Timer: React.FC<Props> = ({ startTime }) => {
   const [timer, setTimer] = useState<string>();
 
   useEffect(() => {
-    const startTime = Date.now() / 1000;
     const timer = setInterval(() => {
       if (startTime) {
         const now = Date.now() / 1000;

@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import 'dayjs/locale/sv';
 import dayjs from 'dayjs';
+import { supabase } from '@utils/supabaseClient';
+import { useUserContext } from '@contexts/UserContext';
+import { DBTable } from '@constants';
+import { Workout } from '@types';
 import Hero from '@components/Hero';
 import Link from '@components/Link';
 import TextField from '@components/Form/TextField';
@@ -39,7 +43,29 @@ const getDefaultName = () =>
   `Inget namn (${dayjs().locale('sv').format('D MMMM YYYY')})`;
 
 const NewWorkout = () => {
+  const { user } = useUserContext();
+
   const [workoutName, setWorkoutName] = useState('');
+  const [workouts, setWorkouts] = useState<Workout[]>([]);
+
+  const templates = workouts.filter((workout) => workout.isTemplate);
+
+  const getWorkouts = async () => {
+    const { data, error } = await supabase
+      .from(DBTable.WORKOUTS)
+      .select()
+      .eq('userId', user?.id);
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    const normalizedWorkouts = data.map((workout) => ({
+      ...workout,
+      exercises: JSON.parse(workout.exercises),
+    }));
+    setWorkouts(normalizedWorkouts);
+  };
 
   const startWorkout = (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,6 +77,10 @@ const NewWorkout = () => {
       setWorkoutName(getDefaultName());
     }
   };
+
+  useEffect(() => {
+    getWorkouts();
+  }, []);
 
   return (
     <>
@@ -67,8 +97,12 @@ const NewWorkout = () => {
           det träningspass du kör just idag!
         </p>
         {/* TODO: Fetch available templates and display them here */}
-        {false ? (
-          <div></div>
+        {templates.length > 0 ? (
+          <div>
+            {templates.map((template) => (
+              <strong>{template.workoutName}</strong>
+            ))}
+          </div>
         ) : (
           <NoTemplateText>Du har inga mallar!</NoTemplateText>
         )}

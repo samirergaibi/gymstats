@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 import { Formik } from 'formik';
 import { WorkoutExerciseFormValues } from '@types';
+import { DBTable } from '@constants';
+import { useUserContext } from '@contexts/UserContext';
+import { supabase } from '@utils/supabaseClient';
 import { PlusCircleIcon } from '@icons';
 import Button from '@components/Button';
 import WorkoutExerciseCard from '@components/Workout/WorkoutExerciseCard';
@@ -59,7 +62,11 @@ type Props = {
   setWorkoutName: (workoutName: string) => void;
 };
 
+// Start time in seconds
+const startTime = Date.now() / 1000;
 const WorkoutStarted: React.FC<Props> = ({ workoutName, setWorkoutName }) => {
+  const { user } = useUserContext();
+
   const [exercises, setExercises] = useState<WorkoutExerciseFormValues[]>([
     initialExercises,
   ]);
@@ -81,6 +88,26 @@ const WorkoutStarted: React.FC<Props> = ({ workoutName, setWorkoutName }) => {
 
   const cancelModal = () => {
     setModalIsOpen(false);
+  };
+
+  const completeWorkout = async () => {
+    if (!user) {
+      throw new Error('No user found');
+    }
+
+    // Total workout time in seconds
+    const workoutTime = Math.floor(Date.now() / 1000 - startTime);
+    const { error } = await supabase.from(DBTable.WORKOUTS).insert({
+      exercises: JSON.stringify(exercises),
+      workoutName,
+      isTemplate: false,
+      workoutTime,
+      userId: user.id,
+    });
+
+    if (error) {
+      throw new Error(error.message);
+    }
   };
 
   return (
@@ -131,7 +158,7 @@ const WorkoutStarted: React.FC<Props> = ({ workoutName, setWorkoutName }) => {
           <PlusCircleIcon />
           <span>Ny övning</span>
         </StyledButton>
-        <Timer />
+        <Timer startTime={startTime} />
       </ButtonTimerWrapper>
       <Section>
         <WorkoutHeading>Klar med träningspasset?</WorkoutHeading>
@@ -144,7 +171,10 @@ const WorkoutStarted: React.FC<Props> = ({ workoutName, setWorkoutName }) => {
           Klicka “Avbryt” för att avsluta träningspasset utan att spara det.
         </StyledP>
         <ButtonWrapper>
-          <Button variant="blue">Klar</Button>
+          {/* TODO: Confirm choice by modal */}
+          <Button variant="blue" onClick={completeWorkout}>
+            Klar
+          </Button>
           <Button variant="red" onClick={openModal}>
             Avbryt
           </Button>
