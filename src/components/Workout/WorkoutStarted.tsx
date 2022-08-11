@@ -9,6 +9,7 @@ import WorkoutExerciseCard from '@components/Workout/WorkoutExerciseCard';
 import Modal from '@components/Modal';
 import { Section, WorkoutHeading } from './styles';
 import { validationSchema } from './validationSchema';
+import Timer from './Timer';
 
 const StyledButton = styled(Button)`
   display: flex;
@@ -63,7 +64,6 @@ const WorkoutStarted: React.FC<Props> = ({ workoutName, setWorkoutName }) => {
     initialExercises,
   ]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [timer, setTimer] = useState<string>();
 
   const cancelWorkout = () => {
     setWorkoutName('');
@@ -82,37 +82,6 @@ const WorkoutStarted: React.FC<Props> = ({ workoutName, setWorkoutName }) => {
   const cancelModal = () => {
     setModalIsOpen(false);
   };
-
-  useEffect(() => {
-    const startTime = Date.now() / 1000;
-    const timer = setInterval(() => {
-      if (startTime) {
-        const now = Date.now() / 1000;
-        const seconds = Math.round(now - startTime);
-        const secondsToDisplay = seconds % 60;
-
-        const minutes = Math.floor(seconds / 60);
-        const minutesToDisplay = minutes % 60;
-
-        const hours = Math.floor(minutes / 60);
-        const hoursToDisplay = hours % 60;
-
-        let displayString = '';
-        if (seconds >= 3600) {
-          displayString += `${hoursToDisplay} tim `;
-        }
-        if (seconds >= 60) {
-          displayString += `${minutesToDisplay} min `;
-        }
-        displayString += `${secondsToDisplay} sek`;
-        setTimer(displayString);
-      }
-    }, 1000);
-
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
 
   return (
     <WorkoutWrapper>
@@ -162,7 +131,7 @@ const WorkoutStarted: React.FC<Props> = ({ workoutName, setWorkoutName }) => {
           <PlusCircleIcon />
           <span>Ny övning</span>
         </StyledButton>
-        {timer && <strong>⏱️ {timer}</strong>}
+        <Timer />
       </ButtonTimerWrapper>
       <Section>
         <WorkoutHeading>Klar med träningspasset?</WorkoutHeading>
