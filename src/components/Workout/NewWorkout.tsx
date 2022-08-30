@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 import 'dayjs/locale/sv';
 import dayjs from 'dayjs';
+import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@utils/supabaseClient';
 import { useUserContext } from '@contexts/UserContext';
 import { DBTable } from '@constants';
@@ -12,6 +13,7 @@ import TextField from '@components/Form/TextField';
 import Button from '@components/Button';
 import WorkoutStarted from '@components/Workout/WorkoutStarted';
 import { Section, WorkoutHeading } from '@components/Workout/styles';
+import Spinner from '@components/Spinner';
 import { useWorkoutContext } from '@contexts/WorkoutContext';
 
 const WORKOUT_NAME = 'workoutName';
@@ -40,50 +42,52 @@ const StartedText = styled.p`
   margin-top: 15px;
 `;
 
+const LoadingWrapper = styled.div`
+  margin-top: 15px;
+`;
+
 const getDefaultName = () =>
   `Inget namn (${dayjs().locale('sv').format('D MMMM YYYY')})`;
 
+const startWorkout = (
+  e: React.FormEvent,
+  setWorkoutName: (name: string) => void,
+) => {
+  e.preventDefault();
+  const formData = new FormData(e.target as HTMLFormElement);
+  const workoutName = formData.get(WORKOUT_NAME);
+  if (workoutName && typeof workoutName === 'string') {
+    setWorkoutName(workoutName);
+  } else {
+    setWorkoutName(getDefaultName());
+  }
+};
+
 const NewWorkout = () => {
   const { user } = useUserContext();
-
   const { workoutStorage, setWorkoutName } = useWorkoutContext();
   const { workoutName } = workoutStorage ?? {};
 
-  const [workouts, setWorkouts] = useState<Workout[]>([]);
+  const { data: workouts = [], isLoading } = useQuery<Workout[]>(
+    ['workouts'],
+    async () => {
+      const { data, error } = await supabase
+        .from(DBTable.WORKOUTS)
+        .select()
+        .eq('userId', user?.id);
 
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      const normalizedWorkouts = data.map((workout) => ({
+        ...workout,
+        exercises: JSON.parse(workout.exercises),
+      }));
+      return normalizedWorkouts;
+    },
+  );
   const templates = workouts.filter((workout) => workout.isTemplate);
-
-  const getWorkouts = async () => {
-    const { data, error } = await supabase
-      .from(DBTable.WORKOUTS)
-      .select()
-      .eq('userId', user?.id);
-
-    if (error) {
-      throw new Error(error.message);
-    }
-
-    const normalizedWorkouts = data.map((workout) => ({
-      ...workout,
-      exercises: JSON.parse(workout.exercises),
-    }));
-    setWorkouts(normalizedWorkouts);
-  };
-
-  const startWorkout = (e: React.FormEvent) => {
-    e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
-    const workoutName = formData.get(WORKOUT_NAME);
-    if (workoutName && typeof workoutName === 'string') {
-      setWorkoutName(workoutName);
-    } else {
-      setWorkoutName(getDefaultName());
-    }
-  };
-
-  useEffect(() => {
-    getWorkouts();
-  }, []);
 
   return (
     <>
@@ -100,7 +104,11 @@ const NewWorkout = () => {
           det träningspass du kör just idag!
         </p>
         {/* TODO: Fetch available templates and display them here */}
-        {templates.length > 0 ? (
+        {isLoading ? (
+          <LoadingWrapper>
+            <Spinner size={20} />
+          </LoadingWrapper>
+        ) : templates.length > 0 ? (
           <div>
             {templates.map((template) => (
               <strong key={template.id}>{template.workoutName}</strong>
@@ -120,7 +128,9 @@ const NewWorkout = () => {
           <StartedText>Du har påbörjat ett träningspass 👇</StartedText>
         )}
         {!workoutName && (
-          <StartWorkoutForm onSubmit={startWorkout}>
+          <StartWorkoutForm
+            onSubmit={(event) => startWorkout(event, setWorkoutName)}
+          >
             <label>Namn på träningspass</label>
             <TextField
               name={WORKOUT_NAME}

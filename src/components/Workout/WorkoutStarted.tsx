@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 import { Formik } from 'formik';
+import { useMutation } from '@tanstack/react-query';
 import { DBTable } from '@constants';
 import { useUserContext } from '@contexts/UserContext';
 import { supabase } from '@utils/supabaseClient';
@@ -77,6 +78,28 @@ const WorkoutStarted: React.FC<Props> = ({ workoutName, setWorkoutName }) => {
   // Start time in seconds
   const startTime = workoutStorage?.startTime || Date.now() / 1000;
 
+  const mutation = useMutation(async () => {
+    if (!user) {
+      throw new Error('No user found');
+    }
+
+    // Total workout time in seconds
+    const workoutTime = Math.floor(Date.now() / 1000 - startTime);
+    const { data, error } = await supabase.from(DBTable.WORKOUTS).insert({
+      exercises: JSON.stringify(exercises),
+      workoutName,
+      isTemplate: false,
+      workoutTime,
+      userId: user.id,
+    });
+
+    if (error) {
+      throw new Error(error.message);
+    }
+    clearWorkoutStorage();
+    return data;
+  });
+
   useEffect(() => {
     setWorkoutExercises(exercises);
     setWorkoutStartTime(startTime);
@@ -103,25 +126,7 @@ const WorkoutStarted: React.FC<Props> = ({ workoutName, setWorkoutName }) => {
   };
 
   const completeWorkout = async () => {
-    if (!user) {
-      throw new Error('No user found');
-    }
-
-    // Total workout time in seconds
-    const workoutTime = Math.floor(Date.now() / 1000 - startTime);
-    const { error } = await supabase.from(DBTable.WORKOUTS).insert({
-      exercises: JSON.stringify(exercises),
-      workoutName,
-      isTemplate: false,
-      workoutTime,
-      userId: user.id,
-    });
-
-    if (error) {
-      throw new Error(error.message);
-    } else {
-      clearWorkoutStorage();
-    }
+    mutation.mutate();
   };
 
   return (
