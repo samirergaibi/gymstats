@@ -58,16 +58,21 @@ const StyledDiv = styled.div`
   }
 `;
 
-const StyledWrapper = styled.div`
-  width: 40px;
-  height: 40px;
+const StyledWrapper = styled.div<{ size: number }>`
+  display: inline-block;
+  width: ${({ size }) => size}px;
+  height: ${({ size }) => size}px;
   position: relative;
   animation: ${main} 2.5s infinite linear both;
 `;
 
-const Spinner: React.FC = () => {
+type Props = {
+  size?: number;
+};
+
+const Spinner: React.FC<Props> = ({ size = 40 }) => {
   return (
-    <StyledWrapper>
+    <StyledWrapper size={size}>
       <StyledDiv />
       <StyledDiv />
       <StyledDiv />

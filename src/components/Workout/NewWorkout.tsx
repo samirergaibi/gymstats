@@ -1,4 +1,3 @@
-import * as React from 'react';
 import styled from 'styled-components';
 import 'dayjs/locale/sv';
 import dayjs from 'dayjs';
@@ -12,6 +11,7 @@ import Link from '@components/Link';
 import TextField from '@components/Form/TextField';
 import Button from '@components/Button';
 import WorkoutStarted from '@components/Workout/WorkoutStarted';
+import WorkoutTemplates from '@components/Workout/WorkoutTemplates';
 import { Section, WorkoutHeading } from '@components/Workout/styles';
 import Spinner from '@components/Spinner';
 import { useWorkoutContext } from '@contexts/WorkoutContext';
@@ -21,7 +21,6 @@ const WORKOUT_NAME = 'workoutName';
 const NoTemplateText = styled.p`
   font-style: italic;
   font-weight: var(--medium-bold);
-  margin-top: 15px;
 `;
 
 const StartWorkoutForm = styled.form`
@@ -42,12 +41,12 @@ const StartedText = styled.p`
   margin-top: 15px;
 `;
 
-const LoadingWrapper = styled.div`
+const TemplateWrapper = styled.div`
   margin-top: 15px;
 `;
 
 const getDefaultName = () =>
-  `Inget namn (${dayjs().locale('sv').format('D MMMM YYYY')})`;
+  `Inget namn (${dayjs().locale('sv').format('D MMM YYYY')})`;
 
 const startWorkout = (
   e: React.FormEvent,
@@ -88,6 +87,7 @@ const NewWorkout = () => {
     },
   );
   const templates = workouts.filter((workout) => workout.isTemplate);
+  const showTemplates = !isLoading && templates.length > 0;
 
   return (
     <>
@@ -97,26 +97,20 @@ const NewWorkout = () => {
         <p>
           Kör du ofta likadana träningspass, eller roterar mellan några olika?
           {/* TODO: REAL LINK */}
-          <Link href="temp" spaceAfter spaceBefore>
+          <Link href="/temp" spaceAfter spaceBefore>
             Skapa en mall
           </Link>
           från ett av dina tidigare träningspass för att snabbt kunna starta upp
           det träningspass du kör just idag!
         </p>
-        {/* TODO: Fetch available templates and display them here */}
-        {isLoading ? (
-          <LoadingWrapper>
-            <Spinner size={20} />
-          </LoadingWrapper>
-        ) : templates.length > 0 ? (
-          <div>
-            {templates.map((template) => (
-              <strong key={template.id}>{template.workoutName}</strong>
-            ))}
-          </div>
-        ) : (
-          <NoTemplateText>Du har inga mallar!</NoTemplateText>
-        )}
+        <TemplateWrapper>
+          {isLoading && <Spinner size={20} />}
+          {showTemplates ? (
+            <WorkoutTemplates templates={templates} />
+          ) : (
+            <NoTemplateText>Du har inga mallar!</NoTemplateText>
+          )}
+        </TemplateWrapper>
       </Section>
       <Section>
         <WorkoutHeading>Starta nytt träningspass</WorkoutHeading>

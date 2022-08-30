@@ -78,27 +78,33 @@ const WorkoutStarted: React.FC<Props> = ({ workoutName, setWorkoutName }) => {
   // Start time in seconds
   const startTime = workoutStorage?.startTime || Date.now() / 1000;
 
-  const mutation = useMutation(async () => {
-    if (!user) {
-      throw new Error('No user found');
-    }
+  const mutation = useMutation(
+    async () => {
+      if (!user) {
+        throw new Error('No user found');
+      }
 
-    // Total workout time in seconds
-    const workoutTime = Math.floor(Date.now() / 1000 - startTime);
-    const { data, error } = await supabase.from(DBTable.WORKOUTS).insert({
-      exercises: JSON.stringify(exercises),
-      workoutName,
-      isTemplate: false,
-      workoutTime,
-      userId: user.id,
-    });
+      // Total workout time in seconds
+      const workoutTime = Math.floor(Date.now() / 1000 - startTime);
+      const { data, error } = await supabase.from(DBTable.WORKOUTS).insert({
+        exercises: JSON.stringify(exercises),
+        workoutName,
+        isTemplate: false,
+        workoutTime,
+        userId: user.id,
+      });
 
-    if (error) {
-      throw new Error(error.message);
-    }
-    clearWorkoutStorage();
-    return data;
-  });
+      if (error) {
+        throw new Error(error.message);
+      }
+      return data;
+    },
+    {
+      onSuccess: () => {
+        clearWorkoutStorage();
+      },
+    },
+  );
 
   useEffect(() => {
     setWorkoutExercises(exercises);
