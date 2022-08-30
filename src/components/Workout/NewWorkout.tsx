@@ -1,11 +1,6 @@
 import styled from 'styled-components';
 import 'dayjs/locale/sv';
 import dayjs from 'dayjs';
-import { useQuery } from '@tanstack/react-query';
-import { supabase } from '@utils/supabaseClient';
-import { useUserContext } from '@contexts/UserContext';
-import { DBTable } from '@constants';
-import { Workout } from '@types';
 import Hero from '@components/Hero';
 import Link from '@components/Link';
 import TextField from '@components/Form/TextField';
@@ -15,6 +10,7 @@ import WorkoutTemplates from '@components/Workout/WorkoutTemplates';
 import { Section, WorkoutHeading } from '@components/Workout/styles';
 import Spinner from '@components/Spinner';
 import { useWorkoutContext } from '@contexts/WorkoutContext';
+import { useQueryWorkouts } from '@hooks/useQueryWorkouts';
 
 const WORKOUT_NAME = 'workoutName';
 
@@ -63,30 +59,11 @@ const startWorkout = (
 };
 
 const NewWorkout = () => {
-  const { user } = useUserContext();
   const { workoutStorage, setWorkoutName, setWorkoutStorage } =
     useWorkoutContext();
   const { workoutName } = workoutStorage ?? {};
 
-  const { data: workouts = [], isLoading } = useQuery<Workout[]>(
-    ['workouts'],
-    async () => {
-      const { data, error } = await supabase
-        .from(DBTable.WORKOUTS)
-        .select()
-        .eq('userId', user?.id);
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      const normalizedWorkouts = data.map((workout) => ({
-        ...workout,
-        exercises: JSON.parse(workout.exercises),
-      }));
-      return normalizedWorkouts;
-    },
-  );
+  const { data: workouts = [], isLoading } = useQueryWorkouts();
   const templates = workouts.filter((workout) => workout.isTemplate);
   const showTemplates = !isLoading && templates.length > 0;
 
@@ -126,6 +103,7 @@ const NewWorkout = () => {
           <StartedText>Du har påbörjat ett träningspass 👇</StartedText>
         )}
         {!workoutName && (
+          //TODO: MAKE THIS FORM NOT POSSIBLE TO BE EMPTY
           <StartWorkoutForm
             onSubmit={(event) => startWorkout(event, setWorkoutName)}
           >
