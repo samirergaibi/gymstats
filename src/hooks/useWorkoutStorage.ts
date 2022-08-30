@@ -49,10 +49,11 @@ const useWorkoutStorage = () => {
 
   return {
     workoutStorage,
+    setWorkoutStorage,
+    clearWorkoutStorage,
     setWorkoutName,
     setWorkoutExercises,
     setWorkoutStartTime,
-    clearWorkoutStorage,
   };
 };
 

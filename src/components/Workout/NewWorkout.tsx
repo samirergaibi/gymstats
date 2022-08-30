@@ -64,7 +64,8 @@ const startWorkout = (
 
 const NewWorkout = () => {
   const { user } = useUserContext();
-  const { workoutStorage, setWorkoutName } = useWorkoutContext();
+  const { workoutStorage, setWorkoutName, setWorkoutStorage } =
+    useWorkoutContext();
   const { workoutName } = workoutStorage ?? {};
 
   const { data: workouts = [], isLoading } = useQuery<Workout[]>(
@@ -106,7 +107,10 @@ const NewWorkout = () => {
         <TemplateWrapper>
           {isLoading && <Spinner size={20} />}
           {showTemplates ? (
-            <WorkoutTemplates templates={templates} />
+            <WorkoutTemplates
+              templates={templates}
+              setWorkoutStorage={setWorkoutStorage}
+            />
           ) : (
             <NoTemplateText>Du har inga mallar!</NoTemplateText>
           )}

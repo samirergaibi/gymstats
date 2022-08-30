@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { Workout } from '@types';
+import { v4 as uuidv4 } from 'uuid';
+import { Workout, WorkoutStorage } from '@types';
 import Button from '@components/Button';
 
 const Wrapper = styled.div`
@@ -23,14 +24,37 @@ const StyledButton = styled(Button)<{ moreThanOne: boolean }>`
 
 type Props = {
   templates: Workout[];
+  setWorkoutStorage: React.Dispatch<
+    React.SetStateAction<WorkoutStorage | undefined>
+  >;
 };
 
-const WorkoutTemplates: React.FC<Props> = ({ templates }) => {
+const WorkoutTemplates: React.FC<Props> = ({
+  templates,
+  setWorkoutStorage,
+}) => {
   return (
     <Wrapper>
-      {templates.map((template) => (
-        <StyledButton moreThanOne={templates.length > 1} variant="unstyled">
-          {template.workoutName}
+      {templates.map(({ workoutName, exercises }) => (
+        <StyledButton
+          moreThanOne={templates.length > 1}
+          variant="unstyled"
+          onClick={() => {
+            setWorkoutStorage((storage) => ({
+              ...storage,
+              workoutName,
+              exercises: exercises.map(({ name, reps, sets, weight }) => ({
+                name: name,
+                reps: reps.toString(),
+                sets: sets.toString(),
+                weight: weight.toString(),
+                id: uuidv4(),
+                isEditing: true,
+              })),
+            }));
+          }}
+        >
+          {workoutName}
         </StyledButton>
       ))}
     </Wrapper>

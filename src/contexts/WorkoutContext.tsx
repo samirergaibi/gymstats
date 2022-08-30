@@ -7,6 +7,9 @@ interface IWorkoutContext {
   setWorkoutName: (workoutName: string) => void;
   setWorkoutExercises: (exercises: WorkoutExerciseFormValues[]) => void;
   setWorkoutStartTime: (workoutTime: number) => void;
+  setWorkoutStorage: React.Dispatch<
+    React.SetStateAction<WorkoutStorage | undefined>
+  >;
   clearWorkoutStorage: () => void;
 }
 
@@ -24,6 +27,7 @@ export const WorkoutContextProvider: React.FC<Props> = ({ children }) => {
     setWorkoutExercises,
     setWorkoutName,
     setWorkoutStartTime,
+    setWorkoutStorage,
     workoutStorage,
   } = useWorkoutStorage();
 
@@ -32,6 +36,7 @@ export const WorkoutContextProvider: React.FC<Props> = ({ children }) => {
     setWorkoutExercises,
     setWorkoutName,
     setWorkoutStartTime,
+    setWorkoutStorage,
     workoutStorage,
   };
 
