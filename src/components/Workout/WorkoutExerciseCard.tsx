@@ -103,6 +103,10 @@ const WorkoutExerciseCard: React.FC<Props> = ({
   };
 
   const editExercise = () => {
+    const updatedExercises = exercises.map((exercise) =>
+      exercise.id === values.id ? { ...exercise, isEditing: true } : exercise,
+    );
+    setWorkoutExercises(updatedExercises);
     setValues({ ...values, isEditing: true });
   };
 

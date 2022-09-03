@@ -46,6 +46,12 @@ const ButtonTimerWrapper = styled.div`
   margin-top: 15px;
 `;
 
+const SubmitError = styled.p`
+  color: var(--error);
+  margin-top: 10px;
+  font-weight: var(--medium-bold);
+`;
+
 const initialExercises = {
   name: '',
   reps: '',
@@ -82,6 +88,17 @@ const WorkoutStarted: React.FC<Props> = ({ workoutName, setWorkoutName }) => {
   }, []);
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+
+  const noExercises = workoutStorage?.exercises?.length === 0;
+  const stillEditing = workoutStorage?.exercises?.some(
+    (exercise) => exercise.isEditing,
+  );
+  useEffect(() => {
+    if (!stillEditing && !noExercises) {
+      setSubmitError('');
+    }
+  }, [stillEditing, noExercises]);
 
   const cancelWorkout = () => {
     setWorkoutName('');
@@ -93,15 +110,19 @@ const WorkoutStarted: React.FC<Props> = ({ workoutName, setWorkoutName }) => {
     setWorkoutExercises([...exercises, { ...initialExercises, id: uuidv4() }]);
   };
 
-  const openModal = () => {
-    setModalIsOpen(true);
-  };
+  const submitWorkout = async () => {
+    if (noExercises) {
+      setSubmitError('At least do one exercise before submitting.');
+      return;
+    }
 
-  const cancelModal = () => {
-    setModalIsOpen(false);
-  };
+    if (stillEditing) {
+      setSubmitError(
+        "You can't submit your workout while still editing an exercise.",
+      );
+      return;
+    }
 
-  const completeWorkout = async () => {
     mutation.mutate();
   };
 
@@ -109,7 +130,7 @@ const WorkoutStarted: React.FC<Props> = ({ workoutName, setWorkoutName }) => {
     <WorkoutWrapper>
       {modalIsOpen && (
         <Modal
-          cancel={cancelModal}
+          cancel={() => setModalIsOpen(false)}
           confirm={cancelWorkout}
           message="Är du säker på att du vill avsluta träningspasset?"
           confirmBtnText="Avsluta"
@@ -167,13 +188,14 @@ const WorkoutStarted: React.FC<Props> = ({ workoutName, setWorkoutName }) => {
         </StyledP>
         <ButtonWrapper>
           {/* TODO: Confirm choice by modal */}
-          <Button variant="blue" onClick={completeWorkout}>
+          <Button variant="blue" onClick={submitWorkout}>
             Klar
           </Button>
-          <Button variant="red" onClick={openModal}>
+          <Button variant="red" onClick={() => setModalIsOpen(true)}>
             Avbryt
           </Button>
         </ButtonWrapper>
+        {!!submitError && <SubmitError>{submitError}</SubmitError>}
       </Section>
     </WorkoutWrapper>
   );
