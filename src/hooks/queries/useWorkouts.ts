@@ -4,7 +4,7 @@ import { DBTable } from '@constants';
 import { Workout } from '@types';
 import { useUserContext } from '@contexts/UserContext';
 
-export const useQueryWorkouts = () => {
+export const useWorkouts = () => {
   const { user } = useUserContext();
 
   const result = useQuery<Workout[]>(['workouts'], async () => {

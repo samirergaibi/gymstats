@@ -10,7 +10,7 @@ import WorkoutTemplates from '@components/Workout/WorkoutTemplates';
 import { Section, WorkoutHeading } from '@components/Workout/styles';
 import Spinner from '@components/Spinner';
 import { useWorkoutContext } from '@contexts/WorkoutContext';
-import { useQueryWorkouts } from '@hooks/useQueryWorkouts';
+import { useWorkouts } from '@hooks/queries/useWorkouts';
 
 const WORKOUT_NAME = 'workoutName';
 
@@ -63,7 +63,7 @@ const NewWorkout = () => {
     useWorkoutContext();
   const { workoutName } = workoutStorage ?? {};
 
-  const { data: workouts = [], isLoading } = useQueryWorkouts();
+  const { data: workouts = [], isLoading } = useWorkouts();
   const templates = workouts.filter((workout) => workout.isTemplate);
   const showTemplates = !isLoading && templates.length > 0;
 

@@ -10,7 +10,7 @@ import { Section, WorkoutHeading } from './styles';
 import { validationSchema } from './validationSchema';
 import Timer from './Timer';
 import { useWorkoutContext } from '@contexts/WorkoutContext';
-import { useMutationAddWorkout } from '@hooks/useMutationAddWorkout';
+import { useAddWorkout } from '@hooks/mutations/useAddWorkout';
 
 const StyledButton = styled(Button)`
   display: flex;
@@ -74,7 +74,7 @@ const WorkoutStarted: React.FC<Props> = ({ workoutName, setWorkoutName }) => {
   // Start time in seconds
   const startTime = workoutStorage?.startTime || Date.now() / 1000;
 
-  const mutation = useMutationAddWorkout({ startTime, exercises });
+  const mutation = useAddWorkout({ startTime, exercises });
 
   useEffect(() => {
     setWorkoutExercises(exercises);

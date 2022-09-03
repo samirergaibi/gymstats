@@ -10,7 +10,7 @@ type Args = {
   exercises: WorkoutExerciseFormValues[];
 };
 
-export const useMutationAddWorkout = ({ startTime, exercises }: Args) => {
+export const useAddWorkout = ({ startTime, exercises }: Args) => {
   const { user } = useUserContext();
   const { workoutStorage, clearWorkoutStorage } = useWorkoutContext();
 
