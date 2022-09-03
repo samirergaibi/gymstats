@@ -61,18 +61,15 @@ const initialExercises = {
   isEditing: true,
 };
 
-type Props = {
-  workoutName: string;
-  setWorkoutName: (workoutName: string) => void;
-};
-
-const WorkoutStarted: React.FC<Props> = ({ workoutName, setWorkoutName }) => {
+const WorkoutStarted = () => {
   const {
     workoutStorage,
     setWorkoutExercises,
     clearWorkoutStorage,
     setWorkoutStartTime,
+    setWorkoutName,
   } = useWorkoutContext();
+  const workoutName = workoutStorage?.workoutName;
   const exercises = workoutStorage?.exercises?.length
     ? workoutStorage.exercises
     : [initialExercises];
@@ -112,13 +109,15 @@ const WorkoutStarted: React.FC<Props> = ({ workoutName, setWorkoutName }) => {
 
   const submitWorkout = async () => {
     if (noExercises) {
-      setSubmitError('At least do one exercise before submitting.');
+      setSubmitError(
+        'Gör åtminstone en övning innan du skickar in träningspasset.',
+      );
       return;
     }
 
     if (stillEditing) {
       setSubmitError(
-        "You can't submit your workout while still editing an exercise.",
+        'Du kan inte skicka in träningspasset när du håller på att redigera en övning.',
       );
       return;
     }
@@ -187,7 +186,7 @@ const WorkoutStarted: React.FC<Props> = ({ workoutName, setWorkoutName }) => {
           Klicka “Avbryt” för att avsluta träningspasset utan att spara det.
         </StyledP>
         <ButtonWrapper>
-          {/* TODO: Confirm choice by modal */}
+          {/* TODO: Confirm choice by modal to avoid missclick */}
           <Button variant="blue" onClick={submitWorkout}>
             Klar
           </Button>

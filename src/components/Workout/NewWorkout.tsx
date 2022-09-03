@@ -1,6 +1,5 @@
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import 'dayjs/locale/sv';
-import dayjs from 'dayjs';
 import Hero from '@components/Hero';
 import Link from '@components/Link';
 import TextField from '@components/Form/TextField';
@@ -41,31 +40,36 @@ const TemplateWrapper = styled.div`
   margin-top: 15px;
 `;
 
-const getDefaultName = () =>
-  `Inget namn (${dayjs().locale('sv').format('D MMM YYYY')})`;
-
-const startWorkout = (
-  e: React.FormEvent,
-  setWorkoutName: (name: string) => void,
-) => {
-  e.preventDefault();
-  const formData = new FormData(e.target as HTMLFormElement);
-  const workoutName = formData.get(WORKOUT_NAME);
-  if (workoutName && typeof workoutName === 'string') {
-    setWorkoutName(workoutName);
-  } else {
-    setWorkoutName(getDefaultName());
-  }
-};
-
 const NewWorkout = () => {
   const { workoutStorage, setWorkoutName, setWorkoutStorage } =
     useWorkoutContext();
-  const { workoutName } = workoutStorage ?? {};
+  const workoutStarted = !!workoutStorage?.workoutName;
 
   const { data: workouts = [], isLoading } = useWorkouts();
   const templates = workouts.filter((workout) => workout.isTemplate);
   const showTemplates = !isLoading && templates.length > 0;
+
+  const [workoutNameInput, setWorkoutNameInput] = useState('');
+  const [error, setError] = useState('');
+
+  const startWorkout = (event: React.FormEvent) => {
+    event.preventDefault();
+    const workoutName = workoutNameInput;
+
+    if (!workoutName) {
+      setError('Du måste namnge ditt träningspass.');
+      return;
+    }
+
+    setWorkoutName(workoutName);
+    setWorkoutNameInput('');
+  };
+
+  useEffect(() => {
+    if (workoutNameInput.length > 0) {
+      setError('');
+    }
+  }, [workoutNameInput]);
 
   return (
     <>
@@ -99,20 +103,21 @@ const NewWorkout = () => {
           Ingen mall? Ingen fara, du kan bygga ett träningspass as you go och
           lägga till övningar under träningspasset.
         </p>
-        {workoutName && (
+        {workoutStarted && (
           <StartedText>Du har påbörjat ett träningspass 👇</StartedText>
         )}
-        {!workoutName && (
-          //TODO: MAKE THIS FORM NOT POSSIBLE TO BE EMPTY
-          <StartWorkoutForm
-            onSubmit={(event) => startWorkout(event, setWorkoutName)}
-          >
+        {!workoutStarted && (
+          <StartWorkoutForm onSubmit={(event) => startWorkout(event)}>
             <label>Namn på träningspass</label>
             <TextField
               name={WORKOUT_NAME}
               type="text"
-              placeholder={getDefaultName()}
+              placeholder={'t.ex. Underkropp'}
               withBorder
+              error={error}
+              touched={!!error}
+              onChange={(e) => setWorkoutNameInput(e.target.value)}
+              value={workoutNameInput}
             />
             <StyledButton variant="blue" type="submit">
               Starta nytt
@@ -120,12 +125,9 @@ const NewWorkout = () => {
           </StartWorkoutForm>
         )}
       </Section>
-      {workoutName && (
+      {workoutStarted && (
         <Section>
-          <WorkoutStarted
-            workoutName={workoutName}
-            setWorkoutName={setWorkoutName}
-          />
+          <WorkoutStarted />
         </Section>
       )}
     </>
