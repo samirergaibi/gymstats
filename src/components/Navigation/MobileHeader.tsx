@@ -58,6 +58,7 @@ const MenuToggle = styled.button`
   display: flex;
   align-items: center;
   gap: 10px;
+  font-weight: var(--medium-bold);
 `;
 
 const GlobalStyle = createGlobalStyle<{ isOpen: boolean }>`
