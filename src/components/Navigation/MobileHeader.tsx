@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { Routes } from '@types*';
+import MobileToggle from './MobileToggle';
 
 const Header = styled.header`
   position: fixed;
@@ -13,7 +14,7 @@ const Header = styled.header`
 const NavBar = styled.div`
   display: flex;
   justify-content: end;
-  padding: 10px 20px;
+  padding: 15px 20px;
   z-index: 100;
   position: relative;
   background-color: var(--dark);
@@ -50,6 +51,15 @@ const StyledLink = styled.a`
   text-decoration: none;
 `;
 
+const MenuToggle = styled.button`
+  all: unset;
+  color: white;
+  padding-right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
 type Props = {
   // For styled components to override styles className needs to be passed
   // https://styled-components.com/docs/basics#styling-any-component
@@ -63,9 +73,10 @@ const MobileHeader: React.FC<Props> = ({ className, routes }) => {
   return (
     <Header className={className}>
       <NavBar>
-        <button onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? 'Stäng' : 'Öppna'}
-        </button>
+        <MenuToggle onClick={() => setIsOpen(!isOpen)}>
+          <p>{isOpen ? 'Stäng' : 'Öppna'}</p>
+          <MobileToggle isOpen={isOpen} />
+        </MenuToggle>
       </NavBar>
       <Nav isOpen={isOpen}>
         <StyledList>
