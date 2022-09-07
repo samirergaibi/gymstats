@@ -35,8 +35,9 @@ const WorkoutTemplates: React.FC<Props> = ({
 }) => {
   return (
     <Wrapper>
-      {templates.map(({ workoutName, exercises }) => (
+      {templates.map(({ workoutName, exercises, id }) => (
         <StyledButton
+          key={id}
           moreThanOne={templates.length > 1}
           variant="unstyled"
           onClick={() => {

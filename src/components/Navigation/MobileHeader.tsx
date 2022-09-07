@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import { Routes } from '@types*';
 import MobileToggle from './MobileToggle';
 
@@ -60,6 +60,12 @@ const MenuToggle = styled.button`
   gap: 10px;
 `;
 
+const GlobalStyle = createGlobalStyle<{ isOpen: boolean }>`
+  body {
+    overflow: ${({ isOpen }) => (isOpen ? 'hidden' : 'initial')};
+  }
+`;
+
 type Props = {
   // For styled components to override styles className needs to be passed
   // https://styled-components.com/docs/basics#styling-any-component
@@ -71,38 +77,41 @@ const MobileHeader: React.FC<Props> = ({ className, routes }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Header className={className}>
-      <NavBar>
-        <MenuToggle onClick={() => setIsOpen(!isOpen)}>
-          <p>{isOpen ? 'Stäng' : 'Öppna'}</p>
-          <MobileToggle isOpen={isOpen} />
-        </MenuToggle>
-      </NavBar>
-      <Nav isOpen={isOpen}>
-        <StyledList>
-          {routes.map(({ action, href, text }) => (
-            <li key={href}>
-              <Link href={href} passHref>
-                {action ? (
-                  <StyledLink
-                    onClick={() => {
-                      setIsOpen(false);
-                      action();
-                    }}
-                  >
-                    {text}
-                  </StyledLink>
-                ) : (
-                  <StyledLink onClick={() => setIsOpen(false)}>
-                    {text}
-                  </StyledLink>
-                )}
-              </Link>
-            </li>
-          ))}
-        </StyledList>
-      </Nav>
-    </Header>
+    <>
+      <GlobalStyle isOpen={isOpen} />
+      <Header className={className}>
+        <NavBar>
+          <MenuToggle onClick={() => setIsOpen(!isOpen)}>
+            <p>{isOpen ? 'Stäng' : 'Öppna'}</p>
+            <MobileToggle isOpen={isOpen} />
+          </MenuToggle>
+        </NavBar>
+        <Nav isOpen={isOpen}>
+          <StyledList>
+            {routes.map(({ action, href, text }) => (
+              <li key={href}>
+                <Link href={href} passHref>
+                  {action ? (
+                    <StyledLink
+                      onClick={() => {
+                        setIsOpen(false);
+                        action();
+                      }}
+                    >
+                      {text}
+                    </StyledLink>
+                  ) : (
+                    <StyledLink onClick={() => setIsOpen(false)}>
+                      {text}
+                    </StyledLink>
+                  )}
+                </Link>
+              </li>
+            ))}
+          </StyledList>
+        </Nav>
+      </Header>
+    </>
   );
 };
 
