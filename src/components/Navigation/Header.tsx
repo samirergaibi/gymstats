@@ -1,33 +1,23 @@
 import styled from 'styled-components';
-import Link from 'next/link';
 import { Paths } from '@constants';
+import { Routes } from '@types';
 import { supabase } from '@utils/supabaseClient';
 import { useUserContext } from '@contexts/UserContext';
+import DesktopHeader from './DesktopHeader';
+import MobileHeader from './MobileHeader';
 
-type Routes = {
-  action?: Function;
-  href: string;
-  text: string;
-};
-
-const StyledNav = styled.nav`
-  padding: 10px;
-  background: var(--dark);
+const StyledMobileHeader = styled(MobileHeader)`
+  display: initial;
+  @media (min-width: 1000px) {
+    display: none;
+  }
 `;
 
-const StyledLink = styled.a`
-  display: inline-block;
-  padding: 10px;
-  color: #fff;
-  text-decoration: none;
-`;
-
-const StyledList = styled.ul`
-  list-style: none;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 0;
+const StyledDesktopHeader = styled(DesktopHeader)`
+  display: none;
+  @media (min-width: 1000px) {
+    display: initial;
+  }
 `;
 
 async function logout() {
@@ -48,31 +38,21 @@ const loggedOutRoutes = [
 
 const loggedInRoutes = [
   { href: Paths.NEW_WORKOUT, text: 'Nytt Träningspass' },
+  { href: Paths.WORKOUTS, text: 'Träningspass' },
   { href: Paths.EXERCISES, text: 'Övningar' },
   { action: logout, href: Paths.LOGIN, text: 'Logga ut' },
 ];
 
-const Nav: React.FC = () => {
+const Header = () => {
   const { authenticated } = useUserContext();
   const routes: Routes[] = authenticated ? loggedInRoutes : loggedOutRoutes;
-
+  // TODO: Change the DOM so that it doesn't render two headers
   return (
-    <StyledNav>
-      <StyledList>
-        {routes.map(({ action, href, text }) => (
-          <li key={href}>
-            <Link href={href} passHref>
-              {action ? (
-                <StyledLink onClick={() => action()}>{text}</StyledLink>
-              ) : (
-                <StyledLink>{text}</StyledLink>
-              )}
-            </Link>
-          </li>
-        ))}
-      </StyledList>
-    </StyledNav>
+    <>
+      <StyledMobileHeader routes={routes} />
+      <StyledDesktopHeader routes={routes} />
+    </>
   );
 };
 
-export default Nav;
+export default Header;

@@ -50,3 +50,9 @@ export type WorkoutStorage = {
   startTime?: number;
   workoutName?: string;
 };
+
+export type Routes = {
+  action?: Function;
+  href: string;
+  text: string;
+};

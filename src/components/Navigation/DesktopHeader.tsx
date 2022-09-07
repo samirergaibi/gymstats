@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Nav from './Nav';
+import { Routes } from '@types*';
+import Nav from './DesktopNav';
 
-const StickyHeader = styled.header<{ hideHeader: boolean }>`
+const Header = styled.header<{ hideHeader: boolean }>`
   position: sticky;
   top: 0;
   z-index: 9999;
@@ -11,7 +12,14 @@ const StickyHeader = styled.header<{ hideHeader: boolean }>`
   transition: transform 0.3s;
 `;
 
-const Header = () => {
+type Props = {
+  // For styled components to override styles className needs to be passed
+  // https://styled-components.com/docs/basics#styling-any-component
+  className?: string;
+  routes: Routes[];
+};
+
+const DesktopHeader: React.FC<Props> = ({ className, routes }) => {
   const [hideHeader, setHideHeader] = useState(false);
 
   useEffect(() => {
@@ -34,10 +42,10 @@ const Header = () => {
   }, [hideHeader]);
 
   return (
-    <StickyHeader hideHeader={hideHeader}>
-      <Nav />
-    </StickyHeader>
+    <Header hideHeader={hideHeader} className={className}>
+      <Nav routes={routes} />
+    </Header>
   );
 };
 
-export default Header;
+export default DesktopHeader;
