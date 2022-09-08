@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import styled, { createGlobalStyle } from 'styled-components';
 import { Routes } from '@types*';
 import MobileToggle from './MobileToggle';
@@ -44,11 +45,11 @@ const StyledList = styled.ul`
   flex-direction: column;
   gap: 50px;
 `;
-const StyledLink = styled.a`
+const StyledLink = styled.a<{ active?: boolean }>`
   color: white;
   font-size: 1.5rem;
   font-weight: bold;
-  text-decoration: none;
+  text-decoration: ${({ active }) => (active ? 'underline' : 'none')};
 `;
 
 const MenuToggle = styled.button`
@@ -76,6 +77,7 @@ type Props = {
 
 const MobileHeader: React.FC<Props> = ({ className, routes }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
 
   return (
     <>
@@ -102,7 +104,10 @@ const MobileHeader: React.FC<Props> = ({ className, routes }) => {
                       {text}
                     </StyledLink>
                   ) : (
-                    <StyledLink onClick={() => setIsOpen(false)}>
+                    <StyledLink
+                      active={router.pathname === href}
+                      onClick={() => setIsOpen(false)}
+                    >
                       {text}
                     </StyledLink>
                   )}
