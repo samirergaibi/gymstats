@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { Section, H2 } from '@styles';
 import Hero from '@components/Hero';
 import Link from '@components/Link';
 import TextField from '@components/Form/TextField';
 import Button from '@components/Button';
 import WorkoutStarted from '@components/Workout/WorkoutStarted';
 import WorkoutTemplates from '@components/Workout/WorkoutTemplates';
-import { Section, WorkoutHeading } from '@components/Workout/styles';
 import Spinner from '@components/Spinner';
 import { useWorkoutContext } from '@contexts/WorkoutContext';
 import { useWorkouts } from '@hooks/queries/useWorkouts';
@@ -75,7 +75,7 @@ const NewWorkout = () => {
     <>
       <Hero imgUrl="/new-workout-hero.jpg" title="Nytt träningspass" />
       <Section>
-        <WorkoutHeading>Starta från mall</WorkoutHeading>
+        <H2>Starta från mall</H2>
         <p>
           Kör du ofta likadana träningspass, eller roterar mellan några olika?
           {/* TODO: REAL LINK */}
@@ -98,7 +98,7 @@ const NewWorkout = () => {
         </TemplateWrapper>
       </Section>
       <Section>
-        <WorkoutHeading>Starta nytt träningspass</WorkoutHeading>
+        <H2>Starta nytt träningspass</H2>
         <p>
           Ingen mall? Ingen fara, du kan bygga ett träningspass as you go och
           lägga till övningar under träningspasset.

@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 import { Formik } from 'formik';
+import { H2, Section } from '@styles';
 import { PlusCircleIcon } from '@icons';
 import Button from '@components/Button';
 import WorkoutExerciseCard from '@components/Workout/WorkoutExerciseCard';
 import Modal from '@components/Modal';
-import { Section, WorkoutHeading } from './styles';
 import { validationSchema } from './validationSchema';
 import Timer from './Timer';
 import { useWorkoutContext } from '@contexts/WorkoutContext';
@@ -135,7 +135,7 @@ const WorkoutStarted = () => {
           confirmBtnText="Avsluta"
         />
       )}
-      <WorkoutHeading>{workoutName}</WorkoutHeading>
+      <H2>{workoutName}</H2>
       <ExerciseList>
         {exercises.map((exercise) => (
           <li key={exercise.id}>
@@ -176,7 +176,7 @@ const WorkoutStarted = () => {
         <Timer startTime={startTime} />
       </ButtonTimerWrapper>
       <Section>
-        <WorkoutHeading>Klar med träningspasset?</WorkoutHeading>
+        <H2>Klar med träningspasset?</H2>
         <p>
           Klicka på “Klar” för att spara ditt träningspass, du kan gå tillbaka
           och se information om ditt träningspass på sidan för alla

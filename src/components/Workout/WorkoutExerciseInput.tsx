@@ -1,12 +1,20 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { FeatherIcon, SetsIcon, RepetitionIcon } from '@icons';
-import { Input } from './styles';
 
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
+`;
+
+export const Input = styled.input<{ error: boolean }>`
+  border-radius: 8px;
+  border: 1px solid ${({ error }) => (error ? 'red' : 'black')};
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  font-size: 0.85rem;
 `;
 
 const StyledInput = styled(Input)`
