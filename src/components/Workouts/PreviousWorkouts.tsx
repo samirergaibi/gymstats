@@ -64,7 +64,10 @@ const PreviousWorkouts: React.FC<Props> = ({ workouts }) => {
                   <strong>{workout.workoutName}</strong>
                   <P>{workoutBreadText}</P>
                 </ContentWrapper>
-                <Link href="hehe">Gå till övning</Link>
+                {/* TODO: add real link to real page */}
+                <Link href="/hehe" withIcon>
+                  Gå till övning
+                </Link>
               </WorkoutItem>
             );
           })}
