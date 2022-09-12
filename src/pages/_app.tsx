@@ -13,6 +13,7 @@ const cssVariables = `
     --dark: #323232;
     --light-gray: #CFCCCC;
     --link: #408AE0;
+    --yellow: #FBBA72;
 
     --error: #F76863;
 

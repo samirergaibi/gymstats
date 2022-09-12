@@ -27,6 +27,7 @@ type TempExercise = Omit<Exercise, 'muscleGroups'> & {
 };
 
 export type Workout = {
+  created_at: string;
   exercises: TempExercise[];
   isTemplate: boolean;
   workoutName: string;
