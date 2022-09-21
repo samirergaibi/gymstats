@@ -1,19 +1,8 @@
-import styled from 'styled-components';
 import { H2, Section, P } from '@styles';
-import { Workout } from '@types';
 import TipBox from './TipBox';
-import WorkoutItem from './WorkoutItem';
+import WorkoutList from './WorkoutList';
 
-const WorkoutList = styled.ul`
-  list-style: none;
-  padding: 0;
-`;
-
-type Props = {
-  workouts?: Workout[];
-};
-
-const PreviousWorkouts: React.FC<Props> = ({ workouts }) => {
+const PreviousWorkouts = () => {
   return (
     <Section>
       <H2>Tidigare träningspass</H2>
@@ -22,13 +11,7 @@ const PreviousWorkouts: React.FC<Props> = ({ workouts }) => {
         även navigera till respektive träningspass för att se mer information.
       </P>
       <TipBox />
-      {workouts && (
-        <WorkoutList>
-          {workouts.map((workout) => (
-            <WorkoutItem key={workout.id} workout={workout} />
-          ))}
-        </WorkoutList>
-      )}
+      <WorkoutList />
     </Section>
   );
 };
