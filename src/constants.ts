@@ -12,3 +12,7 @@ export enum DBTable {
   EXERCISES = 'exercises',
   WORKOUTS = 'workouts',
 }
+
+export enum QueryIds {
+  WORKOUTS = 'workouts',
+}

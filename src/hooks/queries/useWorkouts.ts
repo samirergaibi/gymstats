@@ -1,17 +1,18 @@
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@utils/supabaseClient';
-import { DBTable } from '@constants';
+import { DBTable, QueryIds } from '@constants';
 import { Workout } from '@types';
 import { useUserContext } from '@contexts/UserContext';
 
 export const useWorkouts = () => {
   const { user } = useUserContext();
 
-  const result = useQuery<Workout[]>(['workouts'], async () => {
+  const result = useQuery<Workout[]>([QueryIds.WORKOUTS], async () => {
     const { data, error } = await supabase
       .from(DBTable.WORKOUTS)
       .select()
-      .eq('userId', user?.id);
+      .eq('userId', user?.id)
+      .order('created_at', { ascending: false });
 
     if (error) {
       throw new Error(error.message);
