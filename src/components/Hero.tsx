@@ -15,7 +15,12 @@ const StyledHeroWrapper = styled.div`
   position: relative;
   @media (min-width: 600px) {
     height: 400px;
-    font-size: 1.2rem;
+  }
+  @media (min-width: 1200px) {
+    height: 500px;
+  }
+  @media (min-width: 1200px) {
+    height: 50vh;
   }
 `;
 
@@ -26,6 +31,9 @@ const StyledH1 = styled.h1`
   left: 0;
   padding-left: 10px;
   font-size: 1.5rem;
+  @media (min-width: 1000px) {
+    font-size: 2rem;
+  }
 `;
 
 type Props = {

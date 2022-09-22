@@ -33,7 +33,8 @@ const ButtonWrapper = styled.div`
 `;
 
 const ExerciseList = styled.ul`
-  all: unset;
+  list-style: none;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 15px;

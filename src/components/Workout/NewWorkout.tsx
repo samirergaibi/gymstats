@@ -40,6 +40,10 @@ const TemplateWrapper = styled.div`
   margin-top: 15px;
 `;
 
+const InputWrapper = styled.div`
+  max-width: 400px;
+`;
+
 const NewWorkout = () => {
   const { workoutStorage, setWorkoutName, setWorkoutStorage } =
     useWorkoutContext();
@@ -107,17 +111,19 @@ const NewWorkout = () => {
         )}
         {!workoutStarted && (
           <StartWorkoutForm onSubmit={(event) => startWorkout(event)}>
-            <label>Namn på träningspass</label>
-            <TextField
-              name={WORKOUT_NAME}
-              type="text"
-              placeholder={'t.ex. Underkropp'}
-              withBorder
-              error={error}
-              touched={!!error}
-              onChange={(e) => setWorkoutNameInput(e.target.value)}
-              value={workoutNameInput}
-            />
+            <InputWrapper>
+              <label>Namn på träningspass</label>
+              <TextField
+                name={WORKOUT_NAME}
+                type="text"
+                placeholder={'t.ex. Underkropp'}
+                withBorder
+                error={error}
+                touched={!!error}
+                onChange={(e) => setWorkoutNameInput(e.target.value)}
+                value={workoutNameInput}
+              />
+            </InputWrapper>
             <StyledButton variant="blue" type="submit">
               Starta nytt
             </StyledButton>

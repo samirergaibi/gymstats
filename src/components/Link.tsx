@@ -8,6 +8,7 @@ const StyledLink = styled.a<{ withIcon?: boolean }>`
   text-decoration: underline;
   display: ${({ withIcon }) => withIcon && 'flex'};
   align-items: ${({ withIcon }) => withIcon && 'center'};
+  cursor: pointer;
 `;
 
 type Props = LinkProps & {
