@@ -1,8 +1,8 @@
 import { NextPage } from 'next';
 import styled from 'styled-components';
+import { Spinner } from '@styles';
 import ExerciseForm from '@components/ExerciseForm';
 import Exercises from '@components/Exercises';
-import Spinner from '@components/Spinner';
 import Hero from '@components/Hero';
 import { ExerciseContextProvider } from '@contexts/ExerciseContext';
 import { useUserContext } from '@contexts/UserContext';

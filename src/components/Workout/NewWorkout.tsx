@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Section, H2 } from '@styles';
+import { Section, H2, Spinner } from '@styles';
+import { Paths } from '@constants';
 import Hero from '@components/Hero';
 import Link from '@components/Link';
 import TextField from '@components/Form/TextField';
 import Button from '@components/Button';
 import WorkoutStarted from '@components/Workout/WorkoutStarted';
 import WorkoutTemplates from '@components/Workout/WorkoutTemplates';
-import Spinner from '@components/Spinner';
 import { useWorkoutContext } from '@contexts/WorkoutContext';
 import { useWorkouts } from '@hooks/queries/useWorkouts';
 
@@ -78,8 +78,7 @@ const NewWorkout = () => {
         <H2>Starta från mall</H2>
         <p>
           Kör du ofta likadana träningspass, eller roterar mellan några olika?
-          {/* TODO: REAL LINK */}
-          <Link href="/temp" spaceAfter spaceBefore>
+          <Link href={Paths.WORKOUTS} spaceAfter spaceBefore>
             Skapa en mall
           </Link>
           från ett av dina tidigare träningspass för att snabbt kunna starta upp
