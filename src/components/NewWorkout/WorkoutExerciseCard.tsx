@@ -12,9 +12,7 @@ import {
 import { WorkoutExerciseFormValues } from '@types';
 import Button from '@components/Button';
 import Modal from '@components/Modal';
-import WorkoutExerciseInput, {
-  Input,
-} from '@components/Workout/WorkoutExerciseInput';
+import WorkoutExerciseInput, { Input } from './WorkoutExerciseInput';
 
 const Wrapper = styled.div`
   background-color: var(--secondary);

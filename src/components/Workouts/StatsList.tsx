@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import { Skeleton } from '@styles';
 import { Workout } from '@types';
-import { useWorkouts } from '@hooks/queries/useWorkouts';
+import { useGetWorkouts } from '@hooks/queries/useGetWorkouts';
 
 dayjs.extend(duration);
 
@@ -41,7 +41,7 @@ const getAverageWorkoutTime = (workouts: Workout[]) => {
 };
 
 const StatsList = () => {
-  const { data: workouts } = useWorkouts();
+  const { data: workouts } = useGetWorkouts();
 
   if (!workouts) {
     return <Skeleton count={5} gap={20} spaceAbove />;

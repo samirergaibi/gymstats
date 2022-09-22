@@ -1,12 +1,13 @@
+import styled from 'styled-components';
 import dayjs from 'dayjs';
 import 'dayjs/locale/sv';
-import styled from 'styled-components';
 import { P } from '@styles';
 import { Workout } from '@types';
 import { StarIcon } from '@icons';
+import { Paths } from '@constants';
 import Link from '@components/Link';
 import { useEditWorkout } from '@hooks/mutations/useEditWorkout';
-import { useWorkouts } from '@hooks/queries/useWorkouts';
+import { useGetWorkouts } from '@hooks/queries/useGetWorkouts';
 
 const List = styled.ul`
   list-style: none;
@@ -38,7 +39,7 @@ const StyledStarIcon = styled(StarIcon)<{ $isLoading: boolean }>`
 `;
 
 const WorkoutList = () => {
-  const { data: workouts } = useWorkouts();
+  const { data: workouts } = useGetWorkouts();
   const { isLoading, mutate } = useEditWorkout();
 
   if (!workouts) {
@@ -83,8 +84,7 @@ const WorkoutList = () => {
               <strong>{workout.workoutName}</strong>
               <P spaceBottom>{workoutBreadText}</P>
             </div>
-            {/* TODO: add real link to real page */}
-            <Link href="/hehe" withIcon>
+            <Link href={`${Paths.WORKOUTS}/${workout.id}`} withIcon>
               Gå till övning
             </Link>
           </Workout>

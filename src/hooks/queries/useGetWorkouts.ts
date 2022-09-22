@@ -4,7 +4,7 @@ import { DBTable, QueryIds } from '@constants';
 import { Workout } from '@types';
 import { useUserContext } from '@contexts/UserContext';
 
-export const useWorkouts = () => {
+export const useGetWorkouts = () => {
   const { user } = useUserContext();
 
   const result = useQuery<Workout[]>([QueryIds.WORKOUTS], async () => {

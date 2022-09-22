@@ -6,10 +6,10 @@ import Hero from '@components/Hero';
 import Link from '@components/Link';
 import TextField from '@components/Form/TextField';
 import Button from '@components/Button';
-import WorkoutStarted from '@components/Workout/WorkoutStarted';
-import WorkoutTemplates from '@components/Workout/WorkoutTemplates';
+import WorkoutStarted from './/WorkoutStarted';
+import WorkoutTemplates from './WorkoutTemplates';
 import { useWorkoutContext } from '@contexts/WorkoutContext';
-import { useWorkouts } from '@hooks/queries/useWorkouts';
+import { useGetWorkouts } from '@hooks/queries/useGetWorkouts';
 
 const WORKOUT_NAME = 'workoutName';
 
@@ -49,7 +49,7 @@ const NewWorkout = () => {
     useWorkoutContext();
   const workoutStarted = !!workoutStorage?.workoutName;
 
-  const { data: workouts = [], isLoading } = useWorkouts();
+  const { data: workouts = [], isLoading } = useGetWorkouts();
   const templates = workouts.filter((workout) => workout.isTemplate);
   const showTemplates = !isLoading && templates.length > 0;
 

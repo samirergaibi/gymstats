@@ -5,12 +5,12 @@ import { Formik } from 'formik';
 import { H2, Section } from '@styles';
 import { PlusCircleIcon } from '@icons';
 import Button from '@components/Button';
-import WorkoutExerciseCard from '@components/Workout/WorkoutExerciseCard';
 import Modal from '@components/Modal';
-import { validationSchema } from './validationSchema';
-import Timer from './Timer';
 import { useWorkoutContext } from '@contexts/WorkoutContext';
 import { useAddWorkout } from '@hooks/mutations/useAddWorkout';
+import WorkoutExerciseCard from './WorkoutExerciseCard';
+import { validationSchema } from './validationSchema';
+import Timer from './Timer';
 
 const StyledButton = styled(Button)`
   display: flex;
