@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
+import { Skeleton } from '@styles';
 import { Workout } from '@types';
 import { useWorkouts } from '@hooks/queries/useWorkouts';
-import Spinner from '@components/Spinner';
 
 dayjs.extend(duration);
 
@@ -29,11 +29,6 @@ const StyledHr = styled.hr`
   border-bottom: 1px solid var(--light-gray);
 `;
 
-const SpinnerWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
 const getAverageWorkoutTime = (workouts: Workout[]) => {
   const totalWorkoutTime = workouts.reduce(
     (prev, workout) => prev + workout.workoutTime,
@@ -49,11 +44,7 @@ const StatsList = () => {
   const { data: workouts } = useWorkouts();
 
   if (!workouts) {
-    return (
-      <SpinnerWrapper>
-        <Spinner />
-      </SpinnerWrapper>
-    );
+    return <Skeleton count={5} gap={20} spaceAbove />;
   }
 
   const currentYear = new Date().getFullYear();
