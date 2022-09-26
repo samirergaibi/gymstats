@@ -8,10 +8,14 @@ export const useGetWorkouts = () => {
   const { user } = useUserContext();
 
   const result = useQuery<Workout[]>([QueryIds.WORKOUTS], async () => {
+    if (!user?.id) {
+      throw new Error('No user id provided while trying to fetch workouts.');
+    }
+
     const { data, error } = await supabase
       .from(DBTable.WORKOUTS)
       .select()
-      .eq('userId', user?.id)
+      .eq('userId', user.id)
       .order('created_at', { ascending: false });
 
     if (error) {

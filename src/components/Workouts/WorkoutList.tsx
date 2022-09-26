@@ -6,6 +6,7 @@ import { Workout } from '@types';
 import { StarIcon } from '@icons';
 import { Paths } from '@constants';
 import Link from '@components/Link';
+import { uppercase } from '@utils/uppercase';
 import { useEditWorkout } from '@hooks/mutations/useEditWorkout';
 import { useGetWorkouts } from '@hooks/queries/useGetWorkouts';
 
@@ -81,7 +82,7 @@ const WorkoutList = () => {
               <h3>{formattedDate}</h3>
             </TitleWrapper>
             <div>
-              <strong>{workout.workoutName}</strong>
+              <strong>{uppercase(workout.workoutName)}</strong>
               <P spaceBottom>{workoutBreadText}</P>
             </div>
             <Link href={`${Paths.WORKOUTS}/${workout.id}`} withIcon>

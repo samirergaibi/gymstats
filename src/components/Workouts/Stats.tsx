@@ -1,5 +1,5 @@
 import { H2, Section } from '@styles';
-import StatsList from './StatsList';
+import AllWorkoutsStats from './AllWorkoutsStats';
 
 const Stats = () => {
   return (
@@ -9,7 +9,7 @@ const Stats = () => {
         Hur länge brukar du träna i snitt? Hur många gånger har du tränat i år?
         Detta är några av de frågor vi kan hjälpa dig att ta reda på!
       </p>
-      <StatsList />
+      <AllWorkoutsStats />
     </Section>
   );
 };

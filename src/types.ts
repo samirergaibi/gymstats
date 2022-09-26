@@ -57,3 +57,8 @@ export type Routes = {
   href: string;
   text: string;
 };
+
+export type Stat = {
+  text: string;
+  value: string;
+};

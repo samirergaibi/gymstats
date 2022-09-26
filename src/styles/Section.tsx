@@ -14,8 +14,8 @@ type Props = {
   children: React.ReactNode;
 };
 
-const Section: React.FC<Props> = ({ children }) => {
-  return <StyledSection>{children}</StyledSection>;
+const Section: React.FC<Props> = ({ children, ...props }) => {
+  return <StyledSection {...props}>{children}</StyledSection>;
 };
 
 export default Section;
