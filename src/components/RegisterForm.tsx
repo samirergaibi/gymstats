@@ -39,8 +39,10 @@ const RegisterForm = () => {
 
     const { user, session, error } = await supabase.auth.signUp(
       { email, password },
-      // TODO: Redirect to correct page
-      { redirectTo: 'https://samirergaibi.se' },
+      // TODO: Sending verification emails is currently disabled since Supabase
+      // Does now support re-sending verification emails. Implement this when they do
+      // https://github.com/supabase/gotrue/issues/312
+      { redirectTo: 'https://gymstats.vercel.app/login' },
     );
     console.log({
       user,
