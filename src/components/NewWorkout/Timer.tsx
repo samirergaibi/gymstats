@@ -35,7 +35,7 @@ const Timer: React.FC<Props> = ({ startTime }) => {
     return () => {
       clearInterval(timer);
     };
-  }, []);
+  }, [startTime]);
 
   if (!timer) return null;
 

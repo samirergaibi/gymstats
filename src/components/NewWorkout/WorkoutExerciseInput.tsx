@@ -44,17 +44,23 @@ const WorkoutExerciseInput: React.FC<Props> = ({
     case 'reps':
       name = 'Reps';
       postfix = 'st';
-      Icon = () => <RepetitionIcon color="white" />;
+      Icon = function Icon() {
+        return <RepetitionIcon color="white" />;
+      };
       break;
     case 'sets':
       name = 'Sets';
       postfix = 'st';
-      Icon = () => <SetsIcon color="white" />;
+      Icon = function Icon() {
+        return <SetsIcon color="white" />;
+      };
       break;
     case 'weight':
       name = 'Vikt';
       postfix = 'kg';
-      Icon = () => <FeatherIcon color="white" />;
+      Icon = function Icon() {
+        return <FeatherIcon color="white" />;
+      };
       break;
     default:
       throw new Error(
