@@ -9,7 +9,7 @@ export const useRedirectIfLoggedIn = () => {
 
   useEffect(() => {
     if (authenticated) {
-      router.push(Paths.EXERCISES);
+      router.push(Paths.NEW_WORKOUT);
     }
   }, [authenticated]);
 };
