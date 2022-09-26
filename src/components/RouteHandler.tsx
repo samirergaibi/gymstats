@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
+import { Paths } from '@constants';
 import { useUserContext } from '@contexts/UserContext';
 import { Spinner } from '@styles';
 
@@ -12,19 +13,24 @@ const StyledWrapper = styled.div`
 
 type Props = {
   children: React.ReactNode;
+  isProtected: boolean;
 };
 
-const ProtectedRoute: React.FC<Props> = ({ children }) => {
+const RouteHandler: React.FC<Props> = ({ children, isProtected }) => {
   const { authenticated, isClient } = useUserContext();
   const router = useRouter();
 
   useEffect(() => {
-    if (!authenticated && isClient) {
-      router?.replace('/login');
+    if (isClient && authenticated && !isProtected) {
+      router.replace(Paths.NEW_WORKOUT);
     }
-  }, [authenticated, isClient, router]);
+    if (isClient && !authenticated && isProtected) {
+      router.replace(Paths.LOGIN);
+    }
+  }, [authenticated, isClient, router, isProtected]);
 
-  if (!authenticated) {
+  const pageShouldBeHidden = isProtected ? !authenticated : authenticated;
+  if (pageShouldBeHidden || !isClient) {
     return (
       <StyledWrapper>
         <Spinner />
@@ -35,4 +41,4 @@ const ProtectedRoute: React.FC<Props> = ({ children }) => {
   return <>{children}</>;
 };
 
-export default ProtectedRoute;
+export default RouteHandler;

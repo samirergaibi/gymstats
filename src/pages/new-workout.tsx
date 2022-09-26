@@ -1,14 +1,14 @@
 import Workout from '@components/NewWorkout/NewWorkout';
 import { WorkoutContextProvider } from '@contexts/WorkoutContext';
-import ProtectedRoute from '@components/ProtectedRoute';
+import RouteHandler from '@components/RouteHandler';
 
 const NewWorkout = () => {
   return (
-    <ProtectedRoute>
+    <RouteHandler isProtected>
       <WorkoutContextProvider>
         <Workout />
       </WorkoutContextProvider>
-    </ProtectedRoute>
+    </RouteHandler>
   );
 };
 

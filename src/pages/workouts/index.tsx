@@ -2,15 +2,15 @@ import { NextPage } from 'next';
 import Hero from '@components/Hero';
 import Stats from '@components/Workouts/Stats';
 import PreviousWorkouts from '@components/Workouts/PreviousWorkouts';
-import ProtectedRoute from '@components/ProtectedRoute';
+import RouteHandler from '@components/RouteHandler';
 
 const WorkoutPage: NextPage = () => {
   return (
-    <ProtectedRoute>
+    <RouteHandler isProtected>
       <Hero imgUrl="/workout-hero.jpg" title="Alla träningspass" />
       <Stats />
       <PreviousWorkouts />
-    </ProtectedRoute>
+    </RouteHandler>
   );
 };
 

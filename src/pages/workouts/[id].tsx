@@ -1,11 +1,11 @@
 import SingleWorkout from '@components/SingleWorkout/SingleWorkout';
-import ProtectedRoute from '@components/ProtectedRoute';
+import RouteHandler from '@components/RouteHandler';
 
 const SingleWorkoutPage = () => {
   return (
-    <ProtectedRoute>
+    <RouteHandler isProtected>
       <SingleWorkout />
-    </ProtectedRoute>
+    </RouteHandler>
   );
 };
 
