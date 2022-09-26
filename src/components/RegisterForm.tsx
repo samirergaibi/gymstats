@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -31,29 +32,30 @@ const validationSchema = Yup.object({
 
 const RegisterForm = () => {
   const router = useRouter();
+  const [apiError, setApiError] = useState<string>();
 
   const register = async ({ email, password }: FormValues) => {
     if (!supabase) {
       throw new Error('Trying to sign up without being connect to Supabase.');
     }
 
-    const { user, session, error } = await supabase.auth.signUp(
+    const { error } = await supabase.auth.signUp(
       { email, password },
       // TODO: Sending verification emails is currently disabled since Supabase
       // Does now support re-sending verification emails. Implement this when they do
       // https://github.com/supabase/gotrue/issues/312
       { redirectTo: 'https://gymstats.vercel.app/login' },
     );
-    console.log({
-      user,
-      session,
-      error,
-    });
-    if (error) {
-      throw new Error(JSON.stringify(error));
-    }
 
-    router.push(Paths.LOGIN);
+    if (error) {
+      const msg =
+        error.message === 'User already registered'
+          ? 'Användaren existerar redan'
+          : error.message;
+      setApiError(msg);
+    } else {
+      router.push(Paths.LOGIN);
+    }
   };
 
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
@@ -63,11 +65,19 @@ const RegisterForm = () => {
       onSubmit: register,
     });
 
+  useEffect(() => {
+    // Whenever the user changes a input value remove the error
+    if (apiError) {
+      setApiError(undefined);
+    }
+  }, [values.email, values.password, values.passwordConfirmation]);
+
   return (
     <Form
       buttonText="Skapa konto"
       title="Skapa ett konto"
       onSubmit={handleSubmit}
+      error={apiError}
     >
       <TextField
         autoComplete="email"
