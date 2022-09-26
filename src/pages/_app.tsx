@@ -1,4 +1,5 @@
 import type { AppProps } from 'next/app';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import Layout from '@components/Layout';
 import { UserContextProvider } from '@contexts/UserContext';
@@ -11,6 +12,8 @@ const cssVariables = `
     --peach: #F76863;
     --dark: #323232;
     --light-gray: #CFCCCC;
+    --link: #408AE0;
+    --yellow: #FBBA72;
 
     --error: #F76863;
 
@@ -54,9 +57,11 @@ const theme = {
   },
 };
 
+const queryClient = new QueryClient();
+
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <UserContextProvider>
@@ -65,6 +70,6 @@ export default function App({ Component, pageProps }: AppProps) {
           </Layout>
         </UserContextProvider>
       </ThemeProvider>
-    </>
+    </QueryClientProvider>
   );
 }

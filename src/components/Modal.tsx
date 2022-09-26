@@ -40,17 +40,23 @@ const ButtonContainer = styled.div`
   gap: 20px;
 `;
 
-const ConfirmModal: React.FC<Props> = ({ cancel, confirm }) => {
+const ConfirmModal: React.FC<Props> = ({
+  cancel,
+  cancelBtnText = 'Avbryt',
+  confirm,
+  confirmBtnText = 'Ta bort',
+  message = 'Är du säker på att du vill ta bort övningen?',
+}) => {
   return (
     <Wrapper>
       <StyledConfirmModal>
-        <P>Är du säker på att du vill ta bort övningen?</P>
+        <P>{message}</P>
         <ButtonContainer>
           <Button variant="red" onClick={() => confirm()}>
-            Ta bort
+            {confirmBtnText}
           </Button>
           <Button variant="blue" onClick={() => cancel(false)}>
-            Avbryt
+            {cancelBtnText}
           </Button>
         </ButtonContainer>
       </StyledConfirmModal>
@@ -64,12 +70,30 @@ if (typeof window !== 'undefined') {
 }
 
 type Props = {
+  cancelBtnText?: string;
+  confirmBtnText?: string;
+  message?: string;
   cancel: (isOpen: boolean) => void;
   confirm: () => void;
 };
 
-const Modal: React.FC<Props> = ({ cancel, confirm }) => {
-  return createPortal(<ConfirmModal confirm={confirm} cancel={cancel} />, body);
+const Modal: React.FC<Props> = ({
+  cancel,
+  cancelBtnText,
+  confirm,
+  confirmBtnText,
+  message,
+}) => {
+  return createPortal(
+    <ConfirmModal
+      cancelBtnText={cancelBtnText}
+      confirmBtnText={confirmBtnText}
+      message={message}
+      confirm={confirm}
+      cancel={cancel}
+    />,
+    body,
+  );
 };
 
 export default Modal;

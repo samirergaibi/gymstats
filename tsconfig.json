@@ -23,7 +23,8 @@
       "@hooks/*": ["hooks/*"], 
       "@icons": ["icons/index.ts"],
       "@utils/*": ["utils/*"],
-      "@types*": ["types.ts"], 
+      "@types*": ["types.ts"],
+      "@styles": ["styles"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

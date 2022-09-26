@@ -19,3 +19,46 @@ export type ExerciseFormValues = {
   sets: string;
   weight: string;
 };
+
+// Temporary until decided how to proceed with workouts & exercises
+type TempExercise = Omit<Exercise, 'muscleGroups'> & {
+  idEditing: boolean;
+  id: string;
+};
+
+export type Workout = {
+  created_at: string;
+  exercises: TempExercise[];
+  isTemplate: boolean;
+  workoutName: string;
+  workoutTime: number;
+  id: number;
+  userId: string;
+};
+
+export type WorkoutExerciseFormValues = {
+  name: string;
+  reps: string;
+  sets: string;
+  weight: string;
+  id: string;
+  isEditing: boolean;
+};
+
+export type WorkoutStorage = {
+  exercises?: WorkoutExerciseFormValues[];
+  isTemplate?: boolean;
+  startTime?: number;
+  workoutName?: string;
+};
+
+export type Routes = {
+  action?: Function;
+  href: string;
+  text: string;
+};
+
+export type Stat = {
+  text: string;
+  value: string;
+};

@@ -7,3 +7,6 @@ export { default as RepetitionIcon } from './RepetitionIcon';
 export { default as SetsIcon } from './SetsIcon';
 export { default as TrashIcon } from './TrashIcon';
 export { default as UserIcon } from './UserIcon';
+export { default as SaveIcon } from './SaveIcon';
+export { default as StarIcon } from './StarIcon';
+export { default as PlusCircleIcon } from './PlusCircleIcon';

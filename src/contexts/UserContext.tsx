@@ -4,6 +4,7 @@ import { supabase } from '@utils/supabaseClient';
 
 interface IUserContext {
   authenticated: boolean;
+  isClient: boolean;
   user: AuthUser | null;
 }
 
@@ -14,42 +15,24 @@ type Props = {
 };
 
 export const UserContextProvider: React.FC<Props> = ({ children }) => {
+  const [isClient, setIsClient] = useState(false);
   const [authenticated, setAuthenticated] = useState(false);
 
   const user = supabase.auth.user();
+  const isLoggedIn = !!user;
 
   useEffect(() => {
-    const authListener = supabase.auth.onAuthStateChange((event, session) => {
-      console.log({ event, session });
-      if (event === 'SIGNED_IN') {
-        setAuthenticated(true);
-      }
-      if (event === 'SIGNED_OUT') {
-        setAuthenticated(false);
-      }
-    });
-
-    return () => {
-      authListener.data?.unsubscribe();
-    };
-  }, []);
-
-  // TODO: Without this nav doesnt work on logged in pages, find a better way
-  const setInitialLoginStatus = async () => {
-    const isLoggedIn = !!user;
-
-    setAuthenticated(isLoggedIn);
-    if (!isLoggedIn) {
-      supabase.auth.signOut();
+    setIsClient(true);
+    if (!!isLoggedIn) {
+      setAuthenticated(true);
+    } else {
+      setAuthenticated(false);
     }
-  };
-
-  useEffect(() => {
-    setInitialLoginStatus();
-  }, []);
+  }, [isLoggedIn]);
 
   const value: IUserContext = {
     authenticated,
+    isClient,
     user,
   };
 

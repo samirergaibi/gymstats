@@ -3,7 +3,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { Paths } from '@constants';
 import RegisterForm from '@components/RegisterForm';
-import { useRedirectIfLoggedIn } from '@hooks/useRedirectIfLoggedIn';
+import RouteHandler from '@components/RouteHandler';
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -34,20 +34,20 @@ const StyledLink = styled.a`
 `;
 
 const Register: NextPage = () => {
-  useRedirectIfLoggedIn();
-
   return (
-    <StyledWrapper>
-      <StyledH1>Skapa konto hos GymStat!</StyledH1>
-      <Separator />
-      <RegisterForm />
-      <StyledP>
-        Har du redan ett konto?{' '}
-        <Link href={Paths.LOGIN} passHref>
-          <StyledLink>Logga in</StyledLink>
-        </Link>
-      </StyledP>
-    </StyledWrapper>
+    <RouteHandler isProtected={false}>
+      <StyledWrapper>
+        <StyledH1>Skapa konto hos GymStat!</StyledH1>
+        <Separator />
+        <RegisterForm />
+        <StyledP>
+          Har du redan ett konto?{' '}
+          <Link href={Paths.LOGIN} passHref>
+            <StyledLink>Logga in</StyledLink>
+          </Link>
+        </StyledP>
+      </StyledWrapper>
+    </RouteHandler>
   );
 };
 

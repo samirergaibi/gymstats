@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import ExerciseCard from '@components/ExerciseCard';
-import Spinner from '@components/Spinner';
+import { Spinner } from '@styles';
 import { uppercase } from '@utils/uppercase';
 import { useExerciseContext } from '@contexts/ExerciseContext';
 

@@ -10,13 +10,22 @@ const StyledButton = styled.button<{ variant: string }>`
   cursor: pointer;
 `;
 
+const UnstyledButton = styled.button`
+  all: unset;
+  cursor: pointer;
+`;
+
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   children: React.ReactNode;
   type?: 'button' | 'submit' | 'reset';
-  variant?: 'red' | 'blue';
+  variant?: 'red' | 'blue' | 'unstyled';
 };
 
 const Button: React.FC<Props> = ({ children, variant = 'red', ...props }) => {
+  if (variant === 'unstyled') {
+    return <UnstyledButton {...props}>{children}</UnstyledButton>;
+  }
+
   const backgroundColor = (() => {
     switch (variant) {
       case 'blue':
