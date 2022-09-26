@@ -1,13 +1,14 @@
 import Workout from '@components/NewWorkout/NewWorkout';
 import { WorkoutContextProvider } from '@contexts/WorkoutContext';
+import ProtectedRoute from '@components/ProtectedRoute';
 
 const NewWorkout = () => {
-  // TODO: Reroute if not logged in
-
   return (
-    <WorkoutContextProvider>
-      <Workout />
-    </WorkoutContextProvider>
+    <ProtectedRoute>
+      <WorkoutContextProvider>
+        <Workout />
+      </WorkoutContextProvider>
+    </ProtectedRoute>
   );
 };
 
