@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import dayjs from 'dayjs';
 import 'dayjs/locale/sv';
@@ -43,11 +44,14 @@ const WorkoutList = () => {
   const { data: workouts } = useGetWorkouts();
   const { isLoading, mutate } = useEditWorkout();
 
+  const [clickedId, setClickedId] = useState<number>();
+
   if (!workouts || workouts.length === 0) {
     return null;
   }
 
   const updateWorkoutTemplate = (workout: Workout) => {
+    setClickedId(workout.id);
     mutate(workout);
   };
 
@@ -70,11 +74,11 @@ const WorkoutList = () => {
           <Workout key={workout.id}>
             <TitleWrapper>
               <StyledButton
-                disabled={isLoading}
+                disabled={isLoading && clickedId === workout.id}
                 onClick={() => updateWorkoutTemplate(workout)}
               >
                 <StyledStarIcon
-                  $isLoading={isLoading}
+                  $isLoading={isLoading && clickedId === workout.id}
                   color="var(--yellow)"
                   filled={workout.isTemplate}
                 />
