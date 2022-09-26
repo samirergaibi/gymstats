@@ -38,7 +38,7 @@ const StyledH1 = styled.h1`
 
 type Props = {
   imgUrl: string;
-  title: string;
+  title?: string;
 };
 
 const Hero: React.FC<Props> = ({ imgUrl, title }) => {

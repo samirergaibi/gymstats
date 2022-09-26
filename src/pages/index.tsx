@@ -13,7 +13,7 @@ const ImageWrapper = styled.div`
 
 const ContentWrapper = styled.div`
   display: grid;
-  gap: 30px;
+  gap: 20px;
   padding: 40px 20px;
   width: 95%;
   margin: 0 auto;
@@ -38,12 +38,11 @@ const Home: NextPage = () => {
         <Image alt="Illustration of a woman doing pilates" src={pilatesSvg} />
       </ImageWrapper>
       <ContentWrapper>
+        <h1>Välkommen till Gymstats!</h1>
         <p>
-          Välkommen till GymStats! Stället där du kan dokumentera och hålla reda
-          på dina framsteg för din träning. Här på GymStats får du enkelt en
-          överblick över ditt personliga träningsprogram som du själv utformar
-          och som du självklart kan ändra och modifiera, precis när du vill och
-          hur du vill.
+          Ett stället där du kan dokumentera och hålla reda på dina framsteg för
+          din träning. Hos oss får du enkelt en överblick över dina träningspass
+          och övningarna du har kört!
         </p>
         <CardWrapper>
           <SmallCard
