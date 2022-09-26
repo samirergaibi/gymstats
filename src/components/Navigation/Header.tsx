@@ -39,7 +39,7 @@ const loggedOutRoutes = [
 const loggedInRoutes = [
   { href: Paths.NEW_WORKOUT, text: 'Nytt träningspass' },
   { href: Paths.WORKOUTS, text: 'Dina träningspass' },
-  // TODO: Remove until new version when exercises is unified with workouts
+  // Remove until future version where exercises is separate from workouts
   // { href: Paths.EXERCISES, text: 'Dina övningar' },
   { action: logout, href: Paths.LOGIN, text: 'Logga ut' },
 ];

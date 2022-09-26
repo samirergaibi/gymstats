@@ -43,7 +43,7 @@ const WorkoutList = () => {
   const { data: workouts } = useGetWorkouts();
   const { isLoading, mutate } = useEditWorkout();
 
-  if (!workouts) {
+  if (!workouts || workouts.length === 0) {
     return null;
   }
 
