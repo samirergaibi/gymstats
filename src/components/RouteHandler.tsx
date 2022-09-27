@@ -25,18 +25,19 @@ const RouteHandler: React.FC<Props> = ({ children, isProtected }) => {
       router.replace(Paths.NEW_WORKOUT);
     }
     if (isClient && !authenticated && isProtected) {
+      console.log({ authenticated, isClient, router, isProtected });
       router.replace(Paths.LOGIN);
     }
   }, [authenticated, isClient, router, isProtected]);
 
-  const pageShouldBeHidden = isProtected ? !authenticated : authenticated;
-  if (pageShouldBeHidden || !isClient) {
-    return (
-      <StyledWrapper>
-        <Spinner />
-      </StyledWrapper>
-    );
-  }
+  // const pageShouldBeHidden = isProtected ? !authenticated : authenticated;
+  // if (pageShouldBeHidden) {
+  //   return (
+  //     <StyledWrapper>
+  //       <Spinner />
+  //     </StyledWrapper>
+  //   );
+  // }
 
   return <>{children}</>;
 };
