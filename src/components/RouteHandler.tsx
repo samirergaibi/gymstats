@@ -17,27 +17,26 @@ type Props = {
 };
 
 const RouteHandler: React.FC<Props> = ({ children, isProtected }) => {
-  const { authenticated, isClient } = useUserContext();
+  const { authenticated } = useUserContext();
   const router = useRouter();
 
   useEffect(() => {
-    if (isClient && authenticated && !isProtected) {
+    if (authenticated && !isProtected) {
       router.replace(Paths.NEW_WORKOUT);
     }
-    if (isClient && !authenticated && isProtected) {
-      console.log({ authenticated, isClient, router, isProtected });
+    if (!authenticated && isProtected) {
       router.replace(Paths.LOGIN);
     }
-  }, [authenticated, isClient, router, isProtected]);
+  }, [authenticated, router, isProtected]);
 
-  // const pageShouldBeHidden = isProtected ? !authenticated : authenticated;
-  // if (pageShouldBeHidden) {
-  //   return (
-  //     <StyledWrapper>
-  //       <Spinner />
-  //     </StyledWrapper>
-  //   );
-  // }
+  const pageShouldBeHidden = isProtected ? !authenticated : authenticated;
+  if (pageShouldBeHidden) {
+    return (
+      <StyledWrapper>
+        <Spinner />
+      </StyledWrapper>
+    );
+  }
 
   return <>{children}</>;
 };

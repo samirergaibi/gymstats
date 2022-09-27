@@ -4,7 +4,6 @@ import { supabase } from '@utils/supabaseClient';
 
 interface IUserContext {
   authenticated: boolean;
-  isClient: boolean;
   user: AuthUser | null;
 }
 
@@ -15,14 +14,12 @@ type Props = {
 };
 
 export const UserContextProvider: React.FC<Props> = ({ children }) => {
-  const [isClient, setIsClient] = useState(false);
   const [authenticated, setAuthenticated] = useState(false);
 
   const user = supabase.auth.user();
   const isLoggedIn = !!user;
 
   useEffect(() => {
-    setIsClient(true);
     if (!!isLoggedIn) {
       setAuthenticated(true);
     } else {
@@ -32,7 +29,6 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
 
   const value: IUserContext = {
     authenticated,
-    isClient,
     user,
   };
 
