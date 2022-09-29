@@ -22,11 +22,11 @@ const About: NextPage = () => {
         <h1>💪 Om Gymstats!</h1>
         <StyledP>
           Tränar du varje vecka? lite då och då? Hur som helst så är det enkelt
-          hänt att man inte kommer ihåg vad man lyfte för vikt på en just den
-          där övningen förra veckan... Eller så kanske man bara vill ha ett
-          centralt ställe där ens tidigare träningspass lever och bor, där man
-          lätt kan se lite enkel statistik. Hur många gympass har jag kört i år?
-          Hur länge tränar jag i snitt? Dessa frågor och mer kan du lätt få reda
+          hänt att man inte kommer ihåg hur mycket man lyfte på just den där
+          övningen förra veckan... Eller så kanske man bara vill ha ett centralt
+          ställe där ens tidigare träningspass lever och bor, där man lätt kan
+          se lite enkel statistik. Hur många gympass har jag kört i år? Hur
+          länge tränar jag i snitt? Dessa frågor och mer kan du enkelt få reda
           på om du använder Gymstats!
         </StyledP>
       </Section>
