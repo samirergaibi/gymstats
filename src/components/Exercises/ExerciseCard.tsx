@@ -16,7 +16,7 @@ import { supabase } from '@utils/supabaseClient';
 import { Exercise, ExerciseFormValues } from '@types';
 import { useExerciseContext } from '@contexts/ExerciseContext';
 import Button from '@components/Button';
-import Modal from './Modal';
+import Modal from '@components/Modal';
 
 const StyledCard = styled.article`
   background-color: var(--primary);

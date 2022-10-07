@@ -4,8 +4,8 @@ import { Form, useFormikContext } from 'formik';
 import { ArrowDownCircleIcon } from '@icons';
 import { ExerciseFormValues } from '@types';
 import { useExerciseContext } from '@contexts/ExerciseContext';
-import Button from './Button';
-import { TextField } from './Form';
+import Button from '@components/Button';
+import { TextField } from '@components/Form';
 
 const COLLAPSE_TIME_IN_SECONDS = 0.25;
 

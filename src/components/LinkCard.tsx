@@ -29,7 +29,7 @@ type Props = {
   text: string;
 };
 
-const SmallCard: React.FC<Props> = ({
+const LinkCard: React.FC<Props> = ({
   backgroundColor,
   href,
   imageNode: ImageNode,
@@ -45,4 +45,4 @@ const SmallCard: React.FC<Props> = ({
   </Link>
 );
 
-export default SmallCard;
+export default LinkCard;

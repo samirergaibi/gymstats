@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Paths } from '@constants';
 import { DumbellIcon, UserIcon } from '@icons';
 import pilatesSvg from '@assets/pilates.svg';
-import SmallCard from '@components/SmallCard';
+import LinkCard from '@components/LinkCard';
 
 const ImageWrapper = styled.div`
   display: flex;
@@ -45,13 +45,13 @@ const Home: NextPage = () => {
           och övningarna du har kört!
         </p>
         <CardWrapper>
-          <SmallCard
+          <LinkCard
             backgroundColor="var(--secondary)"
             href={Paths.LOGIN}
             imageNode={<UserIcon />}
             text="Logga in"
           />
-          <SmallCard
+          <LinkCard
             backgroundColor="var(--primary)"
             href={Paths.REGISTER}
             imageNode={<DumbellIcon />}

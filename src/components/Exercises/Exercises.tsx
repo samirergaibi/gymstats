@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import ExerciseCard from '@components/ExerciseCard';
 import { Spinner } from '@styles';
 import { uppercase } from '@utils/uppercase';
 import { useExerciseContext } from '@contexts/ExerciseContext';
+import ExerciseCard from './ExerciseCard';
 
 const StyledH2 = styled.h2`
   margin: 30px 20px;
