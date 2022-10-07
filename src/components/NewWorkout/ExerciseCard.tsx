@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useFormikContext } from 'formik';
+import { Button } from '@styles';
 import {
   TrashIcon,
   SaveIcon,
@@ -10,7 +11,6 @@ import {
   EditIcon,
 } from '@icons';
 import { WorkoutExerciseFormValues } from '@types';
-import Button from '@components/Button';
 import Modal from '@components/Modal';
 import ExerciseInput, { Input } from './ExerciseInput';
 

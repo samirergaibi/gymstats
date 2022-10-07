@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import Collapsible from 'react-collapsible';
 import { Form, useFormikContext } from 'formik';
+import { Button } from '@styles';
 import { ArrowDownCircleIcon } from '@icons';
 import { ExerciseFormValues } from '@types';
 import { useExerciseContext } from '@contexts/ExerciseContext';
-import Button from '@components/Button';
 import { TextField } from '@components/Form';
 
 const COLLAPSE_TIME_IN_SECONDS = 0.25;

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { Button } from '@styles';
 import TextField from '@components/Form/TextField';
-import Button from '@components/Button';
 import { useWorkoutContext } from '@contexts/WorkoutContext';
 
 const WORKOUT_NAME = 'workoutName';

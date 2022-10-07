@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
-import { H2, Section } from '@styles';
+import { H2, Section, Button } from '@styles';
 import { PlusCircleIcon } from '@icons';
 import { Paths } from '@constants';
 import { useWorkoutContext } from '@contexts/WorkoutContext';
 import { useAddWorkout } from '@hooks/mutations/useAddWorkout';
-import Button from '@components/Button';
 import Modal from '@components/Modal';
 import Timer from './Timer';
 import ExerciseList from './ExerciseList';
