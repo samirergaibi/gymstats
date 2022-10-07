@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const StyledButton = styled.button<{ variant: string }>`
+const StyledButton = styled.button<{ hasIcon: boolean; variant: string }>`
   color: white;
   border: none;
   background: ${({ variant }) => variant};
@@ -8,6 +8,9 @@ const StyledButton = styled.button<{ variant: string }>`
   font-weight: var(--medium-bold);
   border-radius: var(--border-medium);
   cursor: pointer;
+  display: ${({ hasIcon }) => hasIcon && 'flex'};
+  gap: ${({ hasIcon }) => hasIcon && '5px'};
+  align-items: ${({ hasIcon }) => hasIcon && 'center'};
 `;
 
 const UnstyledButton = styled.button`
@@ -19,9 +22,15 @@ type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   children: React.ReactNode;
   type?: 'button' | 'submit' | 'reset';
   variant?: 'red' | 'blue' | 'unstyled';
+  icon?: React.ReactNode;
 };
 
-const Button: React.FC<Props> = ({ children, variant = 'red', ...props }) => {
+const Button: React.FC<Props> = ({
+  children,
+  variant = 'red',
+  icon,
+  ...props
+}) => {
   if (variant === 'unstyled') {
     return <UnstyledButton {...props}>{children}</UnstyledButton>;
   }
@@ -36,7 +45,8 @@ const Button: React.FC<Props> = ({ children, variant = 'red', ...props }) => {
   })();
 
   return (
-    <StyledButton {...props} variant={backgroundColor}>
+    <StyledButton {...props} variant={backgroundColor} hasIcon={!!icon}>
+      {!!icon && icon}
       {children}
     </StyledButton>
   );

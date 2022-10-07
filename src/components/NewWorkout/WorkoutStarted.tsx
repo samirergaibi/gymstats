@@ -135,10 +135,13 @@ const WorkoutStarted = () => {
       <H2>{workoutName}</H2>
       <ExerciseList />
       <ButtonTimerWrapper>
-        <StyledButton variant="blue" onClick={addExercise}>
-          <PlusCircleIcon />
-          <span>Ny övning</span>
-        </StyledButton>
+        <Button
+          variant="blue"
+          onClick={addExercise}
+          icon={<PlusCircleIcon size={20} />}
+        >
+          Ny övning
+        </Button>
         <Timer startTime={startTime} />
       </ButtonTimerWrapper>
       <Section>
