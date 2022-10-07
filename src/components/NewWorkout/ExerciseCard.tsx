@@ -12,7 +12,7 @@ import {
 import { WorkoutExerciseFormValues } from '@types';
 import Button from '@components/Button';
 import Modal from '@components/Modal';
-import WorkoutExerciseInput, { Input } from './WorkoutExerciseInput';
+import ExerciseInput, { Input } from './ExerciseInput';
 
 const Wrapper = styled.div`
   background-color: var(--secondary);
@@ -72,10 +72,7 @@ type Props = {
   setWorkoutExercises: (workoutExercises: WorkoutExerciseFormValues[]) => void;
 };
 
-const WorkoutExerciseCard: React.FC<Props> = ({
-  exercises,
-  setWorkoutExercises,
-}) => {
+const ExerciseCard: React.FC<Props> = ({ exercises, setWorkoutExercises }) => {
   const IsOnlyOneExercise = exercises.length <= 1;
 
   const {
@@ -136,21 +133,21 @@ const WorkoutExerciseCard: React.FC<Props> = ({
             </ButtonsWrapper>
           </TopWrapper>
           <BottomWrapper>
-            <WorkoutExerciseInput
+            <ExerciseInput
               variant="reps"
               value={values.reps}
               error={!!touched.reps && !!errors.reps}
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            <WorkoutExerciseInput
+            <ExerciseInput
               variant="sets"
               value={values.sets}
               error={!!touched.sets && !!errors.sets}
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            <WorkoutExerciseInput
+            <ExerciseInput
               variant="weight"
               value={values.weight}
               error={!!touched.weight && !!errors.weight}
@@ -199,4 +196,4 @@ const WorkoutExerciseCard: React.FC<Props> = ({
   );
 };
 
-export default WorkoutExerciseCard;
+export default ExerciseCard;
