@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { useFormikContext } from 'formik';
-import { Button } from '@styles';
+import { Button, Modal } from '@styles';
 import { Paths, DBTable } from '@constants';
 import {
   ArrowRightIcon,
@@ -16,7 +16,6 @@ import { uppercase } from '@utils/uppercase';
 import { supabase } from '@utils/supabaseClient';
 import { Exercise, ExerciseFormValues } from '@types';
 import { useExerciseContext } from '@contexts/ExerciseContext';
-import Modal from '@components/Modal';
 
 const StyledCard = styled.article`
   background-color: var(--primary);

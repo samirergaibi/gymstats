@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { createPortal } from 'react-dom';
-import { Button } from '@styles';
+import Button from './Button';
 
 const Wrapper = styled.div`
   height: 100vh;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useFormikContext } from 'formik';
-import { Button } from '@styles';
+import { Button, Modal } from '@styles';
 import {
   TrashIcon,
   SaveIcon,
@@ -11,7 +11,6 @@ import {
   EditIcon,
 } from '@icons';
 import { WorkoutExerciseFormValues } from '@types';
-import Modal from '@components/Modal';
 import ExerciseInput, { Input } from './ExerciseInput';
 
 const Wrapper = styled.div`
