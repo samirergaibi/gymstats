@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 import { H2, Section } from '@styles';
@@ -79,6 +79,7 @@ const WorkoutStarted = () => {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const submitErrorRef = useRef<HTMLParagraphElement>(null);
 
   const noExercises = workoutStorage?.exercises?.length === 0;
   const stillEditing = workoutStorage?.exercises?.some(
@@ -118,6 +119,12 @@ const WorkoutStarted = () => {
     mutation.mutate();
   };
 
+  useEffect(() => {
+    if (submitError && submitErrorRef.current) {
+      submitErrorRef.current.scrollIntoView();
+    }
+  }, [submitError]);
+
   return (
     <WorkoutWrapper>
       {modalIsOpen && (
@@ -156,7 +163,9 @@ const WorkoutStarted = () => {
             Avbryt
           </Button>
         </ButtonWrapper>
-        {!!submitError && <SubmitError>{submitError}</SubmitError>}
+        {!!submitError && (
+          <SubmitError ref={submitErrorRef}>{submitError}</SubmitError>
+        )}
       </Section>
     </WorkoutWrapper>
   );
