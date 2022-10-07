@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import Hero from '@components/Hero';
+import { Hero } from '@styles';
 import Stats from '@components/Workouts/Stats';
 import PreviousWorkouts from '@components/Workouts/PreviousWorkouts';
 import RouteHandler from '@components/RouteHandler';

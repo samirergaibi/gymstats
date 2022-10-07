@@ -1,16 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
-import { Formik } from 'formik';
-import { H2, Section } from '@styles';
+import { H2, Section, Button, Link, Modal } from '@styles';
 import { PlusCircleIcon } from '@icons';
-import Button from '@components/Button';
-import Modal from '@components/Modal';
+import { Paths } from '@constants';
 import { useWorkoutContext } from '@contexts/WorkoutContext';
 import { useAddWorkout } from '@hooks/mutations/useAddWorkout';
-import WorkoutExerciseCard from './WorkoutExerciseCard';
-import { validationSchema } from './validationSchema';
 import Timer from './Timer';
+import ExerciseList from './ExerciseList';
 
 const StyledButton = styled(Button)`
   display: flex;
@@ -30,14 +27,6 @@ const ButtonWrapper = styled.div`
   display: flex;
   gap: 15px;
   margin-top: 15px;
-`;
-
-const ExerciseList = styled.ul`
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
 `;
 
 const ButtonTimerWrapper = styled.div`
@@ -87,6 +76,7 @@ const WorkoutStarted = () => {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const submitErrorRef = useRef<HTMLParagraphElement>(null);
 
   const noExercises = workoutStorage?.exercises?.length === 0;
   const stillEditing = workoutStorage?.exercises?.some(
@@ -126,6 +116,12 @@ const WorkoutStarted = () => {
     mutation.mutate();
   };
 
+  useEffect(() => {
+    if (submitError && submitErrorRef.current) {
+      submitErrorRef.current.scrollIntoView();
+    }
+  }, [submitError]);
+
   return (
     <WorkoutWrapper>
       {modalIsOpen && (
@@ -137,38 +133,7 @@ const WorkoutStarted = () => {
         />
       )}
       <H2>{workoutName}</H2>
-      <ExerciseList>
-        {exercises.map((exercise) => (
-          <li key={exercise.id}>
-            <Formik
-              validationSchema={validationSchema}
-              initialValues={exercise}
-              onSubmit={(values, { setValues }) => {
-                const updatedExercises = exercises.map((ex) => {
-                  if (ex.id === values.id) {
-                    return {
-                      ...ex,
-                      name: values.name,
-                      reps: values.reps,
-                      sets: values.sets,
-                      weight: values.weight,
-                      isEditing: false,
-                    };
-                  }
-                  return ex;
-                });
-                setWorkoutExercises(updatedExercises);
-                setValues({ ...values, isEditing: false });
-              }}
-            >
-              <WorkoutExerciseCard
-                exercises={exercises}
-                setWorkoutExercises={setWorkoutExercises}
-              />
-            </Formik>
-          </li>
-        ))}
-      </ExerciseList>
+      <ExerciseList />
       <ButtonTimerWrapper>
         <StyledButton variant="blue" onClick={addExercise}>
           <PlusCircleIcon />
@@ -179,9 +144,9 @@ const WorkoutStarted = () => {
       <Section>
         <H2>Klar med träningspasset?</H2>
         <p>
-          Klicka på “Klar” för att spara ditt träningspass, du kan gå tillbaka
-          och se information om ditt träningspass på sidan för alla
-          träningspass.{' '}
+          Klicka på “Klar” för att spara ditt träningspass, du kan sedan se
+          information om ditt träningspass under{' '}
+          <Link href={Paths.WORKOUTS}>dina träningspass</Link>.{' '}
         </p>
         <StyledP>
           Klicka “Avbryt” för att avsluta träningspasset utan att spara det.
@@ -195,7 +160,9 @@ const WorkoutStarted = () => {
             Avbryt
           </Button>
         </ButtonWrapper>
-        {!!submitError && <SubmitError>{submitError}</SubmitError>}
+        {!!submitError && (
+          <SubmitError ref={submitErrorRef}>{submitError}</SubmitError>
+        )}
       </Section>
     </WorkoutWrapper>
   );

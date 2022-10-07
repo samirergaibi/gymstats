@@ -1,10 +1,9 @@
 import styled from 'styled-components';
-import { Skeleton } from '@styles';
+import { Skeleton, Link } from '@styles';
 import { Workout } from '@types';
 import { useGetWorkouts } from '@hooks/queries/useGetWorkouts';
 import StatsList from '@components/StatsList';
 import { durationFromSeconds } from '@utils/durationFromSeconds';
-import Link from '@components/Link';
 import { Paths } from '@constants';
 
 const NoStatsBox = styled.div`

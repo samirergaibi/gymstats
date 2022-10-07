@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
+import { Button } from '@styles';
 import { Workout, WorkoutStorage } from '@types';
-import Button from '@components/Button';
 
 const Wrapper = styled.div`
   display: flex;

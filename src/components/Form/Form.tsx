@@ -1,6 +1,6 @@
 import { FormEvent } from 'react';
 import styled from 'styled-components';
-import Button from '../Button';
+import { Button } from '@styles';
 import FormError from './FormError';
 
 const StyledWrapper = styled.div`

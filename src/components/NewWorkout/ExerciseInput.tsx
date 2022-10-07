@@ -31,11 +31,7 @@ type Props = React.InputHTMLAttributes<HTMLInputElement> & {
   error: boolean;
 };
 
-const WorkoutExerciseInput: React.FC<Props> = ({
-  variant,
-  value,
-  ...props
-}) => {
+const ExerciseInput: React.FC<Props> = ({ variant, value, ...props }) => {
   let name = '';
   let postfix = '';
   let Icon = null;
@@ -78,4 +74,4 @@ const WorkoutExerciseInput: React.FC<Props> = ({
   );
 };
 
-export default WorkoutExerciseInput;
+export default ExerciseInput;
