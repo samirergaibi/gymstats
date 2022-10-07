@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import { Section, H2, Spinner, Hero } from '@styles';
+import { Section, H2, Spinner, Hero, Link } from '@styles';
 import { Paths } from '@constants';
-import Link from '@components/Link';
 import WorkoutStarted from './/WorkoutStarted';
 import WorkoutTemplates from './WorkoutTemplates';
 import { useWorkoutContext } from '@contexts/WorkoutContext';

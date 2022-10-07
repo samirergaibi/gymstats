@@ -1,12 +1,11 @@
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import { Spinner, Section, Hero } from '@styles';
+import { Spinner, Section, Hero, Link } from '@styles';
 import { Paths } from '@constants';
 import { StarIcon, SetsIcon, FeatherIcon, RepetitionIcon } from '@icons';
 import { uppercase } from '@utils/uppercase';
 import { useGetSingleWorkout } from '@hooks/queries/useGetSingleWorkout';
-import Link from '@components/Link';
 import Stats from '@components/SingleWorkout/Stats';
 
 const SpinnerWrapper = styled(Section)`

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
-import { H2, Section, Button } from '@styles';
+import { H2, Section, Button, Link } from '@styles';
 import { PlusCircleIcon } from '@icons';
 import { Paths } from '@constants';
 import { useWorkoutContext } from '@contexts/WorkoutContext';
@@ -9,7 +9,6 @@ import { useAddWorkout } from '@hooks/mutations/useAddWorkout';
 import Modal from '@components/Modal';
 import Timer from './Timer';
 import ExerciseList from './ExerciseList';
-import Link from '@components/Link';
 
 const StyledButton = styled(Button)`
   display: flex;

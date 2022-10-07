@@ -1,8 +1,7 @@
 import { NextPage } from 'next';
 import styled from 'styled-components';
-import { H2, Section, Hero } from 'styles';
+import { H2, Section, Hero, Link } from 'styles';
 import { Paths } from '@constants';
-import Link from '@components/Link';
 
 const StyledP = styled.p`
   margin-top: 10px;
