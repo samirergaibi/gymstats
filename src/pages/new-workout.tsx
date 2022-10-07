@@ -1,15 +1,15 @@
-import Workout from '@components/NewWorkout/NewWorkout';
+import NewWorkout from '@components/NewWorkout/NewWorkout';
 import { WorkoutContextProvider } from '@contexts/WorkoutContext';
 import RouteHandler from '@components/RouteHandler';
 
-const NewWorkout = () => {
+const NewWorkoutPage = () => {
   return (
     <RouteHandler isProtected>
       <WorkoutContextProvider>
-        <Workout />
+        <NewWorkout />
       </WorkoutContextProvider>
     </RouteHandler>
   );
 };
 
-export default NewWorkout;
+export default NewWorkoutPage;
