@@ -1,15 +1,15 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import { Paths } from '@constants';
 import { useUserContext } from '@contexts/UserContext';
-import { Spinner } from '@styles';
+// import { Spinner } from '@styles';
 
-const StyledWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 50px;
-`;
+// const StyledWrapper = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   margin-top: 50px;
+// `;
 
 type Props = {
   children: React.ReactNode;

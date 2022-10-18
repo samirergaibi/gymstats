@@ -9,12 +9,6 @@ import { useAddWorkout } from '@hooks/mutations/useAddWorkout';
 import Timer from './Timer';
 import ExerciseList from './ExerciseList';
 
-const StyledButton = styled(Button)`
-  display: flex;
-  align-items: center;
-  gap: 5px;
-`;
-
 const WorkoutWrapper = styled.div`
   margin-top: 15px;
 `;
@@ -69,6 +63,7 @@ const WorkoutStarted = () => {
 
   const mutation = useAddWorkout({ startTime, exercises });
 
+  console.log({ exercises, startTime });
   useEffect(() => {
     setWorkoutExercises(exercises);
     setWorkoutStartTime(startTime);

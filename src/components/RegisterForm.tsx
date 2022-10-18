@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -65,12 +65,12 @@ const RegisterForm = () => {
       onSubmit: register,
     });
 
-  useEffect(() => {
-    // Whenever the user changes a input value remove the error
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    handleChange(event);
     if (apiError) {
       setApiError(undefined);
     }
-  }, [values.email, values.password, values.passwordConfirmation]);
+  };
 
   return (
     <Form
@@ -86,7 +86,7 @@ const RegisterForm = () => {
         type='text'
         placeholder='Ange din e-postadress'
         value={values.email}
-        onChange={handleChange}
+        onChange={handleInputChange}
         onBlur={handleBlur}
         error={errors.email}
         touched={touched.email}
@@ -98,7 +98,7 @@ const RegisterForm = () => {
         type='password'
         placeholder='Ange ditt lösenord'
         value={values.password}
-        onChange={handleChange}
+        onChange={handleInputChange}
         onBlur={handleBlur}
         error={errors.password}
         touched={touched.password}
@@ -110,7 +110,7 @@ const RegisterForm = () => {
         type='password'
         placeholder='Ange ditt lösenord'
         value={values.passwordConfirmation}
-        onChange={handleChange}
+        onChange={handleInputChange}
         onBlur={handleBlur}
         error={errors.passwordConfirmation}
         touched={touched.passwordConfirmation}
