@@ -128,15 +128,15 @@ const WorkoutStarted = () => {
         <Modal
           cancel={() => setModalIsOpen(false)}
           confirm={cancelWorkout}
-          message="Är du säker på att du vill avsluta träningspasset?"
-          confirmBtnText="Avsluta"
+          message='Är du säker på att du vill avsluta träningspasset?'
+          confirmBtnText='Avsluta'
         />
       )}
       <H2>{workoutName}</H2>
       <ExerciseList />
       <ButtonTimerWrapper>
         <Button
-          variant="blue"
+          variant='blue'
           onClick={addExercise}
           icon={<PlusCircleIcon size={20} />}
         >
@@ -156,10 +156,10 @@ const WorkoutStarted = () => {
         </StyledP>
         <ButtonWrapper>
           {/* TODO: Confirm choice by modal to avoid missclick */}
-          <Button variant="blue" onClick={submitWorkout}>
+          <Button variant='blue' onClick={submitWorkout}>
             Klar
           </Button>
-          <Button variant="red" onClick={() => setModalIsOpen(true)}>
+          <Button variant='red' onClick={() => setModalIsOpen(true)}>
             Avbryt
           </Button>
         </ButtonWrapper>

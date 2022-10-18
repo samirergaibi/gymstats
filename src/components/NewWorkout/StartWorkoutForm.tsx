@@ -53,7 +53,7 @@ const StartWorkoutForm = () => {
         <label>Namn på träningspass</label>
         <TextField
           name={WORKOUT_NAME}
-          type="text"
+          type='text'
           placeholder={'t.ex. Underkropp'}
           withBorder
           error={error}
@@ -62,7 +62,7 @@ const StartWorkoutForm = () => {
           value={workoutNameInput}
         />
       </InputWrapper>
-      <StyledButton variant="blue" type="submit">
+      <StyledButton variant='blue' type='submit'>
         Starta nytt
       </StyledButton>
     </StyledForm>

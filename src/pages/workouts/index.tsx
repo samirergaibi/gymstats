@@ -7,7 +7,7 @@ import RouteHandler from '@components/RouteHandler';
 const WorkoutPage: NextPage = () => {
   return (
     <RouteHandler isProtected>
-      <Hero imgUrl="/workout-hero.jpg" title="Alla träningspass" />
+      <Hero imgUrl='/workout-hero.jpg' title='Alla träningspass' />
       <Stats />
       <PreviousWorkouts />
     </RouteHandler>

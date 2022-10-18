@@ -15,7 +15,7 @@ const StyledOl = styled.ol`
 const About: NextPage = () => {
   return (
     <>
-      <Hero imgUrl="/about.jpg" />
+      <Hero imgUrl='/about.jpg' />
       <Section>
         <h1>💪 Om Gymstats!</h1>
         <StyledP>

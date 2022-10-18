@@ -28,7 +28,7 @@ const ExercisesPage: NextPage = () => {
   return (
     <ExerciseContextProvider user={user}>
       <>
-        <Hero imgUrl="/exercises-header.jpg" title="Övningar" />
+        <Hero imgUrl='/exercises-header.jpg' title='Övningar' />
         <ExerciseForm />
         <Exercises />
       </>

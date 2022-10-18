@@ -32,7 +32,7 @@ const NewWorkout = () => {
 
   return (
     <>
-      <Hero imgUrl="/new-workout-hero.jpg" title="Nytt träningspass" />
+      <Hero imgUrl='/new-workout-hero.jpg' title='Nytt träningspass' />
       <Section>
         <H2>Starta från mall</H2>
         <p>

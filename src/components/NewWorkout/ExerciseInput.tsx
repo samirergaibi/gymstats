@@ -41,21 +41,21 @@ const ExerciseInput: React.FC<Props> = ({ variant, value, ...props }) => {
       name = 'Reps';
       postfix = 'st';
       Icon = function Icon() {
-        return <RepetitionIcon color="white" />;
+        return <RepetitionIcon color='white' />;
       };
       break;
     case 'sets':
       name = 'Sets';
       postfix = 'st';
       Icon = function Icon() {
-        return <SetsIcon color="white" />;
+        return <SetsIcon color='white' />;
       };
       break;
     case 'weight':
       name = 'Vikt';
       postfix = 'kg';
       Icon = function Icon() {
-        return <FeatherIcon color="white" />;
+        return <FeatherIcon color='white' />;
       };
       break;
     default:
@@ -68,7 +68,7 @@ const ExerciseInput: React.FC<Props> = ({ variant, value, ...props }) => {
     <Wrapper>
       <Icon />
       <ExerciseName>{name}</ExerciseName>
-      <StyledInput name={variant} type="number" value={value} {...props} />
+      <StyledInput name={variant} type='number' value={value} {...props} />
       <span>{postfix}</span>
     </Wrapper>
   );

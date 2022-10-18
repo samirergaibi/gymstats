@@ -93,7 +93,7 @@ const SingleWorkout = () => {
 
   return (
     <>
-      <Hero imgUrl="/equipment.jpg" title={`${uppercase(workoutName)} 💪`} />
+      <Hero imgUrl='/equipment.jpg' title={`${uppercase(workoutName)} 💪`} />
       <Section>
         <h2>Vad kan du se här?</h2>
         <p>
@@ -105,7 +105,7 @@ const SingleWorkout = () => {
         <TemplateWrapper $isTemplate={isTemplate}>
           <p>Detta träningspass är {!isTemplate && 'inte'} en aktiv mall</p>
           <div>
-            <StarIcon color="var(--yellow)" filled />
+            <StarIcon color='var(--yellow)' filled />
           </div>
         </TemplateWrapper>
       </Section>

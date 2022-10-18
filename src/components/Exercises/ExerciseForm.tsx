@@ -112,10 +112,10 @@ const ExerciseForm = () => {
           >
             <StyledForm>
               <TextField
-                id="muscleGroups"
-                label="Muskelgrupp(er)"
-                type="text"
-                placeholder="t.ex. Biceps, Bröst"
+                id='muscleGroups'
+                label='Muskelgrupp(er)'
+                type='text'
+                placeholder='t.ex. Biceps, Bröst'
                 value={values.muscleGroups}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -124,10 +124,10 @@ const ExerciseForm = () => {
                 withBorder
               />
               <TextField
-                id="name"
-                label="Övning"
-                type="text"
-                placeholder="t.ex. Hammer curls"
+                id='name'
+                label='Övning'
+                type='text'
+                placeholder='t.ex. Hammer curls'
                 value={values.name}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -136,10 +136,10 @@ const ExerciseForm = () => {
                 withBorder
               />
               <TextField
-                id="reps"
-                label="Reps"
-                type="number"
-                placeholder="t.ex. 8"
+                id='reps'
+                label='Reps'
+                type='number'
+                placeholder='t.ex. 8'
                 value={values.reps}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -148,10 +148,10 @@ const ExerciseForm = () => {
                 withBorder
               />
               <TextField
-                id="sets"
-                label="Sets"
-                type="number"
-                placeholder="t.ex. 4"
+                id='sets'
+                label='Sets'
+                type='number'
+                placeholder='t.ex. 4'
                 value={values.sets}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -160,10 +160,10 @@ const ExerciseForm = () => {
                 withBorder
               />
               <TextField
-                id="weight"
-                label="Vikt (kg)"
-                type="number"
-                placeholder="t.ex. 20"
+                id='weight'
+                label='Vikt (kg)'
+                type='number'
+                placeholder='t.ex. 20'
                 value={values.weight}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -173,15 +173,15 @@ const ExerciseForm = () => {
               />
               {editValues.isEditing ? (
                 <EditingWrapper>
-                  <StyledButton variant="blue" type="submit">
+                  <StyledButton variant='blue' type='submit'>
                     Spara ändring
                   </StyledButton>
-                  <StyledButton variant="red" onClick={abortEdit} type="button">
+                  <StyledButton variant='red' onClick={abortEdit} type='button'>
                     Avbryt
                   </StyledButton>
                 </EditingWrapper>
               ) : (
-                <StyledButton variant="blue" type="submit">
+                <StyledButton variant='blue' type='submit'>
                   Lägg till övning
                 </StyledButton>
               )}

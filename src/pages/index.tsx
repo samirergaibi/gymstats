@@ -35,7 +35,7 @@ const Home: NextPage = () => {
   return (
     <>
       <ImageWrapper>
-        <Image alt="Illustration of a woman doing pilates" src={pilatesSvg} />
+        <Image alt='Illustration of a woman doing pilates' src={pilatesSvg} />
       </ImageWrapper>
       <ContentWrapper>
         <h1>Välkommen till Gymstats!</h1>
@@ -46,16 +46,16 @@ const Home: NextPage = () => {
         </p>
         <CardWrapper>
           <LinkCard
-            backgroundColor="var(--secondary)"
+            backgroundColor='var(--secondary)'
             href={Paths.LOGIN}
             imageNode={<UserIcon />}
-            text="Logga in"
+            text='Logga in'
           />
           <LinkCard
-            backgroundColor="var(--primary)"
+            backgroundColor='var(--primary)'
             href={Paths.REGISTER}
             imageNode={<DumbellIcon />}
-            text="Skapa konto"
+            text='Skapa konto'
           />
         </CardWrapper>
       </ContentWrapper>

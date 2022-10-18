@@ -59,17 +59,17 @@ const LoginForm: React.FC = () => {
 
   return (
     <Form
-      buttonText="Logga in"
+      buttonText='Logga in'
       error={apiError}
-      title="Logga in på ditt konto"
+      title='Logga in på ditt konto'
       onSubmit={handleSubmit}
     >
       <TextField
-        autoComplete="username"
-        id="email"
-        label="E-postadress"
-        type="text"
-        placeholder="Ange din e-postadress"
+        autoComplete='username'
+        id='email'
+        label='E-postadress'
+        type='text'
+        placeholder='Ange din e-postadress'
         value={values.email}
         onChange={handleChange}
         onBlur={handleBlur}
@@ -77,11 +77,11 @@ const LoginForm: React.FC = () => {
         touched={touched.email}
       />
       <TextField
-        autoComplete="current-password"
-        id="password"
-        label="Lösenord"
-        type="password"
-        placeholder="Ange ditt lösenord"
+        autoComplete='current-password'
+        id='password'
+        label='Lösenord'
+        type='password'
+        placeholder='Ange ditt lösenord'
         value={values.password}
         onChange={handleChange}
         onBlur={handleBlur}

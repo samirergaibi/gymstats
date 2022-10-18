@@ -57,8 +57,8 @@ const TrashButton: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement>> = ({
   disabled,
 }) => (
   <Button
-    type="button"
-    variant="unstyled"
+    type='button'
+    variant='unstyled'
     onClick={onClick}
     disabled={disabled}
   >
@@ -116,16 +116,16 @@ const ExerciseCard: React.FC<Props> = ({ exercises, setWorkoutExercises }) => {
         <form onSubmit={handleSubmit}>
           <TopWrapper>
             <Input
-              placeholder="Namn på övning"
-              type="text"
-              name="name"
+              placeholder='Namn på övning'
+              type='text'
+              name='name'
               value={values.name}
               error={!!touched.name && !!errors.name}
               onChange={handleChange}
               onBlur={handleBlur}
             />
             <ButtonsWrapper>
-              <Button variant="unstyled" type="submit">
+              <Button variant='unstyled' type='submit'>
                 <SaveIcon />
               </Button>
               <TrashButton onClick={openModal} disabled={IsOnlyOneExercise} />
@@ -133,21 +133,21 @@ const ExerciseCard: React.FC<Props> = ({ exercises, setWorkoutExercises }) => {
           </TopWrapper>
           <BottomWrapper>
             <ExerciseInput
-              variant="reps"
+              variant='reps'
               value={values.reps}
               error={!!touched.reps && !!errors.reps}
               onChange={handleChange}
               onBlur={handleBlur}
             />
             <ExerciseInput
-              variant="sets"
+              variant='sets'
               value={values.sets}
               error={!!touched.sets && !!errors.sets}
               onChange={handleChange}
               onBlur={handleBlur}
             />
             <ExerciseInput
-              variant="weight"
+              variant='weight'
               value={values.weight}
               error={!!touched.weight && !!errors.weight}
               onChange={handleChange}
@@ -165,7 +165,7 @@ const ExerciseCard: React.FC<Props> = ({ exercises, setWorkoutExercises }) => {
       <TopWrapper>
         <ExerciseHeading>{values.name}</ExerciseHeading>
         <ButtonsWrapper>
-          <Button variant="unstyled" onClick={editExercise}>
+          <Button variant='unstyled' onClick={editExercise}>
             <EditIcon />
           </Button>
           <TrashButton onClick={openModal} disabled={IsOnlyOneExercise} />
@@ -173,19 +173,19 @@ const ExerciseCard: React.FC<Props> = ({ exercises, setWorkoutExercises }) => {
       </TopWrapper>
       <BottomWrapper>
         <ValueWrapper>
-          <RepetitionIcon color="white" />
+          <RepetitionIcon color='white' />
           <ExerciseName>Reps</ExerciseName>
           <strong>{values.reps}</strong>
           <span>st</span>
         </ValueWrapper>
         <ValueWrapper>
-          <SetsIcon color="white" />
+          <SetsIcon color='white' />
           <ExerciseName>Sets</ExerciseName>
           <strong>{values.sets}</strong>
           <span>st</span>
         </ValueWrapper>
         <ValueWrapper>
-          <FeatherIcon color="white" />
+          <FeatherIcon color='white' />
           <ExerciseName>Vikt</ExerciseName>
           <strong>{values.weight}</strong>
           <span>kg</span>
