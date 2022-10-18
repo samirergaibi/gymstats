@@ -67,7 +67,7 @@ const Skeleton: React.FC<Props> = ({
   spaceAbove = false,
   spaceBelow = false,
 }) => {
-  let skeletons = [];
+  const skeletons = [];
   for (let i = 0; i < count; i++) {
     skeletons.push(<StyledSkeleton $height={height} />);
   }

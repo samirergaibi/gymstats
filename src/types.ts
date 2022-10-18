@@ -53,7 +53,7 @@ export type WorkoutStorage = {
 };
 
 export type Routes = {
-  action?: Function;
+  action?: () => void;
   href: string;
   text: string;
 };
