@@ -52,10 +52,10 @@ const ConfirmModal: React.FC<Props> = ({
       <StyledConfirmModal>
         <P>{message}</P>
         <ButtonContainer>
-          <Button variant="red" onClick={() => confirm()}>
+          <Button variant='red' onClick={() => confirm()}>
             {confirmBtnText}
           </Button>
-          <Button variant="blue" onClick={() => cancel(false)}>
+          <Button variant='blue' onClick={() => cancel(false)}>
             {cancelBtnText}
           </Button>
         </ButtonContainer>

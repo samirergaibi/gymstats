@@ -24,7 +24,7 @@ export default class MyDocument extends Document {
       return {
         ...initialProps,
         styles: [
-          <Fragment key="fragment">
+          <Fragment key='fragment'>
             {initialProps.styles}
             {sheet.getStyleElement()}
           </Fragment>,
@@ -40,28 +40,28 @@ export default class MyDocument extends Document {
       <Html>
         <Head>
           <link
-            href="https://fonts.googleapis.com/css2?family=Spartan:wght@400;600;700&display=swap"
-            rel="stylesheet"
+            href='https://fonts.googleapis.com/css2?family=Spartan:wght@400;600;700&display=swap'
+            rel='stylesheet'
           />
-          <link rel="manifest" href="/manifest.json" />
+          <link rel='manifest' href='/manifest.json' />
           <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="/apple-touch-icon.png"
-          />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="/favicon-32x32.png"
+            rel='apple-touch-icon'
+            sizes='180x180'
+            href='/apple-touch-icon.png'
           />
           <link
-            rel="icon"
-            type="image/png"
-            sizes="16x16"
-            href="/favicon-16x16.png"
+            rel='icon'
+            type='image/png'
+            sizes='32x32'
+            href='/favicon-32x32.png'
           />
-          <meta name="theme-color" content="#317EFB" />
+          <link
+            rel='icon'
+            type='image/png'
+            sizes='16x16'
+            href='/favicon-16x16.png'
+          />
+          <meta name='theme-color' content='#317EFB' />
         </Head>
         <body>
           <Main />

@@ -78,7 +78,7 @@ const WorkoutList = () => {
               >
                 <StyledStarIcon
                   $isLoading={isLoading && clickedId === workout.id}
-                  color="var(--yellow)"
+                  color='var(--yellow)'
                   filled={workout.isTemplate}
                 />
               </StyledButton>

@@ -9,19 +9,19 @@ const SaveIcon: React.FC<Props> = ({
   ...props
 }) => (
   <svg
-    xmlns="http://www.w3.org/2000/svg"
+    xmlns='http://www.w3.org/2000/svg'
     width={size}
     height={size}
-    fill="none"
+    fill='none'
     stroke={color}
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    viewBox="0 0 24 24"
+    strokeWidth='2'
+    strokeLinecap='round'
+    strokeLinejoin='round'
+    viewBox='0 0 24 24'
     {...props}
   >
-    <circle cx="12" cy="12" r="10" />
-    <path d="M12 8v8M8 12h8" />
+    <circle cx='12' cy='12' r='10' />
+    <path d='M12 8v8M8 12h8' />
   </svg>
 );
 

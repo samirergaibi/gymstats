@@ -120,11 +120,11 @@ const ExerciseCard: React.FC<Props> = ({ exercise }) => {
         <StyledHeaderWrapper>
           <StyledH4>{uppercase(exercise.name)}</StyledH4>
           <ActionWrapper>
-            <Button variant="unstyled" onClick={openModal}>
-              <TrashIcon color="black" />
+            <Button variant='unstyled' onClick={openModal}>
+              <TrashIcon color='black' />
             </Button>
-            <Button variant="unstyled" onClick={editExercise}>
-              <EditIcon color="black" />
+            <Button variant='unstyled' onClick={editExercise}>
+              <EditIcon color='black' />
             </Button>
           </ActionWrapper>
         </StyledHeaderWrapper>

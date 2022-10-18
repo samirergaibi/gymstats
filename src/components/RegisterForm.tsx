@@ -74,17 +74,17 @@ const RegisterForm = () => {
 
   return (
     <Form
-      buttonText="Skapa konto"
-      title="Skapa ett konto"
+      buttonText='Skapa konto'
+      title='Skapa ett konto'
       onSubmit={handleSubmit}
       error={apiError}
     >
       <TextField
-        autoComplete="email"
-        id="email"
-        label="E-postadress"
-        type="text"
-        placeholder="Ange din e-postadress"
+        autoComplete='email'
+        id='email'
+        label='E-postadress'
+        type='text'
+        placeholder='Ange din e-postadress'
         value={values.email}
         onChange={handleChange}
         onBlur={handleBlur}
@@ -92,11 +92,11 @@ const RegisterForm = () => {
         touched={touched.email}
       />
       <TextField
-        autoComplete="new-password"
-        id="password"
-        label="Lösenord"
-        type="password"
-        placeholder="Ange ditt lösenord"
+        autoComplete='new-password'
+        id='password'
+        label='Lösenord'
+        type='password'
+        placeholder='Ange ditt lösenord'
         value={values.password}
         onChange={handleChange}
         onBlur={handleBlur}
@@ -104,11 +104,11 @@ const RegisterForm = () => {
         touched={touched.password}
       />
       <TextField
-        autoComplete="new-password"
-        id="passwordConfirmation"
-        label="Bekräfta lösenord"
-        type="password"
-        placeholder="Ange ditt lösenord"
+        autoComplete='new-password'
+        id='passwordConfirmation'
+        label='Bekräfta lösenord'
+        type='password'
+        placeholder='Ange ditt lösenord'
         value={values.passwordConfirmation}
         onChange={handleChange}
         onBlur={handleBlur}

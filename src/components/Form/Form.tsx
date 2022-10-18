@@ -70,7 +70,7 @@ const Form: React.FC<Props> = ({
       <StyledForm onSubmit={onSubmit}>
         {children}{' '}
         <StyledButtonWrapper>
-          <Button type="submit">{buttonText}</Button>
+          <Button type='submit'>{buttonText}</Button>
         </StyledButtonWrapper>
         {error && <FormError>{error}</FormError>}
       </StyledForm>

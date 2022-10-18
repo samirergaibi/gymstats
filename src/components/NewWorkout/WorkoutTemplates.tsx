@@ -39,7 +39,7 @@ const WorkoutTemplates: React.FC<Props> = ({
         <StyledButton
           key={id}
           moreThanOne={templates.length > 1}
-          variant="unstyled"
+          variant='unstyled'
           onClick={() => {
             setWorkoutStorage((storage) => ({
               ...storage,

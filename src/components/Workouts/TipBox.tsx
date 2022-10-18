@@ -45,11 +45,11 @@ const TipBox = () => {
       <IconsWrapper>
         <IconContainer>
           <IconText>Mall</IconText>
-          <StarIcon color="var(--yellow)" filled />
+          <StarIcon color='var(--yellow)' filled />
         </IconContainer>
         <IconContainer>
           <IconText>Inte mall</IconText>
-          <StarIcon color="var(--yellow)" />
+          <StarIcon color='var(--yellow)' />
         </IconContainer>
       </IconsWrapper>
     </InfoBox>
