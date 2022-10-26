@@ -22,9 +22,6 @@ const StyledDesktopHeader = styled(DesktopHeader)`
 
 async function logout() {
   const { error } = await supabase.auth.signOut();
-  if (typeof window !== 'undefined') {
-    window.location.href = Paths.LOGIN;
-  }
   if (error) {
     throw new Error(JSON.stringify(error));
   }
@@ -41,12 +38,12 @@ const loggedInRoutes = [
   { href: Paths.WORKOUTS, text: 'Dina träningspass' },
   // Remove until future version where exercises is separate from workouts
   // { href: Paths.EXERCISES, text: 'Dina övningar' },
-  { action: logout, href: Paths.LOGIN, text: 'Logga ut' },
+  { action: logout, href: '#', text: 'Logga ut' },
 ];
 
 const Header = () => {
-  const { authenticated } = useUserContext();
-  const routes: Routes[] = authenticated ? loggedInRoutes : loggedOutRoutes;
+  const { user } = useUserContext();
+  const routes: Routes[] = !!user ? loggedInRoutes : loggedOutRoutes;
   // TODO: Change the DOM so that it doesn't render two headers
   return (
     <>

@@ -63,7 +63,6 @@ const WorkoutStarted = () => {
 
   const mutation = useAddWorkout({ startTime, exercises });
 
-  console.log({ exercises, startTime });
   useEffect(() => {
     setWorkoutExercises(exercises);
     setWorkoutStartTime(startTime);

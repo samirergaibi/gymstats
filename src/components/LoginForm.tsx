@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Paths } from '@constants';
 import { supabase } from '@utils/supabaseClient';
 import { Form, TextField } from './Form';
 
@@ -24,7 +22,6 @@ const validationSchema = Yup.object({
 });
 
 const LoginForm: React.FC = () => {
-  const router = useRouter();
   const [apiError, setApiError] = useState<string>();
 
   const login = async ({ email, password }: FormValues) => {
@@ -32,15 +29,12 @@ const LoginForm: React.FC = () => {
       throw new Error('Trying to log in without being connected to Supabase.');
     }
 
-    const { user, session, error } = await supabase.auth.signIn({
+    const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
     if (error) {
       setApiError('Ogiltiga inloggningsuppgifter');
-    }
-    if (session && user) {
-      router.push(Paths.NEW_WORKOUT);
     }
   };
 

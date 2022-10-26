@@ -15,9 +15,9 @@ const StyledWrapper = styled.div`
 `;
 
 const ExercisesPage: NextPage = () => {
-  const { authenticated, user } = useUserContext();
+  const { user } = useUserContext();
 
-  if (!authenticated || !user) {
+  if (!user) {
     return (
       <StyledWrapper>
         <Spinner />
