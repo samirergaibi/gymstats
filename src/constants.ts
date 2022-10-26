@@ -15,4 +15,5 @@ export enum DBTable {
 
 export enum QueryIds {
   WORKOUTS = 'workouts',
+  GET_SESSION = 'get-session',
 }

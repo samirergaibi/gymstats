@@ -39,13 +39,14 @@ const RegisterForm = () => {
       throw new Error('Trying to sign up without being connect to Supabase.');
     }
 
-    const { error } = await supabase.auth.signUp(
-      { email, password },
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
       // TODO: Sending verification emails is currently disabled since Supabase
       // Does now support re-sending verification emails. Implement this when they do
       // https://github.com/supabase/gotrue/issues/312
-      { redirectTo: 'https://gymstats.vercel.app/login' },
-    );
+      options: { emailRedirectTo: 'https://gymstats.vercel.app/login' },
+    });
 
     if (error) {
       const msg =

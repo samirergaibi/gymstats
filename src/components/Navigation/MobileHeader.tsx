@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styled, { createGlobalStyle } from 'styled-components';
 import { Routes } from '@types*';
+import { Button } from '@styles';
 import MobileToggle from './MobileToggle';
 
 const Header = styled.header`
@@ -45,10 +46,20 @@ const StyledList = styled.ul`
   flex-direction: column;
   gap: 50px;
 `;
+
+const itemStyles = `
+color: white;
+font-size: 1.5rem;
+font-weight: bold;
+`;
+
 const StyledLink = styled.a<{ active?: boolean }>`
-  color: white;
-  font-size: 1.5rem;
-  font-weight: bold;
+  ${itemStyles}
+  text-decoration: ${({ active }) => (active ? 'underline' : 'none')};
+`;
+
+const StyledButton = styled(Button)<{ active?: boolean }>`
+  ${itemStyles}
   text-decoration: ${({ active }) => (active ? 'underline' : 'none')};
 `;
 
@@ -93,25 +104,26 @@ const MobileHeader: React.FC<Props> = ({ className, routes }) => {
           <StyledList>
             {routes.map(({ action, href, text }) => (
               <li key={href}>
-                <Link href={href} passHref>
-                  {action ? (
-                    <StyledLink
-                      onClick={() => {
-                        setIsOpen(false);
-                        action();
-                      }}
-                    >
-                      {text}
-                    </StyledLink>
-                  ) : (
+                {action ? (
+                  <StyledButton
+                    variant='unstyled'
+                    onClick={() => {
+                      setIsOpen(false);
+                      action();
+                    }}
+                  >
+                    {text}
+                  </StyledButton>
+                ) : (
+                  <Link href={href} passHref>
                     <StyledLink
                       active={router.pathname === href}
                       onClick={() => setIsOpen(false)}
                     >
                       {text}
                     </StyledLink>
-                  )}
-                </Link>
+                  </Link>
+                )}
               </li>
             ))}
           </StyledList>

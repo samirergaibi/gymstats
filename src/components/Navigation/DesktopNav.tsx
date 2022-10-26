@@ -1,17 +1,26 @@
 import styled from 'styled-components';
 import Link from 'next/link';
 import { Routes } from '@types';
+import { Button } from '@styles';
 
 const StyledNav = styled.nav`
   padding: 10px;
   background: var(--dark);
 `;
 
-const StyledLink = styled.a`
+const styledItem = `
   display: inline-block;
   padding: 10px;
   color: #fff;
   text-decoration: none;
+`;
+
+const StyledLink = styled.a`
+  ${styledItem}
+`;
+
+const StyledButton = styled(Button)`
+  ${styledItem}
 `;
 
 const StyledList = styled.ul`
@@ -32,13 +41,15 @@ const DesktopNav: React.FC<Props> = ({ routes }) => {
       <StyledList>
         {routes.map(({ action, href, text }) => (
           <li key={href}>
-            <Link href={href} passHref>
-              {action ? (
-                <StyledLink onClick={() => action()}>{text}</StyledLink>
-              ) : (
+            {action ? (
+              <StyledButton variant='unstyled' onClick={() => action()}>
+                {text}
+              </StyledButton>
+            ) : (
+              <Link href={href} passHref>
                 <StyledLink>{text}</StyledLink>
-              )}
-            </Link>
+              </Link>
+            )}
           </li>
         ))}
       </StyledList>
