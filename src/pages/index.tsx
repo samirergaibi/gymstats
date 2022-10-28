@@ -11,6 +11,10 @@ const ImageWrapper = styled.div`
   justify-content: center;
 `;
 
+const StyledImage = styled(Image)`
+  height: auto;
+`;
+
 const ContentWrapper = styled.div`
   display: grid;
   gap: 20px;
@@ -35,7 +39,11 @@ const Home: NextPage = () => {
   return (
     <>
       <ImageWrapper>
-        <Image alt='Illustration of a woman doing pilates' src={pilatesSvg} />
+        <StyledImage
+          alt='Illustration of a woman doing pilates'
+          src={pilatesSvg}
+          priority
+        />
       </ImageWrapper>
       <ContentWrapper>
         <h1>Välkommen till Gymstats!</h1>

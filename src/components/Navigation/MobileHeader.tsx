@@ -53,14 +53,14 @@ font-size: 1.5rem;
 font-weight: bold;
 `;
 
-const StyledLink = styled.a<{ active?: boolean }>`
+const StyledLink = styled(Link)<{ $active?: boolean }>`
   ${itemStyles}
-  text-decoration: ${({ active }) => (active ? 'underline' : 'none')};
+  text-decoration: ${({ $active }) => ($active ? 'underline' : 'none')};
 `;
 
-const StyledButton = styled(Button)<{ active?: boolean }>`
+const StyledButton = styled(Button)<{ $active?: boolean }>`
   ${itemStyles}
-  text-decoration: ${({ active }) => (active ? 'underline' : 'none')};
+  text-decoration: ${({ $active }) => ($active ? 'underline' : 'none')};
 `;
 
 const MenuToggle = styled.button`
@@ -115,14 +115,13 @@ const MobileHeader: React.FC<Props> = ({ className, routes }) => {
                     {text}
                   </StyledButton>
                 ) : (
-                  <Link href={href} passHref>
-                    <StyledLink
-                      active={router.pathname === href}
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {text}
-                    </StyledLink>
-                  </Link>
+                  <StyledLink
+                    href={href}
+                    $active={router.pathname === href}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {text}
+                  </StyledLink>
                 )}
               </li>
             ))}

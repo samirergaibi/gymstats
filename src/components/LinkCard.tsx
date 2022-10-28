@@ -18,7 +18,7 @@ const StyledCardText = styled.p`
   margin-bottom: 10px;
 `;
 
-const StyledLink = styled.a`
+const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
@@ -35,14 +35,12 @@ const LinkCard: React.FC<Props> = ({
   imageNode: ImageNode,
   text,
 }) => (
-  <Link href={href} passHref>
-    <StyledLink>
-      <Card backgroundColor={backgroundColor}>
-        <StyledCardText>{text}</StyledCardText>
-        {ImageNode}
-      </Card>
-    </StyledLink>
-  </Link>
+  <StyledLink href={href}>
+    <Card backgroundColor={backgroundColor}>
+      <StyledCardText>{text}</StyledCardText>
+      {ImageNode}
+    </Card>
+  </StyledLink>
 );
 
 export default LinkCard;

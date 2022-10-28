@@ -29,7 +29,7 @@ const StyledP = styled.p`
   margin-top: 10px;
 `;
 
-const StyledLink = styled.a`
+const StyledLink = styled(Link)`
   color: var(--blue);
   text-decoration: underline;
 `;
@@ -42,10 +42,7 @@ const Login: NextPage = () => {
         <Separator />
         <LoginForm />
         <StyledP>
-          Ny här?{' '}
-          <Link href={Paths.REGISTER} passHref>
-            <StyledLink>Skapa konto</StyledLink>
-          </Link>
+          Ny här? <StyledLink href={Paths.REGISTER}>Skapa konto</StyledLink>
         </StyledP>
       </StyledWrapper>
     </RouteHandler>
