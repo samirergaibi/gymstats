@@ -42,6 +42,7 @@ const Home: NextPage = () => {
         <StyledImage
           alt='Illustration of a woman doing pilates'
           src={pilatesSvg}
+          priority
         />
       </ImageWrapper>
       <ContentWrapper>
