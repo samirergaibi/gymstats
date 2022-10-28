@@ -48,7 +48,7 @@ const StyledLinkWithIcon = styled.div`
   margin-top: 20px;
 `;
 
-const StyledLink = styled.a`
+const StyledLink = styled(Link)`
   display: flex;
   gap: 3px;
   color: black;
@@ -147,12 +147,10 @@ const ExerciseCard: React.FC<Props> = ({ exercise }) => {
           </StyledItem>
         </StyledGrid>
         <StyledLinkWithIcon>
-          <Link href={Paths.ROOT} passHref>
-            <StyledLink>
-              <span>Gå till senaste träningspasset</span>
-              <ArrowRightIcon />
-            </StyledLink>
-          </Link>
+          <StyledLink href={Paths.ROOT}>
+            <span>Gå till senaste träningspasset</span>
+            <ArrowRightIcon />
+          </StyledLink>
         </StyledLinkWithIcon>
       </StyledCard>
     </>

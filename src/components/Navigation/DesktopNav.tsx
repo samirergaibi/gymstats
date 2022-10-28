@@ -15,7 +15,7 @@ const styledItem = `
   text-decoration: none;
 `;
 
-const StyledLink = styled.a`
+const StyledLink = styled(Link)`
   ${styledItem}
 `;
 
@@ -46,9 +46,7 @@ const DesktopNav: React.FC<Props> = ({ routes }) => {
                 {text}
               </StyledButton>
             ) : (
-              <Link href={href} passHref>
-                <StyledLink>{text}</StyledLink>
-              </Link>
+              <StyledLink href={href}>{text}</StyledLink>
             )}
           </li>
         ))}
