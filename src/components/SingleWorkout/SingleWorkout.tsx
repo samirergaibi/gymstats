@@ -21,7 +21,8 @@ const TemplateWrapper = styled.div<{ $isTemplate: boolean }>`
   padding: 30px 20px;
   font-weight: var(--medium-bold);
   display: flex;
-  justify-content: space-around;
+  gap: 10px;
+  justify-content: center;
   align-items: center;
   font-size: 0.82rem;
   box-shadow: var(--box-shadow-strong);
@@ -105,7 +106,7 @@ const SingleWorkout = () => {
         <TemplateWrapper $isTemplate={isTemplate}>
           <p>Detta träningspass är {!isTemplate && 'inte'} en aktiv mall</p>
           <div>
-            <StarIcon color='var(--yellow)' filled />
+            <StarIcon color='var(--yellow)' filled={isTemplate} />
           </div>
         </TemplateWrapper>
       </Section>
