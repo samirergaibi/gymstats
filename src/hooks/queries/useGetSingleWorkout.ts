@@ -7,27 +7,32 @@ import { useUserContext } from '@contexts/UserContext';
 export const useGetSingleWorkout = (workoutId: string) => {
   const { user } = useUserContext();
 
-  const result = useQuery<Workout>(['single-workout', workoutId], async () => {
-    if (!workoutId) {
-      throw new Error('No workout id provided while trying to fetch workout');
-    }
-    if (!user?.id) {
-      throw new Error('No user id provided while trying to fetch workout');
-    }
+  const result = useQuery<Workout>(
+    ['single-workout', workoutId],
+    async () => {
+      if (!user?.id) {
+        throw new Error(
+          'No user id provided while trying to fetch single workout',
+        );
+      }
 
-    const { data, error } = await supabase
-      .from(DBTable.WORKOUTS)
-      .select()
-      .eq('userId', user.id)
-      .eq('id', workoutId)
-      .maybeSingle();
+      const { data, error } = await supabase
+        .from(DBTable.WORKOUTS)
+        .select()
+        .eq('userId', user.id)
+        .eq('id', workoutId)
+        .maybeSingle();
 
-    if (error) {
-      throw new Error(error.message);
-    }
+      if (error) {
+        throw new Error(error.message);
+      }
 
-    return { ...data, exercises: JSON.parse(data.exercises) };
-  });
+      return { ...data, exercises: JSON.parse(data.exercises) };
+    },
+    {
+      enabled: !!workoutId,
+    },
+  );
 
   return result;
 };
