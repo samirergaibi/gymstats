@@ -62,7 +62,7 @@ const TrashButton: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement>> = ({
     onClick={onClick}
     disabled={disabled}
   >
-    <TrashIcon color={disabled ? 'rgba(60, 60, 60, 0.6)' : 'black'} />
+    <TrashIcon color={disabled ? 'rgba(60, 60, 60, 0.6)' : 'black'} size={24} />
   </Button>
 );
 
@@ -126,7 +126,7 @@ const ExerciseCard: React.FC<Props> = ({ exercises, setWorkoutExercises }) => {
             />
             <ButtonsWrapper>
               <Button variant='unstyled' type='submit'>
-                <SaveIcon />
+                <SaveIcon size={24} />
               </Button>
               <TrashButton onClick={openModal} disabled={IsOnlyOneExercise} />
             </ButtonsWrapper>
@@ -166,7 +166,7 @@ const ExerciseCard: React.FC<Props> = ({ exercises, setWorkoutExercises }) => {
         <ExerciseHeading>{values.name}</ExerciseHeading>
         <ButtonsWrapper>
           <Button variant='unstyled' onClick={editExercise}>
-            <EditIcon />
+            <EditIcon size={24} />
           </Button>
           <TrashButton onClick={openModal} disabled={IsOnlyOneExercise} />
         </ButtonsWrapper>

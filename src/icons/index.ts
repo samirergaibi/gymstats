@@ -1,12 +1,24 @@
-export { default as ArrowDownCircleIcon } from './ArrowDownCircleIcon';
-export { default as ArrowRightIcon } from './ArrowRightIcon';
+// Custom icon
 export { default as DumbellIcon } from './DumbellIcon';
-export { default as EditIcon } from './EditIcon';
-export { default as FeatherIcon } from './FeatherIcon';
-export { default as RepetitionIcon } from './RepetitionIcon';
-export { default as SetsIcon } from './SetsIcon';
-export { default as TrashIcon } from './TrashIcon';
 export { default as UserIcon } from './UserIcon';
-export { default as SaveIcon } from './SaveIcon';
+// Needs to be able to be filled
 export { default as StarIcon } from './StarIcon';
-export { default as PlusCircleIcon } from './PlusCircleIcon';
+
+// React icons library icons
+export { CgGym as WeightIcon } from 'react-icons/cg';
+export { GiWeightLiftingUp as WeightLifterIcon } from 'react-icons/gi';
+export {
+  FiArrowRight as ArrowRightIcon,
+  FiArrowDownCircle as ArrowDownCircleIcon,
+  FiLogOut as LogoutIcon,
+  FiLogIn as LoginIcon,
+  FiInfo as InfoIcon,
+  FiHome as HomeIcon,
+  FiEdit as EditIcon,
+  FiFeather as FeatherIcon,
+  FiZap as SetsIcon,
+  FiRefreshCw as RepetitionIcon,
+  FiTrash2 as TrashIcon,
+  FiCheckSquare as SaveIcon,
+  FiPlusCircle as PlusCircleIcon,
+} from 'react-icons/fi';

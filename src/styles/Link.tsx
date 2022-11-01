@@ -31,7 +31,7 @@ const Link: React.FC<Props> = ({
       {spaceBefore && <span> </span>}
       <StyledLink $withIcon={withIcon} href={href}>
         {children}
-        {withIcon && <ArrowRightIcon />}
+        {withIcon && <ArrowRightIcon size={20} />}
       </StyledLink>
       {spaceAfter && <span> </span>}
     </>
