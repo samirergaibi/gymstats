@@ -1,3 +1,5 @@
+import React from 'react';
+
 export type AuthenticationData = {
   email?: string;
   password?: string;
@@ -56,6 +58,7 @@ export type Routes = {
   action?: () => void;
   href: string;
   text: string;
+  icon?: React.ReactNode;
 };
 
 export type Stat = {

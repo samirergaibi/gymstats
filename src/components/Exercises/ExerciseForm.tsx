@@ -103,7 +103,7 @@ const ExerciseForm = () => {
                     ? 'Redigera övningen'
                     : 'Lägg till en ny övning'}
                 </p>
-                <StyledArrowIcon $isOpen={formIsOpen} />
+                <StyledArrowIcon $isOpen={formIsOpen} size={24} />
               </CollapseButton>
             }
             onOpening={() => setFormIsOpen(true)}

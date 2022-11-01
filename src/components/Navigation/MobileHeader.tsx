@@ -6,6 +6,12 @@ import { Routes } from '@types*';
 import { Button } from '@styles';
 import MobileToggle from './MobileToggle';
 
+const GlobalStyle = createGlobalStyle<{ isOpen: boolean }>`
+  body {
+    overflow: ${({ isOpen }) => (isOpen ? 'hidden' : 'initial')};
+  }
+`;
+
 const Header = styled.header`
   position: fixed;
   bottom: 0;
@@ -20,6 +26,15 @@ const NavBar = styled.div`
   z-index: 100;
   position: relative;
   background-color: var(--dark);
+`;
+
+const MenuToggle = styled.button`
+  all: unset;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: var(--medium-bold);
 `;
 
 const Nav = styled.nav<{ isOpen: boolean }>`
@@ -47,10 +62,18 @@ const StyledList = styled.ul`
   gap: 50px;
 `;
 
+const ListItem = styled.li`
+  display: flex;
+  gap: 10px;
+`;
+
 const itemStyles = `
 color: white;
 font-size: 1.5rem;
 font-weight: bold;
+display: flex;
+align-items: center;
+gap: 15px;
 `;
 
 const StyledLink = styled(Link)<{ $active?: boolean }>`
@@ -61,22 +84,6 @@ const StyledLink = styled(Link)<{ $active?: boolean }>`
 const StyledButton = styled(Button)<{ $active?: boolean }>`
   ${itemStyles}
   text-decoration: ${({ $active }) => ($active ? 'underline' : 'none')};
-`;
-
-const MenuToggle = styled.button`
-  all: unset;
-  color: white;
-  padding-right: 20px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: var(--medium-bold);
-`;
-
-const GlobalStyle = createGlobalStyle<{ isOpen: boolean }>`
-  body {
-    overflow: ${({ isOpen }) => (isOpen ? 'hidden' : 'initial')};
-  }
 `;
 
 type Props = {
@@ -102,8 +109,8 @@ const MobileHeader: React.FC<Props> = ({ className, routes }) => {
         </NavBar>
         <Nav isOpen={isOpen}>
           <StyledList>
-            {routes.map(({ action, href, text }) => (
-              <li key={href}>
+            {routes.map(({ action, href, text, icon }) => (
+              <ListItem key={href}>
                 {action ? (
                   <StyledButton
                     variant='unstyled'
@@ -112,6 +119,7 @@ const MobileHeader: React.FC<Props> = ({ className, routes }) => {
                       action();
                     }}
                   >
+                    {icon && icon}
                     {text}
                   </StyledButton>
                 ) : (
@@ -120,10 +128,11 @@ const MobileHeader: React.FC<Props> = ({ className, routes }) => {
                     $active={router.pathname === href}
                     onClick={() => setIsOpen(false)}
                   >
+                    {icon && icon}
                     {text}
                   </StyledLink>
                 )}
-              </li>
+              </ListItem>
             ))}
           </StyledList>
         </Nav>

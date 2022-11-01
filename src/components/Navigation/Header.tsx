@@ -1,6 +1,14 @@
 import styled from 'styled-components';
 import { Paths } from '@constants';
 import { Routes } from '@types';
+import {
+  WeightIcon,
+  WeightLifterIcon,
+  LogoutIcon,
+  HomeIcon,
+  InfoIcon,
+  LoginIcon,
+} from '@icons';
 import { supabase } from '@utils/supabaseClient';
 import { useUserContext } from '@contexts/UserContext';
 import DesktopHeader from './DesktopHeader';
@@ -28,17 +36,38 @@ async function logout() {
 }
 
 const loggedOutRoutes = [
-  { href: Paths.ROOT, text: 'Hem' },
-  { href: Paths.ABOUT, text: 'Om Gymstats' },
-  { href: Paths.LOGIN, text: 'Logga in' },
+  { href: Paths.ROOT, text: 'Hem', icon: <HomeIcon color='white' size={24} /> },
+  {
+    href: Paths.ABOUT,
+    text: 'Om Gymstats',
+    icon: <InfoIcon color='white' size={24} />,
+  },
+  {
+    href: Paths.LOGIN,
+    text: 'Logga in',
+    icon: <LoginIcon color='white' size={24} />,
+  },
 ];
 
 const loggedInRoutes = [
-  { href: Paths.NEW_WORKOUT, text: 'Nytt träningspass' },
-  { href: Paths.WORKOUTS, text: 'Dina träningspass' },
+  {
+    href: Paths.NEW_WORKOUT,
+    text: 'Nytt träningspass',
+    icon: <WeightLifterIcon color='white' size={24} />,
+  },
+  {
+    href: Paths.WORKOUTS,
+    text: 'Dina träningspass',
+    icon: <WeightIcon color='white' size={24} />,
+  },
   // Remove until future version where exercises is separate from workouts
   // { href: Paths.EXERCISES, text: 'Dina övningar' },
-  { action: logout, href: '#', text: 'Logga ut' },
+  {
+    action: logout,
+    href: '#',
+    text: 'Logga ut',
+    icon: <LogoutIcon color='white' size={24} />,
+  },
 ];
 
 const Header = () => {
