@@ -9,13 +9,6 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
-  redirects: async () => [
-    {
-      source: '/exercises',
-      destination: '/404',
-      permanent: false,
-    },
-  ],
 };
 
 module.exports = withPWA(nextConfig);

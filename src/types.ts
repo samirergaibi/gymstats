@@ -6,31 +6,17 @@ export type AuthenticationData = {
 };
 
 export type Exercise = {
-  muscleGroups: string[];
   name: string;
   reps: number;
   sets: number;
   weight: number;
   id: string;
-};
-
-export type ExerciseFormValues = {
-  muscleGroups: string;
-  name: string;
-  reps: string;
-  sets: string;
-  weight: string;
-};
-
-// Temporary until decided how to proceed with workouts & exercises
-type TempExercise = Omit<Exercise, 'muscleGroups'> & {
-  idEditing: boolean;
-  id: string;
+  isEditing: boolean;
 };
 
 export type Workout = {
   created_at: string;
-  exercises: TempExercise[];
+  exercises: Exercise[];
   isTemplate: boolean;
   workoutName: string;
   workoutTime: number;
