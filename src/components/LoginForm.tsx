@@ -29,8 +29,7 @@ const LoginForm: React.FC = () => {
     resolver: yupResolver(validationSchema),
   });
 
-  const email = watch('email') ?? '';
-  const password = watch('password') ?? '';
+  const { email = '', password = '' } = watch();
 
   const login = async ({ email, password }: FormValues) => {
     if (!supabase) {
