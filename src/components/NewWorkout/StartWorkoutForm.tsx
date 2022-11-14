@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Button } from '@styles';
-import TextField from '@components/Form/TextField';
 import { useWorkoutContext } from '@contexts/WorkoutContext';
+import { FormError } from '@components/Form';
 
 const WORKOUT_NAME = 'workoutName';
 
@@ -20,6 +20,19 @@ const StyledButton = styled(Button)`
 
 const InputWrapper = styled.div`
   max-width: 400px;
+`;
+
+const Input = styled.input<{ error: boolean }>`
+  border-radius: 6px;
+  border: ${({ error }) =>
+    error ? '2px solid var(--error)' : '2px solid var(--dark)'};
+  padding: 8px 10px;
+  margin-bottom: 5px;
+  font-size: 1rem;
+  width: 100%;
+  &::placeholder {
+    font-size: 0.8rem;
+  }
 `;
 
 const StartWorkoutForm = () => {
@@ -51,16 +64,15 @@ const StartWorkoutForm = () => {
     <StyledForm onSubmit={(event) => startWorkout(event)}>
       <InputWrapper>
         <label>Namn på träningspass</label>
-        <TextField
+        <Input
           name={WORKOUT_NAME}
           type='text'
           placeholder={'t.ex. Underkropp'}
-          withBorder
-          error={error}
-          touched={!!error}
+          error={!!error}
           onChange={(e) => setWorkoutNameInput(e.target.value)}
           value={workoutNameInput}
         />
+        {error && <FormError>{error}</FormError>}
       </InputWrapper>
       <StyledButton variant='blue' type='submit'>
         Starta nytt

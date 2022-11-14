@@ -1,21 +1,16 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Paths } from '@constants';
 import { supabase } from '@utils/supabaseClient';
-import { Form, TextField } from './Form';
+import { Form, FormInput } from './Form';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 type FormValues = {
   email: string;
   password: string;
   passwordConfirmation: string;
-};
-
-const initialValues = {
-  email: '',
-  password: '',
-  passwordConfirmation: '',
 };
 
 const validationSchema = Yup.object({
@@ -32,9 +27,15 @@ const validationSchema = Yup.object({
 
 const RegisterForm = () => {
   const router = useRouter();
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<FormValues>({ resolver: yupResolver(validationSchema) });
+
   const [apiError, setApiError] = useState<string>();
 
-  const register = async ({ email, password }: FormValues) => {
+  const signUp = async ({ email, password }: FormValues) => {
     if (!supabase) {
       throw new Error('Trying to sign up without being connect to Supabase.');
     }
@@ -59,15 +60,7 @@ const RegisterForm = () => {
     }
   };
 
-  const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
-    useFormik({
-      initialValues,
-      validationSchema,
-      onSubmit: register,
-    });
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    handleChange(event);
+  const handleInputChange = () => {
     if (apiError) {
       setApiError(undefined);
     }
@@ -77,44 +70,38 @@ const RegisterForm = () => {
     <Form
       buttonText='Skapa konto'
       title='Skapa ett konto'
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(signUp)}
       error={apiError}
     >
-      <TextField
+      <FormInput
         autoComplete='email'
         id='email'
         label='E-postadress'
         type='text'
         placeholder='Ange din e-postadress'
-        value={values.email}
+        register={register}
+        error={errors.email?.message}
         onChange={handleInputChange}
-        onBlur={handleBlur}
-        error={errors.email}
-        touched={touched.email}
       />
-      <TextField
+      <FormInput
         autoComplete='new-password'
         id='password'
         label='Lösenord'
         type='password'
         placeholder='Ange ditt lösenord'
-        value={values.password}
+        register={register}
+        error={errors.password?.message}
         onChange={handleInputChange}
-        onBlur={handleBlur}
-        error={errors.password}
-        touched={touched.password}
       />
-      <TextField
+      <FormInput
         autoComplete='new-password'
         id='passwordConfirmation'
         label='Bekräfta lösenord'
         type='password'
         placeholder='Ange ditt lösenord'
-        value={values.passwordConfirmation}
+        register={register}
+        error={errors.passwordConfirmation?.message}
         onChange={handleInputChange}
-        onBlur={handleBlur}
-        error={errors.passwordConfirmation}
-        touched={touched.passwordConfirmation}
       />
     </Form>
   );

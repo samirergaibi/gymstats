@@ -9,7 +9,6 @@ export { CgGym as WeightIcon } from 'react-icons/cg';
 export { GiWeightLiftingUp as WeightLifterIcon } from 'react-icons/gi';
 export {
   FiArrowRight as ArrowRightIcon,
-  FiArrowDownCircle as ArrowDownCircleIcon,
   FiLogOut as LogoutIcon,
   FiLogIn as LoginIcon,
   FiInfo as InfoIcon,

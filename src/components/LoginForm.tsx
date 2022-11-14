@@ -1,17 +1,13 @@
 import { useState, useEffect } from 'react';
-import { useFormik } from 'formik';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { supabase } from '@utils/supabaseClient';
-import { Form, TextField } from './Form';
+import { Form, FormInput } from './Form';
 
 type FormValues = {
   email: string;
   password: string;
-};
-
-const initialValues = {
-  email: '',
-  password: '',
 };
 
 const validationSchema = Yup.object({
@@ -23,6 +19,17 @@ const validationSchema = Yup.object({
 
 const LoginForm: React.FC = () => {
   const [apiError, setApiError] = useState<string>();
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<FormValues>({
+    resolver: yupResolver(validationSchema),
+  });
+
+  const { email = '', password = '' } = watch();
 
   const login = async ({ email, password }: FormValues) => {
     if (!supabase) {
@@ -38,49 +45,36 @@ const LoginForm: React.FC = () => {
     }
   };
 
-  const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
-    useFormik<FormValues>({
-      initialValues,
-      validationSchema,
-      onSubmit: login,
-    });
-
   useEffect(() => {
-    if (values.email.length === 0 || values.password.length === 0) {
+    if (email.length === 0 || password.length === 0) {
       setApiError(undefined);
     }
-  }, [values.email, values.password]);
+  }, [email, password]);
 
   return (
     <Form
       buttonText='Logga in'
       error={apiError}
       title='Logga in på ditt konto'
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(login)}
     >
-      <TextField
+      <FormInput
         autoComplete='username'
         id='email'
         label='E-postadress'
         type='text'
         placeholder='Ange din e-postadress'
-        value={values.email}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        error={errors.email}
-        touched={touched.email}
+        error={errors.email?.message}
+        register={register}
       />
-      <TextField
+      <FormInput
         autoComplete='current-password'
         id='password'
         label='Lösenord'
         type='password'
         placeholder='Ange ditt lösenord'
-        value={values.password}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        error={errors.password}
-        touched={touched.password}
+        error={errors.password?.message}
+        register={register}
       />
     </Form>
   );

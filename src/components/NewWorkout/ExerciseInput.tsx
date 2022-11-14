@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { FeatherIcon, SetsIcon, RepetitionIcon } from '@icons';
+import { UseFormRegister } from 'react-hook-form';
 
 const Wrapper = styled.div`
   display: flex;
@@ -25,13 +26,14 @@ const ExerciseName = styled.span`
   width: 50px;
 `;
 
-type Props = React.InputHTMLAttributes<HTMLInputElement> & {
-  variant: 'reps' | 'sets' | 'weight';
-  value: string;
+type Props = {
   error: boolean;
+  variant: 'reps' | 'sets' | 'weight';
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  register: UseFormRegister<any>;
 };
 
-const ExerciseInput: React.FC<Props> = ({ variant, value, ...props }) => {
+const ExerciseInput: React.FC<Props> = ({ error, register, variant }) => {
   let name = '';
   let postfix = '';
   let Icon = null;
@@ -68,7 +70,11 @@ const ExerciseInput: React.FC<Props> = ({ variant, value, ...props }) => {
     <Wrapper>
       <Icon />
       <ExerciseName>{name}</ExerciseName>
-      <StyledInput name={variant} type='number' value={value} {...props} />
+      <StyledInput
+        type='number'
+        error={error}
+        {...register(variant, { required: true })}
+      />
       <span>{postfix}</span>
     </Wrapper>
   );
