@@ -72,6 +72,7 @@ const ExerciseInput: React.FC<Props> = ({ error, register, variant }) => {
       <ExerciseName>{name}</ExerciseName>
       <StyledInput
         type='number'
+        step='any'
         error={error}
         {...register(variant, { required: true })}
       />
